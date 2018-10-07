@@ -9,6 +9,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/imguitest.dir/src/imgui/imgui_node_graph_test.cpp.o"
   "CMakeFiles/imguitest.dir/src/graph.cpp.o"
   "CMakeFiles/imguitest.dir/src/node.cpp.o"
+  "CMakeFiles/imguitest.dir/src/game.cpp.o"
   "imguitest.pdb"
   "imguitest"
 )

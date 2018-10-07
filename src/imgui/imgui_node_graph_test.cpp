@@ -30,18 +30,18 @@ void ShowExampleAppCustomNodeGraph(bool* opened, Graph& graph)
 
     static bool graphInited = false;
     static int nodeSelected = -1;
-    static int levelOffsetY = 100;
-    static int levelOffsetX = 150;
+    static int levelOffsetY = 60;
+    static int levelOffsetX = 100;
 
     if (!graphInited)
     {
         std::vector<Node*> list;
         int lvl = 1;
-        for(int i = 0; i < 6; ++i)
+        for(int i = 0; i < 16; ++i)
         {
             std::string name(1, char(65 + i)); // From ascii table
             name += " " + std::to_string(i % 2 == 0 ? lvl : lvl++);
-            Node* a = new Node(i, name, ImVec2(0, 0), i/2, 0.5f, ImColor(255, 100, 100), 1, 1);
+            Node* a = new Node(i, name, ImVec2(0, 0), i/2, 100, 20, 40, 1, 1);
             list.push_back(a);
         }
 
@@ -95,13 +95,16 @@ void ShowExampleAppCustomNodeGraph(bool* opened, Graph& graph)
 
     ImVec2 offset = ImGui::GetCursorScreenPos() + graph.scrolling;
     ImDrawList* draw_list = ImGui::GetWindowDrawList();
+
+
+    ImVec2 win_pos = ImGui::GetCursorScreenPos();
+    ImVec2 canvas_sz = ImGui::GetWindowSize();
+
     // Display grid
     if (graph.showGrid)
     {
         ImU32 GRID_COLOR = IM_COL32(200, 200, 200, 40);
         float GRID_SZ = 64.0f;
-        ImVec2 win_pos = ImGui::GetCursorScreenPos();
-        ImVec2 canvas_sz = ImGui::GetWindowSize();
         for (float x = fmodf(graph.scrolling.x, GRID_SZ); x < canvas_sz.x; x += GRID_SZ)
             draw_list->AddLine(ImVec2(x, 0.0f) + win_pos, ImVec2(x, canvas_sz.y) + win_pos, GRID_COLOR);
         for (float y = fmodf(graph.scrolling.y, GRID_SZ); y < canvas_sz.y; y += GRID_SZ)
@@ -123,23 +126,25 @@ void ShowExampleAppCustomNodeGraph(bool* opened, Graph& graph)
 //
     // Display nodes
     // Iterate trough each level
-    for (auto const& [key, value] : graph.layout) {
+    for (auto const& [level, value] : graph.layout) {
         int nthElem = 0;
         draw_list->ChannelsSetCurrent(0);
-//        draw_list->AddLine(ImVec2(x, 0.0f) + win_pos, ImVec2(x, canvas_sz.y) + win_pos, GRID_COLOR);
+        ImU32 levelColor = level % 2 == 0 ? IM_COL32(20, 20, 20, 20) : IM_COL32(255, 255, 255, 20);
+        ImVec2 x(0, offset.y + (level * levelOffsetY));
+        draw_list->AddRectFilled(x,
+                                 ImVec2(canvas_sz.x + 500,  offset.y + ((level + 1) * levelOffsetY)), levelColor, 0.f, 0);
 
         for(auto const& n : value) {
             ImGui::PushID(n->id);
             ImVec2 node_rect_min = offset + n->pos;
-
             // Display node contents first
             draw_list->ChannelsSetCurrent(2); // Foreground
             bool old_any_active = ImGui::IsAnyItemActive();
             ImGui::SetCursorScreenPos(node_rect_min + NODE_WINDOW_PADDING);
             ImGui::BeginGroup(); // Lock horizontal position
-            ImGui::Text("%s", n->getCName());
-            ImGui::SliderFloat("##value", &n->value, 0.0f, 1.0f, "Alpha %.2f");
-            ImGui::ColorEdit3("##color", &n->color.x);
+            ImGui::Text("%i", n->health); ImGui::SameLine(30);
+            ImGui::Text("%i", n->defense); ImGui::SameLine(50);
+            ImGui::Text("%i", n->heal);
             ImGui::EndGroup();
 
             // Save the size of what we have emitted and whether any of the widgets are being used
@@ -152,7 +157,7 @@ void ShowExampleAppCustomNodeGraph(bool* opened, Graph& graph)
 
             if(!graphInited) {
                 ImVec2 newPos(nthElem * levelOffsetX + n->size.x ,
-                              n->graphLevel * levelOffsetY + n->size.y);
+                              level * levelOffsetY + n->size.y);
                 n->setPos(newPos);
             }
 

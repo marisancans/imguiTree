@@ -88,6 +88,12 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/home/maris/src/imguitest/src/game.cpp">
+			<Option target="imguitest"/>
+		</Unit>
+		<Unit filename="/home/maris/src/imguitest/src/game.h">
+			<Option target="imguitest"/>
+		</Unit>
 		<Unit filename="/home/maris/src/imguitest/src/graph.cpp">
 			<Option target="imguitest"/>
 		</Unit>

@@ -1,10 +1,10 @@
 #include "node.h"
 
 
-Node::Node(int id, std::string const& name, const ImVec2 &pos, int graphLevel, float value, const ImVec4 &color, int inputsCount,
-           int outputsCount) :
-           id(id), name(name), pos(pos), graphLevel(graphLevel), value(value), color(color),
-           inputsCount(inputsCount), outputsCount(outputsCount)
+Node::Node(int id, std::string const& name, const ImVec2 &pos, int graphLevel,
+          int health, int defense, int heal, int inputsCount, int outputsCount) :
+           id(id), name(name), pos(pos), graphLevel(graphLevel), health(health),
+           defense(defense), heal(heal), inputsCount(inputsCount), outputsCount(outputsCount)
     {
 
     }

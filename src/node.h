@@ -8,8 +8,8 @@ class Node
 {
 
 public:
-    Node(int id, std::string const& name, const ImVec2& pos, int graphLevel, float value,
-         const ImVec4& color, int inputsCount, int outputsCount); //   input/output nodes are references to vector of node pointers
+    Node(int id, std::string const& name, const ImVec2 &pos, int graphLevel,
+         int health, int defense, int heal, int inputsCount, int outputsCount); //   input/output nodes are references to vector of node pointers
 
     ImVec2 getInputSlotPos() const;
     ImVec2 getOutputSlotPos() const;
@@ -23,8 +23,9 @@ public:
     ImVec2              pos;
     int                 graphLevel;
     ImVec2              size;
-    float               value;
-    ImVec4              color;
+    int                 health;
+    int                 defense;
+    int                 heal;
     std::vector<Node*>  outpuNodes;
     int                 inputsCount;
     int                 outputsCount;

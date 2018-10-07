@@ -123,6 +123,33 @@ imguitest/fast:
 	$(MAKE) -f CMakeFiles/imguitest.dir/build.make CMakeFiles/imguitest.dir/build
 .PHONY : imguitest/fast
 
+src/game.o: src/game.cpp.o
+
+.PHONY : src/game.o
+
+# target to build an object file
+src/game.cpp.o:
+	$(MAKE) -f CMakeFiles/imguitest.dir/build.make CMakeFiles/imguitest.dir/src/game.cpp.o
+.PHONY : src/game.cpp.o
+
+src/game.i: src/game.cpp.i
+
+.PHONY : src/game.i
+
+# target to preprocess a source file
+src/game.cpp.i:
+	$(MAKE) -f CMakeFiles/imguitest.dir/build.make CMakeFiles/imguitest.dir/src/game.cpp.i
+.PHONY : src/game.cpp.i
+
+src/game.s: src/game.cpp.s
+
+.PHONY : src/game.s
+
+# target to generate assembly for a file
+src/game.cpp.s:
+	$(MAKE) -f CMakeFiles/imguitest.dir/build.make CMakeFiles/imguitest.dir/src/game.cpp.s
+.PHONY : src/game.cpp.s
+
 src/graph.o: src/graph.cpp.o
 
 .PHONY : src/graph.o
@@ -402,6 +429,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... imguitest"
+	@echo "... src/game.o"
+	@echo "... src/game.i"
+	@echo "... src/game.s"
 	@echo "... src/graph.o"
 	@echo "... src/graph.i"
 	@echo "... src/graph.s"

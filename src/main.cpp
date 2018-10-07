@@ -92,6 +92,7 @@ int main(int, char**)
     ImVec4 clear_color = ImVec4(0.0f, 0.0f, 0.0f, 1.00f);
 
     Graph graph(true);
+    bool* lala;
     // Main loop
     while (!glfwWindowShouldClose(window))
     {
@@ -105,6 +106,7 @@ int main(int, char**)
 
 
         ShowExampleAppCustomNodeGraph(&show_test_window, graph);
+        ImGui::ShowDemoWindow(lala);
 
         // Rendering
         ImGui::Render();
