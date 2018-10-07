@@ -8,7 +8,6 @@
 #include <math.h> // fmodf
 #include "imgui/imgui.h"
 #include <vector>
-
 #include "graph.h"
 #include "node.h"
 
@@ -31,13 +30,11 @@ void ShowExampleAppCustomNodeGraph(bool* opened, Graph& graph)
 
     static bool graphInited = false;
     static int nodeSelected = -1;
-    static int levelHeight = 40;
-    static int nodeWidthOffset = 10;
+    static int levelOffsetY = 100;
+    static int levelOffsetX = 150;
 
     if (!graphInited)
     {
-
-
         std::vector<Node*> list;
         int lvl = 1;
         for(int i = 0; i < 6; ++i)
@@ -49,11 +46,11 @@ void ShowExampleAppCustomNodeGraph(bool* opened, Graph& graph)
         }
 
         // Create demo links
-        list[0]->addOutput(list[3]);
         list[1]->addOutput(list[3]);
         list[1]->addOutput(list[2]);
+        list[2]->addOutput(list[5]);
+        list[2]->addOutput(list[4]);
         graph.addNode(list);
-        graphInited = true;
     }
 
     // Draw a list of nodes on the left side
@@ -112,8 +109,8 @@ void ShowExampleAppCustomNodeGraph(bool* opened, Graph& graph)
     }
 //
 //    // Display links
-    draw_list->ChannelsSplit(2);
-    draw_list->ChannelsSetCurrent(0);               // Background
+    draw_list->ChannelsSplit(3);
+    draw_list->ChannelsSetCurrent(1);               // Background
     for (auto const& kv : graph.layout) {                 // Iterate through map pairs
         for (auto const& curr : kv.second) {            // Iterate through vector of nodes
             for (auto const& out : curr->outpuNodes) {    // Iterate through each nodes outputs and link them
@@ -127,12 +124,16 @@ void ShowExampleAppCustomNodeGraph(bool* opened, Graph& graph)
     // Display nodes
     // Iterate trough each level
     for (auto const& [key, value] : graph.layout) {
+        int nthElem = 0;
+        draw_list->ChannelsSetCurrent(0);
+//        draw_list->AddLine(ImVec2(x, 0.0f) + win_pos, ImVec2(x, canvas_sz.y) + win_pos, GRID_COLOR);
+
         for(auto const& n : value) {
             ImGui::PushID(n->id);
             ImVec2 node_rect_min = offset + n->pos;
 
             // Display node contents first
-            draw_list->ChannelsSetCurrent(1); // Foreground
+            draw_list->ChannelsSetCurrent(2); // Foreground
             bool old_any_active = ImGui::IsAnyItemActive();
             ImGui::SetCursorScreenPos(node_rect_min + NODE_WINDOW_PADDING);
             ImGui::BeginGroup(); // Lock horizontal position
@@ -147,11 +148,16 @@ void ShowExampleAppCustomNodeGraph(bool* opened, Graph& graph)
             ImVec2 node_rect_max = node_rect_min + n->size;
 
 
-            // Set correct position
+            // Set initial position
 
+            if(!graphInited) {
+                ImVec2 newPos(nthElem * levelOffsetX + n->size.x ,
+                              n->graphLevel * levelOffsetY + n->size.y);
+                n->setPos(newPos);
+            }
 
             // Display node box
-            draw_list->ChannelsSetCurrent(0); // Background
+            draw_list->ChannelsSetCurrent(1); // Background
             ImGui::SetCursorScreenPos(node_rect_min);
             ImGui::InvisibleButton("node", n->size);
             if (ImGui::IsItemHovered()) {
@@ -175,6 +181,7 @@ void ShowExampleAppCustomNodeGraph(bool* opened, Graph& graph)
             //            draw_list->AddCircleFilled(offset + n->getOutputSlotPos(slot_idx), NODE_SLOT_RADIUS, IM_COL32(150, 150, 150, 150));
 
             ImGui::PopID();
+            nthElem++;
         }
     }
     draw_list->ChannelsMerge();
@@ -228,4 +235,6 @@ void ShowExampleAppCustomNodeGraph(bool* opened, Graph& graph)
     ImGui::EndGroup();
 
     ImGui::End();
+
+    graphInited = true;
 }
