@@ -1,9 +1,9 @@
 #include "node.h"
 
 
-Node::Node(int id, std::string const& name, const ImVec2 &pos, float value, const ImVec4 &color, int inputsCount,
+Node::Node(int id, std::string const& name, const ImVec2 &pos, int graphLevel, float value, const ImVec4 &color, int inputsCount,
            int outputsCount) :
-           id(id), name(name), pos(pos), value(value), color(color),
+           id(id), name(name), pos(pos), graphLevel(graphLevel), value(value), color(color),
            inputsCount(inputsCount), outputsCount(outputsCount)
     {
 

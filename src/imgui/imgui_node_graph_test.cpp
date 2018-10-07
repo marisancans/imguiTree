@@ -31,18 +31,28 @@ void ShowExampleAppCustomNodeGraph(bool* opened, Graph& graph)
 
     static bool graphInited = false;
     static int nodeSelected = -1;
+    static int levelHeight = 40;
+    static int nodeWidthOffset = 10;
 
     if (!graphInited)
     {
-        Node* a = new Node(0, "a", ImVec2(40, 50), 0.5f, ImColor(255, 100, 100), 1, 1);
-        Node* b = new Node(1, "b", ImVec2(40, 150), 0.42f, ImColor(200, 100, 200), 1, 1);
-        Node* c = new Node(2, "c", ImVec2(270, 80), 1.0f, ImColor(0, 200, 100), 2, 2);
-        Node* d = new Node(3, "d", ImVec2(270, 80), 1.0f, ImColor(0, 200, 100), 2, 2);
-        a->addOutput(d);
-        b->addOutput(d);
-        b->addOutput(c);
-        std::vector<Node*> allNodes = {a, b, c, d};
-        graph.addNode(allNodes);
+
+
+        std::vector<Node*> list;
+        int lvl = 1;
+        for(int i = 0; i < 6; ++i)
+        {
+            std::string name(1, char(65 + i)); // From ascii table
+            name += " " + std::to_string(i % 2 == 0 ? lvl : lvl++);
+            Node* a = new Node(i, name, ImVec2(0, 0), i/2, 0.5f, ImColor(255, 100, 100), 1, 1);
+            list.push_back(a);
+        }
+
+        // Create demo links
+        list[0]->addOutput(list[3]);
+        list[1]->addOutput(list[3]);
+        list[1]->addOutput(list[2]);
+        graph.addNode(list);
         graphInited = true;
     }
 
@@ -53,17 +63,20 @@ void ShowExampleAppCustomNodeGraph(bool* opened, Graph& graph)
     ImGui::BeginChild("node_list", ImVec2(100, 0));
     ImGui::Text("Nodes");
     ImGui::Separator();
-    for (auto const& n : graph.nodes)
-    {
-        ImGui::PushID(n->id);
-        if (ImGui::Selectable(n->getCName(), n->id == nodeSelected))
-            nodeSelected = n->id;
-        if (ImGui::IsItemHovered())
-        {
-            node_hovered_in_list = n->id;
-            open_context_menu |= ImGui::IsMouseClicked(1);
+
+
+
+    for (auto& kv : graph.layout) {
+        for(auto const& n : kv.second) {
+            ImGui::PushID(n->id);
+            if (ImGui::Selectable(n->getCName(), n->id == nodeSelected))
+                nodeSelected = n->id;
+            if (ImGui::IsItemHovered()) {
+                node_hovered_in_list = n->id;
+                open_context_menu |= ImGui::IsMouseClicked(1);
+            }
+            ImGui::PopID();
         }
-        ImGui::PopID();
     }
     ImGui::EndChild();
 
@@ -100,63 +113,69 @@ void ShowExampleAppCustomNodeGraph(bool* opened, Graph& graph)
 //
 //    // Display links
     draw_list->ChannelsSplit(2);
-    draw_list->ChannelsSetCurrent(0); // Background
-    for (auto const& curr : graph.nodes)
-    {
-        for(auto const& out : curr->outpuNodes)
-        {
-            ImVec2 p1 = offset + curr->getOutputSlotPos();
-            ImVec2 p2 = offset + out->getInputSlotPos();
-            draw_list->AddBezierCurve(p1, p1 + ImVec2(+50, 0), p2 + ImVec2(-50, 0), p2, IM_COL32(200, 200, 100, 255), 3.0f);
+    draw_list->ChannelsSetCurrent(0);               // Background
+    for (auto const& kv : graph.layout) {                 // Iterate through map pairs
+        for (auto const& curr : kv.second) {            // Iterate through vector of nodes
+            for (auto const& out : curr->outpuNodes) {    // Iterate through each nodes outputs and link them
+                ImVec2 p1 = offset + curr->getOutputSlotPos();
+                ImVec2 p2 = offset + out->getInputSlotPos();
+                draw_list->AddBezierCurve(p1, p1 + ImVec2(+50, 0), p2 + ImVec2(-50, 0), p2, IM_COL32(200, 200, 100, 255), 3.0f);
+            }
         }
-
     }
 //
     // Display nodes
-    for (auto const& n : graph.nodes)
-    {
-        ImGui::PushID(n->id);
-        ImVec2 node_rect_min = offset + n->pos;
+    // Iterate trough each level
+    for (auto const& [key, value] : graph.layout) {
+        for(auto const& n : value) {
+            ImGui::PushID(n->id);
+            ImVec2 node_rect_min = offset + n->pos;
 
-        // Display node contents first
-        draw_list->ChannelsSetCurrent(1); // Foreground
-        bool old_any_active = ImGui::IsAnyItemActive();
-        ImGui::SetCursorScreenPos(node_rect_min + NODE_WINDOW_PADDING);
-        ImGui::BeginGroup(); // Lock horizontal position
-        ImGui::Text("%s", n->getCName());
-        ImGui::SliderFloat("##value", &n->value, 0.0f, 1.0f, "Alpha %.2f");
-        ImGui::ColorEdit3("##color", &n->color.x);
-        ImGui::EndGroup();
+            // Display node contents first
+            draw_list->ChannelsSetCurrent(1); // Foreground
+            bool old_any_active = ImGui::IsAnyItemActive();
+            ImGui::SetCursorScreenPos(node_rect_min + NODE_WINDOW_PADDING);
+            ImGui::BeginGroup(); // Lock horizontal position
+            ImGui::Text("%s", n->getCName());
+            ImGui::SliderFloat("##value", &n->value, 0.0f, 1.0f, "Alpha %.2f");
+            ImGui::ColorEdit3("##color", &n->color.x);
+            ImGui::EndGroup();
 
-        // Save the size of what we have emitted and whether any of the widgets are being used
-        bool node_widgets_active = (!old_any_active && ImGui::IsAnyItemActive());
-        n->size = ImGui::GetItemRectSize() + NODE_WINDOW_PADDING + NODE_WINDOW_PADDING;
-        ImVec2 node_rect_max = node_rect_min + n->size;
+            // Save the size of what we have emitted and whether any of the widgets are being used
+            bool node_widgets_active = (!old_any_active && ImGui::IsAnyItemActive());
+            n->size = ImGui::GetItemRectSize() + NODE_WINDOW_PADDING + NODE_WINDOW_PADDING;
+            ImVec2 node_rect_max = node_rect_min + n->size;
 
-        // Display node box
-        draw_list->ChannelsSetCurrent(0); // Background
-        ImGui::SetCursorScreenPos(node_rect_min);
-        ImGui::InvisibleButton("node", n->size);
-        if (ImGui::IsItemHovered())
-        {
-            node_hovered_in_scene = n->id;
-            open_context_menu |= ImGui::IsMouseClicked(1);
+
+            // Set correct position
+
+
+            // Display node box
+            draw_list->ChannelsSetCurrent(0); // Background
+            ImGui::SetCursorScreenPos(node_rect_min);
+            ImGui::InvisibleButton("node", n->size);
+            if (ImGui::IsItemHovered()) {
+                node_hovered_in_scene = n->id;
+                open_context_menu |= ImGui::IsMouseClicked(1);
+            }
+            bool node_moving_active = ImGui::IsItemActive();
+            if (node_widgets_active || node_moving_active)
+                nodeSelected = n->id;
+            if (node_moving_active && ImGui::IsMouseDragging(0))
+                n->pos = n->pos + ImGui::GetIO().MouseDelta;
+
+            ImU32 node_bg_color = (node_hovered_in_list == n->id || node_hovered_in_scene == n->id ||
+                                   (node_hovered_in_list == -1 && nodeSelected == n->id)) ? IM_COL32(75, 75, 75, 255)
+                                                                                          : IM_COL32(60, 60, 60, 255);
+            draw_list->AddRectFilled(node_rect_min, node_rect_max, node_bg_color, 4.0f);
+            draw_list->AddRect(node_rect_min, node_rect_max, IM_COL32(100, 100, 100, 255), 4.0f);
+            //        for (int slot_idx = 0; slot_idx < n->inputsCount; slot_idx++)
+            //            draw_list->AddCircleFilled(offset + n->getInputSlotPos(slot_idx), NODE_SLOT_RADIUS, IM_COL32(150, 150, 150, 150));
+            //        for (int slot_idx = 0; slot_idx < n->outputsCount; slot_idx++)
+            //            draw_list->AddCircleFilled(offset + n->getOutputSlotPos(slot_idx), NODE_SLOT_RADIUS, IM_COL32(150, 150, 150, 150));
+
+            ImGui::PopID();
         }
-        bool node_moving_active = ImGui::IsItemActive();
-        if (node_widgets_active || node_moving_active)
-            nodeSelected = n->id;
-        if (node_moving_active && ImGui::IsMouseDragging(0))
-            n->pos = n->pos + ImGui::GetIO().MouseDelta;
-
-        ImU32 node_bg_color = (node_hovered_in_list == n->id || node_hovered_in_scene == n->id || (node_hovered_in_list == -1 && nodeSelected == n->id)) ? IM_COL32(75, 75, 75, 255) : IM_COL32(60, 60, 60, 255);
-        draw_list->AddRectFilled(node_rect_min, node_rect_max, node_bg_color, 4.0f);
-        draw_list->AddRect(node_rect_min, node_rect_max, IM_COL32(100, 100, 100, 255), 4.0f);
-//        for (int slot_idx = 0; slot_idx < n->inputsCount; slot_idx++)
-//            draw_list->AddCircleFilled(offset + n->getInputSlotPos(slot_idx), NODE_SLOT_RADIUS, IM_COL32(150, 150, 150, 150));
-//        for (int slot_idx = 0; slot_idx < n->outputsCount; slot_idx++)
-//            draw_list->AddCircleFilled(offset + n->getOutputSlotPos(slot_idx), NODE_SLOT_RADIUS, IM_COL32(150, 150, 150, 150));
-
-        ImGui::PopID();
     }
     draw_list->ChannelsMerge();
 
