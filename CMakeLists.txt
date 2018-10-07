@@ -20,8 +20,10 @@ set(SOURCES ${SRC_DIR}/main.cpp
             ${SRC_DIR}/imgui/imstb_truetype.h
             ${SRC_DIR}/imgui/imgui_node_graph_test.cpp
             ${SRC_DIR}/imgui/imgui_node_graph_test.h
-            ${SRC_DIR}/Node.cpp
-            ${SRC_DIR}/Node.h)
+            ${SRC_DIR}/graph.cpp
+            ${SRC_DIR}/graph.h
+            ${SRC_DIR}/node.cpp
+            ${SRC_DIR}/node.h)
 
 
 add_executable(${PROJECT_NAME} ${SOURCES})

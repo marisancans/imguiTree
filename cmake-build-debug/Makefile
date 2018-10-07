@@ -123,32 +123,32 @@ imguitest/fast:
 	$(MAKE) -f CMakeFiles/imguitest.dir/build.make CMakeFiles/imguitest.dir/build
 .PHONY : imguitest/fast
 
-src/Node.o: src/Node.cpp.o
+src/graph.o: src/graph.cpp.o
 
-.PHONY : src/Node.o
+.PHONY : src/graph.o
 
 # target to build an object file
-src/Node.cpp.o:
-	$(MAKE) -f CMakeFiles/imguitest.dir/build.make CMakeFiles/imguitest.dir/src/Node.cpp.o
-.PHONY : src/Node.cpp.o
+src/graph.cpp.o:
+	$(MAKE) -f CMakeFiles/imguitest.dir/build.make CMakeFiles/imguitest.dir/src/graph.cpp.o
+.PHONY : src/graph.cpp.o
 
-src/Node.i: src/Node.cpp.i
+src/graph.i: src/graph.cpp.i
 
-.PHONY : src/Node.i
+.PHONY : src/graph.i
 
 # target to preprocess a source file
-src/Node.cpp.i:
-	$(MAKE) -f CMakeFiles/imguitest.dir/build.make CMakeFiles/imguitest.dir/src/Node.cpp.i
-.PHONY : src/Node.cpp.i
+src/graph.cpp.i:
+	$(MAKE) -f CMakeFiles/imguitest.dir/build.make CMakeFiles/imguitest.dir/src/graph.cpp.i
+.PHONY : src/graph.cpp.i
 
-src/Node.s: src/Node.cpp.s
+src/graph.s: src/graph.cpp.s
 
-.PHONY : src/Node.s
+.PHONY : src/graph.s
 
 # target to generate assembly for a file
-src/Node.cpp.s:
-	$(MAKE) -f CMakeFiles/imguitest.dir/build.make CMakeFiles/imguitest.dir/src/Node.cpp.s
-.PHONY : src/Node.cpp.s
+src/graph.cpp.s:
+	$(MAKE) -f CMakeFiles/imguitest.dir/build.make CMakeFiles/imguitest.dir/src/graph.cpp.s
+.PHONY : src/graph.cpp.s
 
 src/imgui/imgui.o: src/imgui/imgui.cpp.o
 
@@ -366,6 +366,33 @@ src/main.cpp.s:
 	$(MAKE) -f CMakeFiles/imguitest.dir/build.make CMakeFiles/imguitest.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
 
+src/node.o: src/node.cpp.o
+
+.PHONY : src/node.o
+
+# target to build an object file
+src/node.cpp.o:
+	$(MAKE) -f CMakeFiles/imguitest.dir/build.make CMakeFiles/imguitest.dir/src/node.cpp.o
+.PHONY : src/node.cpp.o
+
+src/node.i: src/node.cpp.i
+
+.PHONY : src/node.i
+
+# target to preprocess a source file
+src/node.cpp.i:
+	$(MAKE) -f CMakeFiles/imguitest.dir/build.make CMakeFiles/imguitest.dir/src/node.cpp.i
+.PHONY : src/node.cpp.i
+
+src/node.s: src/node.cpp.s
+
+.PHONY : src/node.s
+
+# target to generate assembly for a file
+src/node.cpp.s:
+	$(MAKE) -f CMakeFiles/imguitest.dir/build.make CMakeFiles/imguitest.dir/src/node.cpp.s
+.PHONY : src/node.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -375,9 +402,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... imguitest"
-	@echo "... src/Node.o"
-	@echo "... src/Node.i"
-	@echo "... src/Node.s"
+	@echo "... src/graph.o"
+	@echo "... src/graph.i"
+	@echo "... src/graph.s"
 	@echo "... src/imgui/imgui.o"
 	@echo "... src/imgui/imgui.i"
 	@echo "... src/imgui/imgui.s"
@@ -402,6 +429,9 @@ help:
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
+	@echo "... src/node.o"
+	@echo "... src/node.i"
+	@echo "... src/node.s"
 .PHONY : help
 
 

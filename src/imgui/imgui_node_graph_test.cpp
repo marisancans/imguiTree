@@ -7,7 +7,11 @@
 
 #include <math.h> // fmodf
 #include "imgui/imgui.h"
-#include "../Node.h"
+#include <vector>
+
+#include "graph.h"
+#include "node.h"
+
 
 // NB: You can use math functions/operators on ImVec2 if you #define IMGUI_DEFINE_MATH_OPERATORS and #include "imgui_internal.h"
 // Here we only declare simple +/- operators so others don't leak into the demo code.
@@ -16,7 +20,7 @@ static inline ImVec2 operator-(const ImVec2& lhs, const ImVec2& rhs) { return Im
 
 // Really dumb data structure provided for the example.
 // Note that we storing links are INDICES (not ID) to make example code shorter, obviously a bad idea for any general purpose code.
-void ShowExampleAppCustomNodeGraph(bool* opened)
+void ShowExampleAppCustomNodeGraph(bool* opened, Graph& graph)
 {
     ImGui::SetNextWindowSize(ImVec2(700, 600), ImGuiSetCond_FirstUseEver);
     if (!ImGui::Begin("Example: Custom Node Graph", opened))
@@ -25,22 +29,21 @@ void ShowExampleAppCustomNodeGraph(bool* opened)
         return;
     }
 
+    static bool graphInited = false;
+    static int nodeSelected = -1;
 
-
-    static ImVector<Node> nodes;
-    static ImVector<NodeLink> links;
-    static bool inited = false;
-    static ImVec2 scrolling = ImVec2(0.0f, 0.0f);
-    static bool show_grid = true;
-    static int node_selected = -1;
-    if (!inited)
+    if (!graphInited)
     {
-        nodes.push_back(Node(0, "MainTex", ImVec2(40, 50), 0.5f, ImColor(255, 100, 100), 1, 1));
-        nodes.push_back(Node(1, "BumpMap", ImVec2(40, 150), 0.42f, ImColor(200, 100, 200), 1, 1));
-        nodes.push_back(Node(2, "Combine", ImVec2(270, 80), 1.0f, ImColor(0, 200, 100), 2, 2));
-        links.push_back(NodeLink(0, 0, 2, 0));
-        links.push_back(NodeLink(1, 0, 2, 1));
-        inited = true;
+        Node* a = new Node(0, "a", ImVec2(40, 50), 0.5f, ImColor(255, 100, 100), 1, 1);
+        Node* b = new Node(1, "b", ImVec2(40, 150), 0.42f, ImColor(200, 100, 200), 1, 1);
+        Node* c = new Node(2, "c", ImVec2(270, 80), 1.0f, ImColor(0, 200, 100), 2, 2);
+        Node* d = new Node(3, "d", ImVec2(270, 80), 1.0f, ImColor(0, 200, 100), 2, 2);
+        a->addOutput(d);
+        b->addOutput(d);
+        b->addOutput(c);
+        std::vector<Node*> allNodes = {a, b, c, d};
+        graph.addNode(allNodes);
+        graphInited = true;
     }
 
     // Draw a list of nodes on the left side
@@ -50,15 +53,14 @@ void ShowExampleAppCustomNodeGraph(bool* opened)
     ImGui::BeginChild("node_list", ImVec2(100, 0));
     ImGui::Text("Nodes");
     ImGui::Separator();
-    for (int node_idx = 0; node_idx < nodes.Size; node_idx++)
+    for (auto const& n : graph.nodes)
     {
-        Node* node = &nodes[node_idx];
-        ImGui::PushID(node->id);
-        if (ImGui::Selectable(node->getCName(), node->id == node_selected))
-            node_selected = node->id;
+        ImGui::PushID(n->id);
+        if (ImGui::Selectable(n->getCName(), n->id == nodeSelected))
+            nodeSelected = n->id;
         if (ImGui::IsItemHovered())
         {
-            node_hovered_in_list = node->id;
+            node_hovered_in_list = n->id;
             open_context_menu |= ImGui::IsMouseClicked(1);
         }
         ImGui::PopID();
@@ -72,91 +74,87 @@ void ShowExampleAppCustomNodeGraph(bool* opened)
     const ImVec2 NODE_WINDOW_PADDING(8.0f, 8.0f);
 
     // Create our child canvas
-    ImGui::Text("Hold middle mouse button to scroll (%.2f,%.2f)", scrolling.x, scrolling.y);
+    ImGui::Text("Hold middle mouse button to scroll (%.2f,%.2f)", graph.scrolling.x, graph.scrolling.y);
     ImGui::SameLine(ImGui::GetWindowWidth() - 100);
-    ImGui::Checkbox("Show grid", &show_grid);
+    ImGui::Checkbox("Show grid", &graph.showGrid);
     ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(1, 1));
     ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0, 0));
     ImGui::PushStyleColor(ImGuiCol_ChildWindowBg, IM_COL32(60, 60, 70, 200));
     ImGui::BeginChild("scrolling_region", ImVec2(0, 0), true, ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoMove);
     ImGui::PushItemWidth(120.0f);
 
-    ImVec2 offset = ImGui::GetCursorScreenPos() + scrolling;
+    ImVec2 offset = ImGui::GetCursorScreenPos() + graph.scrolling;
     ImDrawList* draw_list = ImGui::GetWindowDrawList();
     // Display grid
-    if (show_grid)
+    if (graph.showGrid)
     {
         ImU32 GRID_COLOR = IM_COL32(200, 200, 200, 40);
         float GRID_SZ = 64.0f;
         ImVec2 win_pos = ImGui::GetCursorScreenPos();
         ImVec2 canvas_sz = ImGui::GetWindowSize();
-        for (float x = fmodf(scrolling.x, GRID_SZ); x < canvas_sz.x; x += GRID_SZ)
+        for (float x = fmodf(graph.scrolling.x, GRID_SZ); x < canvas_sz.x; x += GRID_SZ)
             draw_list->AddLine(ImVec2(x, 0.0f) + win_pos, ImVec2(x, canvas_sz.y) + win_pos, GRID_COLOR);
-        for (float y = fmodf(scrolling.y, GRID_SZ); y < canvas_sz.y; y += GRID_SZ)
+        for (float y = fmodf(graph.scrolling.y, GRID_SZ); y < canvas_sz.y; y += GRID_SZ)
             draw_list->AddLine(ImVec2(0.0f, y) + win_pos, ImVec2(canvas_sz.x, y) + win_pos, GRID_COLOR);
     }
-
-    // Display links
+//
+//    // Display links
     draw_list->ChannelsSplit(2);
     draw_list->ChannelsSetCurrent(0); // Background
-    for (int link_idx = 0; link_idx < links.Size; link_idx++)
+    for (auto const& curr : graph.nodes)
     {
-        NodeLink* link = &links[link_idx];
-        Node* node_inp = &nodes[link->inputIdx];
-        Node* node_out = &nodes[link->outputIdx];
-        ImVec2 p1 = offset + node_inp->GetOutputSlotPos(link->inputSlot);
-        ImVec2 p2 = offset + node_out->GetInputSlotPos(link->outputSlot);
-        draw_list->AddBezierCurve(p1, p1 + ImVec2(+50, 0), p2 + ImVec2(-50, 0), p2, IM_COL32(200, 200, 100, 255), 3.0f);
-    }
+        for(auto const& out : curr->outpuNodes)
+        {
+            ImVec2 p1 = offset + curr->getOutputSlotPos();
+            ImVec2 p2 = offset + out->getInputSlotPos();
+            draw_list->AddBezierCurve(p1, p1 + ImVec2(+50, 0), p2 + ImVec2(-50, 0), p2, IM_COL32(200, 200, 100, 255), 3.0f);
+        }
 
+    }
+//
     // Display nodes
-    for (int node_idx = 0; node_idx < nodes.Size; node_idx++)
+    for (auto const& n : graph.nodes)
     {
-        Node* node = &nodes[node_idx];
-        ImGui::PushID(node->id);
-        ImVec2 node_rect_min = offset + node->pos;
+        ImGui::PushID(n->id);
+        ImVec2 node_rect_min = offset + n->pos;
 
         // Display node contents first
         draw_list->ChannelsSetCurrent(1); // Foreground
         bool old_any_active = ImGui::IsAnyItemActive();
         ImGui::SetCursorScreenPos(node_rect_min + NODE_WINDOW_PADDING);
         ImGui::BeginGroup(); // Lock horizontal position
-        ImGui::Text("%s", node->getCName());
-        ImGui::SliderFloat("##value", &node->value, 0.0f, 1.0f, "Alpha %.2f");
-        ImGui::ColorEdit3("##color", &node->color.x);
+        ImGui::Text("%s", n->getCName());
+        ImGui::SliderFloat("##value", &n->value, 0.0f, 1.0f, "Alpha %.2f");
+        ImGui::ColorEdit3("##color", &n->color.x);
         ImGui::EndGroup();
 
         // Save the size of what we have emitted and whether any of the widgets are being used
         bool node_widgets_active = (!old_any_active && ImGui::IsAnyItemActive());
-        node->size = ImGui::GetItemRectSize() + NODE_WINDOW_PADDING + NODE_WINDOW_PADDING;
-        ImVec2 node_rect_max = node_rect_min + node->size;
+        n->size = ImGui::GetItemRectSize() + NODE_WINDOW_PADDING + NODE_WINDOW_PADDING;
+        ImVec2 node_rect_max = node_rect_min + n->size;
 
         // Display node box
         draw_list->ChannelsSetCurrent(0); // Background
         ImGui::SetCursorScreenPos(node_rect_min);
-        ImGui::InvisibleButton("node", node->size);
+        ImGui::InvisibleButton("node", n->size);
         if (ImGui::IsItemHovered())
         {
-            node_hovered_in_scene = node->id;
+            node_hovered_in_scene = n->id;
             open_context_menu |= ImGui::IsMouseClicked(1);
         }
         bool node_moving_active = ImGui::IsItemActive();
         if (node_widgets_active || node_moving_active)
-            node_selected = node->id;
+            nodeSelected = n->id;
         if (node_moving_active && ImGui::IsMouseDragging(0))
-            node->pos = node->pos + ImGui::GetIO().MouseDelta;
+            n->pos = n->pos + ImGui::GetIO().MouseDelta;
 
-        ImU32 node_bg_color = (node_hovered_in_list == node->id
-                               || node_hovered_in_scene == node->id
-                               || (node_hovered_in_list == -1
-                               && node_selected == node->id))
-                               ? IM_COL32(75, 75, 75, 255) : IM_COL32(60, 60, 60, 255);
+        ImU32 node_bg_color = (node_hovered_in_list == n->id || node_hovered_in_scene == n->id || (node_hovered_in_list == -1 && nodeSelected == n->id)) ? IM_COL32(75, 75, 75, 255) : IM_COL32(60, 60, 60, 255);
         draw_list->AddRectFilled(node_rect_min, node_rect_max, node_bg_color, 4.0f);
         draw_list->AddRect(node_rect_min, node_rect_max, IM_COL32(100, 100, 100, 255), 4.0f);
-        for (int slot_idx = 0; slot_idx < node->inputsCount; slot_idx++)
-            draw_list->AddCircleFilled(offset + node->GetInputSlotPos(slot_idx), NODE_SLOT_RADIUS, IM_COL32(150, 150, 150, 150));
-        for (int slot_idx = 0; slot_idx < node->outputsCount; slot_idx++)
-            draw_list->AddCircleFilled(offset + node->GetOutputSlotPos(slot_idx), NODE_SLOT_RADIUS, IM_COL32(150, 150, 150, 150));
+//        for (int slot_idx = 0; slot_idx < n->inputsCount; slot_idx++)
+//            draw_list->AddCircleFilled(offset + n->getInputSlotPos(slot_idx), NODE_SLOT_RADIUS, IM_COL32(150, 150, 150, 150));
+//        for (int slot_idx = 0; slot_idx < n->outputsCount; slot_idx++)
+//            draw_list->AddCircleFilled(offset + n->getOutputSlotPos(slot_idx), NODE_SLOT_RADIUS, IM_COL32(150, 150, 150, 150));
 
         ImGui::PopID();
     }
@@ -165,44 +163,44 @@ void ShowExampleAppCustomNodeGraph(bool* opened)
     // Open context menu
     if (!ImGui::IsAnyItemHovered() && ImGui::IsMouseHoveringWindow() && ImGui::IsMouseClicked(1))
     {
-        node_selected = node_hovered_in_list = node_hovered_in_scene = -1;
+        nodeSelected = node_hovered_in_list = node_hovered_in_scene = -1;
         open_context_menu = true;
     }
     if (open_context_menu)
     {
         ImGui::OpenPopup("context_menu");
         if (node_hovered_in_list != -1)
-            node_selected = node_hovered_in_list;
+            nodeSelected = node_hovered_in_list;
         if (node_hovered_in_scene != -1)
-            node_selected = node_hovered_in_scene;
+            nodeSelected = node_hovered_in_scene;
     }
 
-    // Draw context menu
-    ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(8, 8));
-    if (ImGui::BeginPopup("context_menu"))
-    {
-        Node* node = node_selected != -1 ? &nodes[node_selected] : NULL;
-        ImVec2 scene_pos = ImGui::GetMousePosOnOpeningCurrentPopup() - offset;
-        if (node)
-        {
-            ImGui::Text("Node '%s'", node->getCName());
-            ImGui::Separator();
-            if (ImGui::MenuItem("Rename..", NULL, false, false)) {}
-            if (ImGui::MenuItem("Delete", NULL, false, false)) {}
-            if (ImGui::MenuItem("Copy", NULL, false, false)) {}
-        }
-        else
-        {
-            if (ImGui::MenuItem("Add")) { nodes.push_back(Node(nodes.Size, "New node", scene_pos, 0.5f, ImColor(100, 100, 200), 2, 2)); }
-            if (ImGui::MenuItem("Paste", NULL, false, false)) {}
-        }
-        ImGui::EndPopup();
-    }
-    ImGui::PopStyleVar();
+//    // Draw context menu
+//    ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(8, 8));
+//    if (ImGui::BeginPopup("context_menu"))
+//    {
+//        Node* node = nodeSelected != -1 ? &nodes[nodeSelected] : NULL;
+//        ImVec2 scene_pos = ImGui::GetMousePosOnOpeningCurrentPopup() - offset;
+//        if (node)
+//        {
+//            ImGui::Text("Node '%s'", node->Name);
+//            ImGui::Separator();
+//            if (ImGui::MenuItem("Rename..", NULL, false, false)) {}
+//            if (ImGui::MenuItem("Delete", NULL, false, false)) {}
+//            if (ImGui::MenuItem("Copy", NULL, false, false)) {}
+//        }
+//        else
+//        {
+//            if (ImGui::MenuItem("Add")) { nodes.push_back(Node(nodes.Size, "New node", scene_pos, 0.5f, ImColor(100, 100, 200), 2, 2)); }
+//            if (ImGui::MenuItem("Paste", NULL, false, false)) {}
+//        }
+//        ImGui::EndPopup();
+//    }
+//    ImGui::PopStyleVar();
 
     // Scrolling
     if (ImGui::IsWindowHovered() && !ImGui::IsAnyItemActive() && ImGui::IsMouseDragging(2, 0.0f))
-        scrolling = scrolling + ImGui::GetIO().MouseDelta;
+        graph.scrolling = graph.scrolling + ImGui::GetIO().MouseDelta;
 
     ImGui::PopItemWidth();
     ImGui::EndChild();

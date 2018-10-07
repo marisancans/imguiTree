@@ -7,7 +7,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/imguitest.dir/src/imgui/imgui_impl_opengl3.cpp.o"
   "CMakeFiles/imguitest.dir/src/imgui/imgui_widgets.cpp.o"
   "CMakeFiles/imguitest.dir/src/imgui/imgui_node_graph_test.cpp.o"
-  "CMakeFiles/imguitest.dir/src/Node.cpp.o"
+  "CMakeFiles/imguitest.dir/src/graph.cpp.o"
+  "CMakeFiles/imguitest.dir/src/node.cpp.o"
   "imguitest.pdb"
   "imguitest"
 )

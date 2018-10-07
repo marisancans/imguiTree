@@ -88,10 +88,10 @@
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/home/maris/src/imguitest/src/Node.cpp">
+		<Unit filename="/home/maris/src/imguitest/src/graph.cpp">
 			<Option target="imguitest"/>
 		</Unit>
-		<Unit filename="/home/maris/src/imguitest/src/Node.h">
+		<Unit filename="/home/maris/src/imguitest/src/graph.h">
 			<Option target="imguitest"/>
 		</Unit>
 		<Unit filename="/home/maris/src/imguitest/src/imgui/imconfig.h">
@@ -143,6 +143,12 @@
 			<Option target="imguitest"/>
 		</Unit>
 		<Unit filename="/home/maris/src/imguitest/src/main.cpp">
+			<Option target="imguitest"/>
+		</Unit>
+		<Unit filename="/home/maris/src/imguitest/src/node.cpp">
+			<Option target="imguitest"/>
+		</Unit>
+		<Unit filename="/home/maris/src/imguitest/src/node.h">
 			<Option target="imguitest"/>
 		</Unit>
 		<Unit filename="/home/maris/src/imguitest/CMakeLists.txt">

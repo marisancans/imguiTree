@@ -1,13 +1,11 @@
-// dear imgui: standalone example application for GLFW + OpenGL 3, using programmable pipeline
-// If you are new to dear imgui, see examples/README.txt and documentation at the top of imgui.cpp.
-// (GLFW is a cross-platform general purpose library for handling windows, inputs, OpenGL/Vulkan graphics context creation, etc.)
-//cmake ./cmake -DCMAKE_INSTALL_PREFIX=$HOME/lib/glew
+#include <stdio.h>
 
 #include "imgui/imgui.h"
 #include "imgui/imgui_impl_glfw.h"
 #include "imgui/imgui_impl_opengl3.h"
 #include "imgui/imgui_node_graph_test.h"
-#include <stdio.h>
+
+#include "graph.h"
 
 // About OpenGL function loaders: modern OpenGL doesn't have a standard header file and requires individual function pointers to be loaded manually.
 // Helper libraries are often used for this purpose! Here we are supporting a few common ones: gl3w, glew, glad.
@@ -92,7 +90,8 @@ int main(int, char**)
     bool show_test_window = true;
 
     ImVec4 clear_color = ImVec4(0.0f, 0.0f, 0.0f, 1.00f);
-    
+
+    Graph graph(true);
     // Main loop
     while (!glfwWindowShouldClose(window))
     {
@@ -105,13 +104,8 @@ int main(int, char**)
         ImGui::NewFrame();
 
 
+        ShowExampleAppCustomNodeGraph(&show_test_window, graph);
 
-        ShowExampleAppCustomNodeGraph(&show_test_window);
-
-
-
-
-        
         // Rendering
         ImGui::Render();
         int display_w, display_h;
