@@ -4,6 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
+  "/home/maris/src/imguitest/src/Node.cpp" "/home/maris/src/imguitest/cmake-build-debug/CMakeFiles/imguitest.dir/src/Node.cpp.o"
   "/home/maris/src/imguitest/src/imgui/imgui.cpp" "/home/maris/src/imguitest/cmake-build-debug/CMakeFiles/imguitest.dir/src/imgui/imgui.cpp.o"
   "/home/maris/src/imguitest/src/imgui/imgui_demo.cpp" "/home/maris/src/imguitest/cmake-build-debug/CMakeFiles/imguitest.dir/src/imgui/imgui_demo.cpp.o"
   "/home/maris/src/imguitest/src/imgui/imgui_draw.cpp" "/home/maris/src/imguitest/cmake-build-debug/CMakeFiles/imguitest.dir/src/imgui/imgui_draw.cpp.o"

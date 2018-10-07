@@ -26,9 +26,17 @@ stdint.h
 imgui_user.h
 ../src/imgui/imgui_user.h
 
+/home/maris/src/imguitest/src/Node.h
+string
+-
+imgui/imgui.h
+/home/maris/src/imguitest/src/imgui/imgui.h
+
 /home/maris/src/imguitest/src/imgui/imgui_node_graph_test.cpp
 math.h
 -
 imgui/imgui.h
 /home/maris/src/imguitest/src/imgui/imgui/imgui.h
+../Node.h
+/home/maris/src/imguitest/src/Node.h
 

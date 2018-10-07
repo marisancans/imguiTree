@@ -123,6 +123,33 @@ imguitest/fast:
 	$(MAKE) -f CMakeFiles/imguitest.dir/build.make CMakeFiles/imguitest.dir/build
 .PHONY : imguitest/fast
 
+src/Node.o: src/Node.cpp.o
+
+.PHONY : src/Node.o
+
+# target to build an object file
+src/Node.cpp.o:
+	$(MAKE) -f CMakeFiles/imguitest.dir/build.make CMakeFiles/imguitest.dir/src/Node.cpp.o
+.PHONY : src/Node.cpp.o
+
+src/Node.i: src/Node.cpp.i
+
+.PHONY : src/Node.i
+
+# target to preprocess a source file
+src/Node.cpp.i:
+	$(MAKE) -f CMakeFiles/imguitest.dir/build.make CMakeFiles/imguitest.dir/src/Node.cpp.i
+.PHONY : src/Node.cpp.i
+
+src/Node.s: src/Node.cpp.s
+
+.PHONY : src/Node.s
+
+# target to generate assembly for a file
+src/Node.cpp.s:
+	$(MAKE) -f CMakeFiles/imguitest.dir/build.make CMakeFiles/imguitest.dir/src/Node.cpp.s
+.PHONY : src/Node.cpp.s
+
 src/imgui/imgui.o: src/imgui/imgui.cpp.o
 
 .PHONY : src/imgui/imgui.o
@@ -348,6 +375,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... imguitest"
+	@echo "... src/Node.o"
+	@echo "... src/Node.i"
+	@echo "... src/Node.s"
 	@echo "... src/imgui/imgui.o"
 	@echo "... src/imgui/imgui.i"
 	@echo "... src/imgui/imgui.s"

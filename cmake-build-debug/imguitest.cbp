@@ -88,6 +88,12 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/home/maris/src/imguitest/src/Node.cpp">
+			<Option target="imguitest"/>
+		</Unit>
+		<Unit filename="/home/maris/src/imguitest/src/Node.h">
+			<Option target="imguitest"/>
+		</Unit>
 		<Unit filename="/home/maris/src/imguitest/src/imgui/imconfig.h">
 			<Option target="imguitest"/>
 		</Unit>
