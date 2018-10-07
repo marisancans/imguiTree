@@ -39,19 +39,19 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /home/maris/clion-2018.2.2/bin/cmake/linux/bin/cmake
+CMAKE_COMMAND = /home/maris/Downloads/clion-2018.2.4/bin/cmake/linux/bin/cmake
 
 # The command to remove a file.
-RM = /home/maris/clion-2018.2.2/bin/cmake/linux/bin/cmake -E remove -f
+RM = /home/maris/Downloads/clion-2018.2.4/bin/cmake/linux/bin/cmake -E remove -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/maris/CLionProjects/imguitest
+CMAKE_SOURCE_DIR = /home/maris/src/imguitest
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/maris/CLionProjects/imguitest/cmake-build-debug
+CMAKE_BINARY_DIR = /home/maris/src/imguitest/cmake-build-debug
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -59,7 +59,7 @@ CMAKE_BINARY_DIR = /home/maris/CLionProjects/imguitest/cmake-build-debug
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	/home/maris/clion-2018.2.2/bin/cmake/linux/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+	/home/maris/Downloads/clion-2018.2.4/bin/cmake/linux/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -70,7 +70,7 @@ edit_cache/fast: edit_cache
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/home/maris/clion-2018.2.2/bin/cmake/linux/bin/cmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	/home/maris/Downloads/clion-2018.2.4/bin/cmake/linux/bin/cmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
@@ -80,9 +80,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/maris/CLionProjects/imguitest/cmake-build-debug/CMakeFiles /home/maris/CLionProjects/imguitest/cmake-build-debug/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/maris/src/imguitest/cmake-build-debug/CMakeFiles /home/maris/src/imguitest/cmake-build-debug/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/maris/CLionProjects/imguitest/cmake-build-debug/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/maris/src/imguitest/cmake-build-debug/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -258,6 +258,33 @@ src/imgui/imgui_impl_opengl3.cpp.s:
 	$(MAKE) -f CMakeFiles/imguitest.dir/build.make CMakeFiles/imguitest.dir/src/imgui/imgui_impl_opengl3.cpp.s
 .PHONY : src/imgui/imgui_impl_opengl3.cpp.s
 
+src/imgui/imgui_node_graph_test.o: src/imgui/imgui_node_graph_test.cpp.o
+
+.PHONY : src/imgui/imgui_node_graph_test.o
+
+# target to build an object file
+src/imgui/imgui_node_graph_test.cpp.o:
+	$(MAKE) -f CMakeFiles/imguitest.dir/build.make CMakeFiles/imguitest.dir/src/imgui/imgui_node_graph_test.cpp.o
+.PHONY : src/imgui/imgui_node_graph_test.cpp.o
+
+src/imgui/imgui_node_graph_test.i: src/imgui/imgui_node_graph_test.cpp.i
+
+.PHONY : src/imgui/imgui_node_graph_test.i
+
+# target to preprocess a source file
+src/imgui/imgui_node_graph_test.cpp.i:
+	$(MAKE) -f CMakeFiles/imguitest.dir/build.make CMakeFiles/imguitest.dir/src/imgui/imgui_node_graph_test.cpp.i
+.PHONY : src/imgui/imgui_node_graph_test.cpp.i
+
+src/imgui/imgui_node_graph_test.s: src/imgui/imgui_node_graph_test.cpp.s
+
+.PHONY : src/imgui/imgui_node_graph_test.s
+
+# target to generate assembly for a file
+src/imgui/imgui_node_graph_test.cpp.s:
+	$(MAKE) -f CMakeFiles/imguitest.dir/build.make CMakeFiles/imguitest.dir/src/imgui/imgui_node_graph_test.cpp.s
+.PHONY : src/imgui/imgui_node_graph_test.cpp.s
+
 src/imgui/imgui_widgets.o: src/imgui/imgui_widgets.cpp.o
 
 .PHONY : src/imgui/imgui_widgets.o
@@ -336,6 +363,9 @@ help:
 	@echo "... src/imgui/imgui_impl_opengl3.o"
 	@echo "... src/imgui/imgui_impl_opengl3.i"
 	@echo "... src/imgui/imgui_impl_opengl3.s"
+	@echo "... src/imgui/imgui_node_graph_test.o"
+	@echo "... src/imgui/imgui_node_graph_test.i"
+	@echo "... src/imgui/imgui_node_graph_test.s"
 	@echo "... src/imgui/imgui_widgets.o"
 	@echo "... src/imgui/imgui_widgets.i"
 	@echo "... src/imgui/imgui_widgets.s"

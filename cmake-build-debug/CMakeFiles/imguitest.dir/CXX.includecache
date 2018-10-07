@@ -6,11 +6,11 @@
 
 #IncludeRegexTransform: 
 
-/home/maris/CLionProjects/imguitest/src/imgui/imconfig.h
+../src/imgui/imconfig.h
 
-/home/maris/CLionProjects/imguitest/src/imgui/imgui.h
+../src/imgui/imgui.h
 imconfig.h
-/home/maris/CLionProjects/imguitest/src/imgui/imconfig.h
+../src/imgui/imconfig.h
 float.h
 -
 stdarg.h
@@ -24,27 +24,11 @@ assert.h
 stdint.h
 -
 imgui_user.h
-/home/maris/CLionProjects/imguitest/src/imgui/imgui_user.h
+../src/imgui/imgui_user.h
 
-/home/maris/CLionProjects/imguitest/src/imgui/imgui_impl_glfw.h
-
-/home/maris/CLionProjects/imguitest/src/imgui/imgui_impl_opengl3.h
-
-/home/maris/CLionProjects/imguitest/src/main.cpp
+/home/maris/src/imguitest/src/imgui/imgui_node_graph_test.cpp
+math.h
+-
 imgui/imgui.h
-/home/maris/CLionProjects/imguitest/src/imgui/imgui.h
-imgui/imgui_impl_glfw.h
-/home/maris/CLionProjects/imguitest/src/imgui/imgui_impl_glfw.h
-imgui/imgui_impl_opengl3.h
-/home/maris/CLionProjects/imguitest/src/imgui/imgui_impl_opengl3.h
-stdio.h
--
-GL/gl3w.h
--
-GL/glew.h
--
-glad/glad.h
--
-GLFW/glfw3.h
--
+/home/maris/src/imguitest/src/imgui/imgui/imgui.h
 

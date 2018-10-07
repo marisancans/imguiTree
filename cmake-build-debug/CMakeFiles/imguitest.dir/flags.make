@@ -6,5 +6,5 @@ CXX_FLAGS = -g   -std=gnu++1z
 
 CXX_DEFINES = -DGLFW_DLL
 
-CXX_INCLUDES = -I/home/maris/CLionProjects/imguitest/src 
+CXX_INCLUDES = -I/home/maris/src/imguitest/src 
 
