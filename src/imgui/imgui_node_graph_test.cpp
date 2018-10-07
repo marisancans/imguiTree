@@ -41,7 +41,7 @@ void ShowExampleAppCustomNodeGraph(bool* opened, Graph& graph)
         {
             std::string name(1, char(65 + i)); // From ascii table
             name += " " + std::to_string(i % 2 == 0 ? lvl : lvl++);
-            Node* a = new Node(i, name, ImVec2(0, 0), i/2, 100, 20, 40, 1, 1);
+            Node* a = new Node(i, name, ImVec2(0, 0), i/2, 10, 3, 2, 40, 1, 1);
             list.push_back(a);
         }
 
@@ -143,7 +143,8 @@ void ShowExampleAppCustomNodeGraph(bool* opened, Graph& graph)
             ImGui::SetCursorScreenPos(node_rect_min + NODE_WINDOW_PADDING);
             ImGui::BeginGroup(); // Lock horizontal position
             ImGui::Text("%i", n->health); ImGui::SameLine(30);
-            ImGui::Text("%i", n->defense); ImGui::SameLine(50);
+            ImGui::Text("%i", n->attack); ImGui::SameLine(60);
+            ImGui::Text("%i", n->defense); ImGui::SameLine(80);
             ImGui::Text("%i", n->heal);
             ImGui::EndGroup();
 
