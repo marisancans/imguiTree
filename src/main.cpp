@@ -6,6 +6,7 @@
 #include "imgui/imgui_node_graph_test.h"
 
 #include "graph.h"
+#include "game.h"
 
 // About OpenGL function loaders: modern OpenGL doesn't have a standard header file and requires individual function pointers to be loaded manually.
 // Helper libraries are often used for this purpose! Here we are supporting a few common ones: gl3w, glew, glad.
@@ -92,6 +93,9 @@ int main(int, char**)
     ImVec4 clear_color = ImVec4(0.0f, 0.0f, 0.0f, 1.00f);
 
     Graph graph(true);
+    Game game(Game::PvsPC, Game::P1);
+
+
     bool* lala;
     // Main loop
     while (!glfwWindowShouldClose(window))
@@ -106,7 +110,7 @@ int main(int, char**)
 
 
         ShowExampleAppCustomNodeGraph(&show_test_window, graph);
-        ImGui::ShowDemoWindow(lala);
+//        ImGui::ShowDemoWindow(lala);
 
         // Rendering
         ImGui::Render();

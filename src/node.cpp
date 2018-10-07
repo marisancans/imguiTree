@@ -2,8 +2,8 @@
 
 
 Node::Node(int id, std::string const& name, const ImVec2 &pos, int graphLevel,
-          int health, int defense, int heal, int inputsCount, int outputsCount) :
-           id(id), name(name), pos(pos), graphLevel(graphLevel), health(health),
+          int health, int attack, int defense, int heal, int inputsCount, int outputsCount) :
+           id(id), name(name), pos(pos), graphLevel(graphLevel), health(health), attack(attack),
            defense(defense), heal(heal), inputsCount(inputsCount), outputsCount(outputsCount)
     {
 
