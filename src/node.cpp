@@ -19,6 +19,19 @@ ImVec2 Node::getOutputSlotPos() const
     return ImVec2(pos.x + size.x / ((float)outputsCount + 1), pos.y + size.y);
 }
 
+Node::Node(const Node& parent, int id, std::string name) {
+    this->id = id;
+    this->name = name;
+    pos = ImVec2(0, 0);
+    graphLevel = parent.graphLevel + 1;
+    health = parent.health;
+    attack = parent.attack;
+    defense = parent.defense;
+    heal = parent.heal;
+    inputsCount = 1;
+    outputsCount = 0;
+}
+
 
 
 

@@ -92,8 +92,11 @@ int main(int, char**)
 
     ImVec4 clear_color = ImVec4(0.0f, 0.0f, 0.0f, 1.00f);
 
-    Graph graph(true);
-    Game game(Game::PvsPC, Game::P1);
+
+    Game game(Game::PCvsPC, Game::P1);
+    Graph graph(false, game.getNodes());
+
+
 
 
     bool* lala;

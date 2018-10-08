@@ -6,16 +6,11 @@
 
 class Node;
 
-using level = std::pair<int, std::vector<Node*>>;
-
-class Node;
 class Graph {
 public:
-    explicit Graph(bool showGrid);
-    void addNode(Node* n);
-    void addNode(std::vector<Node*>& nodes);
-
-    std::map<int, std::vector<Node*>> layout;
+    explicit Graph(bool showGrid, std::vector<Node*>& nodes);
+    std::map<int, int> layout;
+    std::vector<Node*>& _nodes;
     ImVec2 scrolling;
     bool showGrid;
 };
