@@ -25,7 +25,9 @@ set(SOURCES ${SRC_DIR}/main.cpp
             ${SRC_DIR}/node.cpp
             ${SRC_DIR}/node.h
             ${SRC_DIR}/game.cpp
-            ${SRC_DIR}/game.h)
+            ${SRC_DIR}/game.h
+            ${SRC_DIR}/layer.cpp
+            ${SRC_DIR}/layer.h)
 
 
 add_executable(${PROJECT_NAME} ${SOURCES})

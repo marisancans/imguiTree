@@ -41,15 +41,15 @@ void ShowExampleAppCustomNodeGraph(bool* opened, Graph& graph)
         {
             std::string name(1, char(65 + i)); // From ascii table
             name += " " + std::to_string(i % 2 == 0 ? lvl : lvl++);
-            Node* a = new Node(i, name, ImVec2(0, 0), i/2, 10, 3, 2, 40, 1, 1);
-            nodeVec.push_back(a);
+//            Node* a = new Node(i, name, ImVec2(0, 0), i/2, 10, 3, 2, 40, 1, 1);
+//            nodeVec.push_back(a);
         }
 
         // Create demo links
-        nodeVec[2]->addInput(nodeVec[1]);
-        nodeVec[3]->addInput(nodeVec[1]);
-        nodeVec[4]->addInput(nodeVec[3]);
-        nodeVec[5]->addInput(nodeVec[3]);
+//        nodeVec[2]->addParent(nodeVec[1]);
+//        nodeVec[3]->addParent(nodeVec[1]);
+//        nodeVec[4]->addParent(nodeVec[3]);
+//        nodeVec[5]->addParent(nodeVec[3]);
         //graph.addNode(nodeVec);
     }
 
@@ -113,7 +113,7 @@ void ShowExampleAppCustomNodeGraph(bool* opened, Graph& graph)
     draw_list->ChannelsSplit(3);
     draw_list->ChannelsSetCurrent(1);                    // Background
     for (auto const& curr : graph._nodes){               // Iterate through vector of nodes
-        for (auto const& in : curr->inputNodes) {    // Iterate through each nodes inputs and link them
+        for (auto const& in : curr->parentNodes) {    // Iterate through each nodes inputs and link them
             ImVec2 p1 = offset + in->getOutputSlotPos();
             ImVec2 p2 = offset + curr->getInputSlotPos();
             draw_list->AddBezierCurve(p1, p1 + ImVec2(+50, 0), p2 + ImVec2(-50, 0), p2, IM_COL32(200, 200, 100, 255), 3.0f);
@@ -179,9 +179,9 @@ void ShowExampleAppCustomNodeGraph(bool* opened, Graph& graph)
                                                                                       : IM_COL32(60, 60, 60, 255);
         draw_list->AddRectFilled(node_rect_min, node_rect_max, node_bg_color, 4.0f);
         draw_list->AddRect(node_rect_min, node_rect_max, IM_COL32(100, 100, 100, 255), 4.0f);
-        //        for (int slot_idx = 0; slot_idx < n->inputsCount; slot_idx++)
+        //        for (int slot_idx = 0; slot_idx < n->parentCount; slot_idx++)
         //            draw_list->AddCircleFilled(offset + n->getInputSlotPos(slot_idx), NODE_SLOT_RADIUS, IM_COL32(150, 150, 150, 150));
-        //        for (int slot_idx = 0; slot_idx < n->outputsCount; slot_idx++)
+        //        for (int slot_idx = 0; slot_idx < n->childrenCount; slot_idx++)
         //            draw_list->AddCircleFilled(offset + n->getOutputSlotPos(slot_idx), NODE_SLOT_RADIUS, IM_COL32(150, 150, 150, 150));
 
         ImGui::PopID();

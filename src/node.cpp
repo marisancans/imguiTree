@@ -2,24 +2,24 @@
 
 
 Node::Node(int id, std::string const& name, const ImVec2 &pos, int graphLevel,
-          int health, int attack, int defense, int heal, int inputsCount, int outputsCount) :
+          int health, int attack, int defense, int heal, int inputsCount, int outputsCount, Status status) :
            id(id), name(name), pos(pos), graphLevel(graphLevel), health(health), attack(attack),
-           defense(defense), heal(heal), inputsCount(inputsCount), outputsCount(outputsCount)
+           defense(defense), heal(heal), parentCount(inputsCount), childrenCount(outputsCount), status(status)
     {
 
     }
 
 ImVec2 Node::getInputSlotPos() const
 {
-    return ImVec2(pos.x + size.x  / ((float)inputsCount + 1), + pos.y);
+    return ImVec2(pos.x + size.x  / ((float)parentCount + 1), + pos.y);
 }
 
 ImVec2 Node::getOutputSlotPos() const
 {
-    return ImVec2(pos.x + size.x / ((float)outputsCount + 1), pos.y + size.y);
+    return ImVec2(pos.x + size.x / ((float)childrenCount + 1), pos.y + size.y);
 }
 
-Node::Node(const Node& parent, int id, std::string name) {
+Node::Node(Node& parent, int id, std::string name) {
     this->id = id;
     this->name = name;
     pos = ImVec2(0, 0);
@@ -28,10 +28,29 @@ Node::Node(const Node& parent, int id, std::string name) {
     attack = parent.attack;
     defense = parent.defense;
     heal = parent.heal;
-    inputsCount = 1;
-    outputsCount = 0;
+    parentCount = 1;
+    childrenCount = 0;
+    status = MIDDLE;
+
+    addParent(&parent);
+    parent.addChildren(this);
 }
 
+bool Node::operator!=(const Node& parent) {
+    return health  != parent.health &&
+           attack  != parent.attack &&
+           defense != parent.defense &&
+           heal    != parent.heal;
+}
 
+void Node::addParent(Node::nodeVec &nodes) {
+    parentNodes.insert(parentNodes.end(), nodes.begin(), nodes.end());
+    parentCount += nodes.size();
+}
+
+void Node::addChildren(Node::nodeVec &nodes) {
+    childrenNodes.insert(childrenNodes.end(), nodes.begin(), nodes.end());
+    childrenCount += nodes.size();
+}
 
 

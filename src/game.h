@@ -10,21 +10,21 @@ public:
     enum GameMode{ PvsPC, PCvsPC};
     enum Turn{P1, P2};
     Game(GameMode mode, Turn turn);
-    void getMoves(Node* n);
+    void getLevel(Node *n);
     inline std::vector<Node*>& getNodes(){ return _nodes; }
     inline std::string genName(){ return _turn == P1 ? "P1" : "P2"; }
 
     Node& createChild(Node* parent);
-    void attack(Node* parent);
-    void defend(Node* parent);
-    void heal(Node* parent);
+    Node& attack(Node* parent);
+    Node& defend(Node* parent);
+    Node& heal(Node* parent);
 
 private:
     GameMode _mode;
     Turn _turn;
     int _graphLevel;
     std::vector<Node*> _nodes;
-    std::vector<void (Game::*)(Node* n)> _moves;
+    std::vector<Node& (Game::*)(Node* n)> _moves;
 
     void init();
     void initMoves();

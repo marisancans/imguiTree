@@ -2,10 +2,30 @@
 #include "game.h"
 #include "imgui/imgui.h"
 
-void Game::getMoves(Node* n) {
+#include <iostream>
+
+void Game::getLevel(Node *n) {
     _graphLevel++;
-    for(auto& fn : _moves)
-        (this->*fn)(n);
+    static int iii = 0;
+
+
+
+
+    for(auto& fn : _moves) {
+        Node& child = (this->*fn)(n);
+        if (child.isAlive()) {
+            _nodes.push_back(&child);
+        } else {
+            n->status = Node::END;
+            return;
+        }
+    }
+    iii++;
+    //if(iii == 10) return;
+    printf("%i\n", n->health);
+    for(auto const& c : n->childrenNodes)
+        if(c->status != Node::END)
+            getLevel(c);
 }
 
 Game::Game(Game::GameMode mode, Game::Turn turn) : _graphLevel(0) {
@@ -15,10 +35,10 @@ Game::Game(Game::GameMode mode, Game::Turn turn) : _graphLevel(0) {
 
 void Game::init() {
     auto inputs = [this](){ return _turn == P1 ? 0 : 1; };
-    Node* n = new Node(int(_nodes.size()), genName(), ImVec2(0, 0), 0, 10, 3, 2, 2, inputs(), 0);
+    Node* n = new Node(int(_nodes.size()), genName(), ImVec2(0, 0), 0, 10, 3, 2, 2, inputs(), 0, Node::ROOT);
     _nodes.push_back(n);
     _turn = _turn == P1 ? P2 : P1;
-    getMoves(n);
+    getLevel(n);
 }
 
 void Game::initMoves() {
@@ -29,29 +49,25 @@ void Game::initMoves() {
 
 Node& Game::createChild(Node* parent) {
     Node* child = new Node(*parent, int(_nodes.size()), genName());
-    child->addInput(parent);
     return *child;
 }
 
-void Game::attack(Node* parent){
+Node& Game::attack(Node* parent){
     Node& child = createChild(parent);
     child.health -= parent->attack;
-    if(child.isAlive())
-        _nodes.push_back(&child);
+    return child;
 }
 
-void Game::defend(Node* parent){
+Node& Game::defend(Node* parent){
     Node& child = createChild(parent);
     child.health -= parent->defense - parent->attack;
-    if(child.isAlive())
-        _nodes.push_back(&child);
+    return child;
 }
 
-void Game::heal(Node* parent){
+Node& Game::heal(Node* parent){
     Node& child = createChild(parent);
     child.health += child.heal;
-    if(child.isAlive())
-        _nodes.push_back(&child);
+    return child;
 }
 
 
