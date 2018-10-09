@@ -5,9 +5,7 @@
 #include "graph.h"
 #include "node.h"
 
-
-Graph::Graph(bool showGrid, std::vector<Node*>& nodes) : showGrid(showGrid), _nodes(nodes){
+Graph::Graph(bool showGrid, std::vector<Layer*> const& layers) : showGrid(showGrid),  layers(layers){
     scrolling = ImVec2(0.0f, 0.0f);
 }
-
 

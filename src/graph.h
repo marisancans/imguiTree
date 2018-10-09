@@ -5,12 +5,12 @@
 #include <map>
 
 class Node;
+class Layer;
 
 class Graph {
 public:
-    explicit Graph(bool showGrid, std::vector<Node*>& nodes);
-    std::map<int, int> layout;
-    std::vector<Node*>& _nodes;
+    Graph(bool showGrid, std::vector<Layer*> const& layers);
     ImVec2 scrolling;
     bool showGrid;
+    std::vector<Layer*> layers;
 };

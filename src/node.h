@@ -14,7 +14,7 @@ public:
     enum Status{ROOT, MIDDLE, END};
     Node(int id, std::string const& name, const ImVec2 &pos, int graphLevel,
          int health, int attack, int defense, int heal, int inputsCount, int outputsCount, Status status); //   input/output nodes are references to vector of node pointers
-    Node(Node& parent, int id, std::string name);
+    Node(int id, Node& parent, std::string name);
 
 
     ImVec2 getInputSlotPos() const;
@@ -25,11 +25,12 @@ public:
     inline void addParent(nodeVec& nodes);
     inline void addChildren(nodeVec& nodes);
     inline void setPos(ImVec2 pos){ this->pos = pos; }
-    inline bool isAlive(){ return bool(health); }
+    inline bool isAlive(){ return bool(health > 0); }
+    inline void setStatus(Status status){ _status = _status; }
 
     bool operator!=(Node const& parent);
 
-    int                 id;
+    int         id;
     std::string         name;
     ImVec2              pos;
     int                 graphLevel;
@@ -42,7 +43,9 @@ public:
     nodeVec             childrenNodes;
     int                 parentCount;
     int                 childrenCount;
-    Status              status;
+
+private:
+    Status      _status;
 };
 
 

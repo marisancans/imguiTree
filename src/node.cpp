@@ -4,7 +4,7 @@
 Node::Node(int id, std::string const& name, const ImVec2 &pos, int graphLevel,
           int health, int attack, int defense, int heal, int inputsCount, int outputsCount, Status status) :
            id(id), name(name), pos(pos), graphLevel(graphLevel), health(health), attack(attack),
-           defense(defense), heal(heal), parentCount(inputsCount), childrenCount(outputsCount), status(status)
+           defense(defense), heal(heal), parentCount(inputsCount), childrenCount(outputsCount), _status(status)
     {
 
     }
@@ -19,7 +19,7 @@ ImVec2 Node::getOutputSlotPos() const
     return ImVec2(pos.x + size.x / ((float)childrenCount + 1), pos.y + size.y);
 }
 
-Node::Node(Node& parent, int id, std::string name) {
+Node::Node(int id, Node& parent, std::string name) {
     this->id = id;
     this->name = name;
     pos = ImVec2(0, 0);
@@ -30,7 +30,7 @@ Node::Node(Node& parent, int id, std::string name) {
     heal = parent.heal;
     parentCount = 1;
     childrenCount = 0;
-    status = MIDDLE;
+    _status = MIDDLE;
 
     addParent(&parent);
     parent.addChildren(this);

@@ -94,7 +94,7 @@ int main(int, char**)
 
 
     Game game(Game::PCvsPC, Game::P1);
-    Graph graph(false, game.getNodes());
+    Graph graph(false, game.getLayers());
 
 
 
