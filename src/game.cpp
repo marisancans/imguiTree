@@ -7,32 +7,44 @@
 #include <algorithm>
 
 void Game::getNextLayer() {
-    auto l = new Layer(_layers.back()->getLevel() + 1);
-    auto prevNodes = _layers.back()->getNodes();
+    if(_layers.back()->getLevel() < 4) {
+        auto l = new Layer(_layers.back()->getLevel() + 1);
+        auto prevNodes = _layers.back()->getNodes();
 
-    for(auto & parent : prevNodes) {
-        for (auto &fn : _moves) {
-            Node &child = (this->*fn)(parent);
-//            auto cmpLambda = [parent](auto child){ return &child != parent; };
-//            bool unique = std::any_of(prevNodes.back(), prevNodes.end(), cmpLambda());
-            if (child.isAlive() ) {
+        for (auto &parent : prevNodes) {
+            for (auto &fn : _moves) {
+                auto child = (this->*fn)(parent);
+
+                // Goes through all layer nodes to find match, if so, cleanup references
+                bool contain = false;
+                for(auto& n : l->getNodes()){
+                    if(n->P1Stats == child->P1Stats && n->P2Stats == child->P2Stats){
+                          n->addParent(parent);
+                          parent->removeChild(child);
+                          contain = true;
+                    }
+                }
 
 
-                l->addNode(&child);
-            } else {
-                child.setStatus(Node::END);
-                return;
+                if (child->isAlive() && !contain) {
+                    child->addParent(parent);
+                    l->addNode(child);
+                } else {
+                    child->setStatus(Node::END);
+                   // return;
+                }
             }
         }
+
+        _layers.push_back(l);
+        swapTurn();
+        getNextLayer();
+
+        //printf("%i\n", n->health);
+        //for(auto const& c : n->childrenNodes)
+        //    if(c->status != Node::END)
+        //        getNextLayer(c);
     }
-
-    _layers.push_back(l);
-    getNextLayer();
-
-    //printf("%i\n", n->health);
-    //for(auto const& c : n->childrenNodes)
-    //    if(c->status != Node::END)
-    //        getNextLayer(c);
 }
 
 Game::Game(Game::GameMode mode, Game::Turn turn) : _nodeCount(0){
@@ -43,10 +55,11 @@ Game::Game(Game::GameMode mode, Game::Turn turn) : _nodeCount(0){
 void Game::init() {
     auto inputs = [this](){ return _turn == P1 ? 0 : 1; };
     auto l = new Layer(0);
-    auto n = new Node(getNodeID(), genName(), ImVec2(0, 0), 0, 10, 3, 2, 2, inputs(), 0, Node::ROOT);
+    auto n = new Node(getNodeID(), ImVec2(0, 0), 0, inputs(), 0, Node::ROOT);
+    n->P1Stats = {10, 3, 2, 2};
+    n->P2Stats = {10, 3, 2, 2};
     l->addNode(n);
     _layers.push_back(l);
-    _turn = _turn == P1 ? P2 : P1;
     getNextLayer();
 }
 
@@ -56,28 +69,40 @@ void Game::initMoves() {
     _moves.push_back(&Game::heal);
 }
 
-Node& Game::createChild(Node* parent) {
-    Node* child = new Node(getNodeID(), *parent, genName());
-    return *child;
-}
-
-Node& Game::attack(Node* parent){
-    Node& child = createChild(parent);
-    child.health -= parent->attack;
+Node* Game::createChild(Node* parent) {
+    Node* child = new Node(getNodeID(), *parent);
     return child;
 }
 
-Node& Game::defend(Node* parent){
-    Node& child = createChild(parent);
-    child.health -= parent->defense - parent->attack;
+Node* Game::attack(Node* parent){
+    auto child = createChild(parent);
+//    child.health -= parent->attack;
+    if(_turn == P1)
+        child->P2Stats.health -= parent->P1Stats.attack;
+    else
+        child->P1Stats.health -= parent->P2Stats.attack;
+
     return child;
 }
 
-Node& Game::heal(Node* parent){
-    Node& child = createChild(parent);
-    child.health += child.heal;
+Node* Game::defend(Node* parent){
+    auto child = createChild(parent);
+    if(_turn == P1)
+        child->P2Stats.health -= parent->P1Stats.attack - child->P2Stats.defense;
+    else
+        child->P1Stats.health -= parent->P2Stats.attack - child->P2Stats.defense;
     return child;
 }
+
+Node* Game::heal(Node* parent){
+    auto child = createChild(parent);
+    if(_turn == P1)
+        child->P1Stats.health += child->P1Stats.heal;
+    else
+        child->P2Stats.health += child->P2Stats.heal;
+    return child;
+}
+
 
 
 

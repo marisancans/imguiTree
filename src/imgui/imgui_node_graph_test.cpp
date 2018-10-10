@@ -33,25 +33,6 @@ void ShowExampleAppCustomNodeGraph(bool* opened, Graph& graph)
     static int levelOffsetY = 150;
     static int levelOffsetX = 150;
 
-    if (!graphInited)
-    {
-        std::vector<Node*> nodeVec;
-        int lvl = 1;
-        for(int i = 0; i < 16; ++i)
-        {
-            std::string name(1, char(65 + i)); // From ascii table
-            name += " " + std::to_string(i % 2 == 0 ? lvl : lvl++);
-//            Node* a = new Node(i, name, ImVec2(0, 0), i/2, 10, 3, 2, 40, 1, 1);
-//            nodeVec.push_back(a);
-        }
-
-        // Create demo links
-//        nodeVec[2]->addParent(nodeVec[1]);
-//        nodeVec[3]->addParent(nodeVec[1]);
-//        nodeVec[4]->addParent(nodeVec[3]);
-//        nodeVec[5]->addParent(nodeVec[3]);
-        //graph.addNode(nodeVec);
-    }
 
     // Draw a list of nodes on the left side
     bool open_context_menu = false;
@@ -64,7 +45,7 @@ void ShowExampleAppCustomNodeGraph(bool* opened, Graph& graph)
     for (auto& l : graph.layers) {
         for(auto& n : l->getNodes()) {
             ImGui::PushID(n->id);
-            if (ImGui::Selectable(n->getCName(), n->id == nodeSelected))
+            if (ImGui::Selectable("tmp", n->id == nodeSelected))
                 nodeSelected = n->id;
             if (ImGui::IsItemHovered()) {
                 node_hovered_in_list = n->id;
@@ -137,13 +118,9 @@ void ShowExampleAppCustomNodeGraph(bool* opened, Graph& graph)
             bool old_any_active = ImGui::IsAnyItemActive();
             ImGui::SetCursorScreenPos(node_rect_min + NODE_WINDOW_PADDING);
             ImGui::BeginGroup(); // Lock horizontal position
-            ImGui::Text("%i", n->health);
+            ImGui::Text("%i", n->P1Stats.health);
             ImGui::SameLine(30);
-            ImGui::Text("%i", n->attack);
-            ImGui::SameLine(60);
-            ImGui::Text("%i", n->defense);
-            ImGui::SameLine(80);
-            ImGui::Text("%i", n->heal);
+            ImGui::Text("%i", n->P2Stats.health);
             ImGui::EndGroup();
 
             // Save the size of what we have emitted and whether any of the widgets are being used

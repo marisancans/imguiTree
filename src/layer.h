@@ -9,6 +9,7 @@ public:
     inline void addNode(Node* n){ _nodes.push_back(n);}
     inline int getLevel(){ return _level; }
     inline std::vector<Node*>& getNodes(){ return _nodes; }
+    bool linkDuplicate(Node* child);
 
 private:
     int _level;
