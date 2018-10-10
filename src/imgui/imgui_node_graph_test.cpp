@@ -30,8 +30,7 @@ void ShowExampleAppCustomNodeGraph(bool* opened, Graph& graph)
 
     static bool graphInited = false;
     static int nodeSelected = -1;
-    static int levelOffsetY = 150;
-    static int levelOffsetX = 150;
+
 
 
     // Draw a list of nodes on the left side
@@ -62,9 +61,13 @@ void ShowExampleAppCustomNodeGraph(bool* opened, Graph& graph)
     const float NODE_SLOT_RADIUS = 4.0f;
     const ImVec2 NODE_WINDOW_PADDING(8.0f, 8.0f);
 
+
     // Create our child canvas
     ImGui::Text("Hold middle mouse button to scroll (%.2f,%.2f)", graph.scrolling.x, graph.scrolling.y);
+    ImGui::SliderInt("slider int2", &graph.levelOffsetXTo, 0, 255);
+    ImGui::SliderInt("slider int", &graph.levelOffsetYTo, 0, 255);
     ImGui::SameLine(ImGui::GetWindowWidth() - 100);
+
     ImGui::Checkbox("Show grid", &graph.showGrid);
     ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(1, 1));
     ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0, 0));
@@ -129,12 +132,12 @@ void ShowExampleAppCustomNodeGraph(bool* opened, Graph& graph)
             ImVec2 node_rect_max = node_rect_min + n->size;
 
 
-            if (!graphInited) {
+//            if (!graphInited) {
                 // Set initial position
-                ImVec2 newPos(nthNode* levelOffsetX + n->size.x,
-                              n->graphLevel * levelOffsetY + n->size.y);
+                ImVec2 newPos(nthNode* graph.levelOffsetXTo + n->size.x,
+                              n->graphLevel * graph.levelOffsetYTo + n->size.y);
                 n->setPos(newPos);
-            }
+//            }
 
             // Display node box
             draw_list->ChannelsSetCurrent(1); // Background
@@ -166,9 +169,9 @@ void ShowExampleAppCustomNodeGraph(bool* opened, Graph& graph)
         // Draw levels
         draw_list->ChannelsSetCurrent(0);
         ImU32 levelColor = l->getLevel() % 2 == 0 ? IM_COL32(20, 20, 20, 20) : IM_COL32(255, 255, 255, 20);
-        draw_list->AddRectFilled(ImVec2(0, offset.y + (l->getLevel() * levelOffsetY)),
+        draw_list->AddRectFilled(ImVec2(0, offset.y + (l->getLevel() * graph.levelOffsetYTo)),
                                  ImVec2(canvas_sz.x + 500,
-                                        offset.y + ((l->getLevel() + 1) * levelOffsetY)),
+                                        offset.y + ((l->getLevel() + 1) * graph.levelOffsetYTo)),
                                  levelColor, 0.f, 0);
 
     }

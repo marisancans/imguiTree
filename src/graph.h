@@ -13,4 +13,6 @@ public:
     ImVec2 scrolling;
     bool showGrid;
     std::vector<Layer*> layers;
+    int levelOffsetYTo;
+    int levelOffsetXTo;
 };

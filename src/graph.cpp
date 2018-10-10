@@ -7,5 +7,7 @@
 
 Graph::Graph(bool showGrid, std::vector<Layer*> const& layers) : showGrid(showGrid),  layers(layers){
     scrolling = ImVec2(0.0f, 0.0f);
+    levelOffsetYTo = 150;
+    levelOffsetXTo = 150;
 }
 
