@@ -48,4 +48,14 @@ void Node::removeChild(Node *child) {
 
 }
 
+void Node::setSelected(bool b) {
+    if(b) {
+        for (auto &p : parentNodes)
+            p->setSelected(true);
+        selected = true;
+    } else {
+        selected = false;
+    }
+}
+
 

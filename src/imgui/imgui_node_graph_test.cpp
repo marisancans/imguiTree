@@ -101,8 +101,9 @@ void ShowExampleAppCustomNodeGraph(bool* opened, Graph& graph)
             for (auto &in : curr->parentNodes) {    // Iterate through each nodes inputs and link them
                 ImVec2 p1 = offset + in->getOutputSlotPos();
                 ImVec2 p2 = offset + curr->getInputSlotPos();
+                ImU32 color = in->isSelected(curr) ? IM_COL32(200, 200, 200, 255) : IM_COL32(200, 200, 100, 55);
                 draw_list->AddBezierCurve(p1, p1 + ImVec2(+50, 0), p2 + ImVec2(-50, 0), p2,
-                                          IM_COL32(200, 200, 100, 255), 3.0f);
+                                          color, 3.0f);
             }
         }
     }
@@ -146,12 +147,16 @@ void ShowExampleAppCustomNodeGraph(bool* opened, Graph& graph)
             if (ImGui::IsItemHovered()) {
                 node_hovered_in_scene = n->id;
                 open_context_menu |= ImGui::IsMouseClicked(1);
+                n->setSelected(true);
+            } else {
+                n->setSelected(false);
             }
             bool node_moving_active = ImGui::IsItemActive();
             if (node_widgets_active || node_moving_active)
                 nodeSelected = n->id;
             if (node_moving_active && ImGui::IsMouseDragging(0))
                 n->pos = n->pos + ImGui::GetIO().MouseDelta;
+
 
             ImU32 node_bg_color = (node_hovered_in_list == n->id || node_hovered_in_scene == n->id ||
                                    (node_hovered_in_list == -1 && nodeSelected == n->id)) ? IM_COL32(75, 75, 75, 255)

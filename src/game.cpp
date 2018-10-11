@@ -7,7 +7,7 @@
 #include <algorithm>
 
 void Game::getNextLayer() {
-    if(_layers.back()->getLevel() < 4) {
+    if(_layers.back()->getLevel() < 5) {
         auto l = new Layer(_layers.back()->getLevel() + 1);
         auto prevNodes = _layers.back()->getNodes();
 

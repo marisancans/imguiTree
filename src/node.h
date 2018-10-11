@@ -36,6 +36,8 @@ public:
     inline void setStatus(Status status){ _status = _status; }
     inline bool isAlive(){ return P1Stats.health > 0 && P2Stats.health > 0; }
     void removeChild(Node *child);
+    void setSelected(bool b);
+    bool inline isSelected(Node* child){ return selected && child->selected; }
 
 
     int         id;
@@ -48,6 +50,7 @@ public:
     int         childrenCount;
     PlayerStats P1Stats;
     PlayerStats P2Stats;
+    bool        selected;
 
 private:
     Status      _status;
