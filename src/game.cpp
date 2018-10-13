@@ -9,7 +9,7 @@
 #include <thread>
 
 void Game::getNextLayer() {
-        for(int i = 0; i < 8; ++i) {
+        for(int i = 0; i < gameSettings->layerCount; ++i) {
             auto l = new Layer(_layers.back()->getLevel() + 1);
             auto prevNodes = _layers.back()->getNodes();
             _layers.push_back(l);

@@ -90,10 +90,17 @@ int main(int, char**)
     //ImGui::StyleColorsClassic();
     
 
-    // Settings Setup
+    // GAME SETTINGS <--------------------------------------------------
+    int levelCount = 8; // -< need to beat this
+    ImVec2 scrolling = ImVec2(0.0f, 0.0f);
+    bool showGid = true;
+    int levelOffsetXTo = 90;
+    int levelOffsetYTo = 20;
+    int speedMS = 1;
+
     bool show_test_window = true;
     ImVec4 clear_color = ImVec4(0.0f, 0.0f, 0.0f, 1.00f);
-    GameSettings gameSettings{ImVec2(0.0f, 0.0f), true, 90, 20, 20};
+    GameSettings gameSettings{levelCount, scrolling, showGid, levelOffsetXTo, levelOffsetYTo, speedMS};
 
     // Intialization
     Game game(Game::PCvsPC, Game::P1, &gameSettings);

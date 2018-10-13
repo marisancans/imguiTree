@@ -5,6 +5,7 @@
 #include "imgui/imgui.h"
 
 struct GameSettings{
+    int layerCount;
     ImVec2 scrolling;
     bool showGrid;
     int levelOffsetYTo;
