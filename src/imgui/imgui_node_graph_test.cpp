@@ -136,9 +136,7 @@ void ShowExampleAppCustomNodeGraph(bool* opened, Game const& game, GameSettings&
             // Adjust to gameSettings offsets
             int x = gameSettings.levelOffsetXTo;
             int y = gameSettings.levelOffsetYTo;
-            ImVec2 newPos(nthNode * x + n->size.x,
-                          l->getLevel() * y + n->size.y);
-            n->setPos(newPos);
+            n->setPos(nthNode, l->getLevel(), x, y);
 
 
 

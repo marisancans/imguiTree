@@ -70,12 +70,12 @@ void Game::initMoves() {
 
 Node *Game::createChild(Node *parent) {
     Node* child = new Node(getNodeID(), *parent);
+    int level = getLastLayer()->getLevel();
+    int nodeCount =  getLastLayer()->getNodeCount();
     int x = gameSettings->levelOffsetXTo;
     int y = gameSettings->levelOffsetYTo;
-    ImVec2 newPos(getLastLayer()->getNodeCount() * x + parent->size.x,
-                  getLastLayer()->getLevel() * y + parent->size.y);
-    child->setPos(newPos);
 
+    child->setPos(nodeCount, level, x, y);
     return child;
 }
 
