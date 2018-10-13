@@ -8,9 +8,9 @@
 #include <math.h> // fmodf
 #include "imgui/imgui.h"
 #include <vector>
-#include "graph.h"
 #include "node.h"
 #include "layer.h"
+#include "game.h"
 
 // NB: You can use math functions/operators on ImVec2 if you #define IMGUI_DEFINE_MATH_OPERATORS and #include "imgui_internal.h"
 // Here we only declare simple +/- operators so others don't leak into the demo code.
@@ -19,7 +19,7 @@ static inline ImVec2 operator-(const ImVec2& lhs, const ImVec2& rhs) { return Im
 
 // Really dumb data structure provided for the example.
 // Note that we storing links are INDICES (not ID) to make example code shorter, obviously a bad idea for any general purpose code.
-void ShowExampleAppCustomNodeGraph(bool* opened, Graph& graph)
+void ShowExampleAppCustomNodeGraph(bool* opened, Game const& game, GameSettings& gameSettings)
 {
     ImGui::SetNextWindowSize(ImVec2(700, 600), ImGuiSetCond_FirstUseEver);
     if (!ImGui::Begin("Example: Custom Node Graph", opened))
@@ -41,7 +41,7 @@ void ShowExampleAppCustomNodeGraph(bool* opened, Graph& graph)
     ImGui::Text("Nodes");
     ImGui::Separator();
 
-    for (auto& l : graph.layers) {
+    for (auto& l : game.getLayers()) {
         for(auto& n : l->getNodes()) {
             ImGui::PushID(n->id);
             if (ImGui::Selectable("tmp", n->id == nodeSelected))
@@ -63,19 +63,19 @@ void ShowExampleAppCustomNodeGraph(bool* opened, Graph& graph)
 
 
     // Create our child canvas
-    ImGui::Text("Hold middle mouse button to scroll (%.2f,%.2f)", graph.scrolling.x, graph.scrolling.y);
-    ImGui::SliderInt("slider int2", &graph.levelOffsetXTo, 0, 255);
-    ImGui::SliderInt("slider int", &graph.levelOffsetYTo, 0, 255);
+    ImGui::Text("Hold middle mouse button to scroll (%.2f,%.2f)", gameSettings.scrolling.x, gameSettings.scrolling.y);
+    ImGui::SliderInt("slider int2",  &gameSettings.levelOffsetXTo, 0, 255);
+    ImGui::SliderInt("slider int",  &gameSettings.levelOffsetYTo, 0, 255);
     ImGui::SameLine(ImGui::GetWindowWidth() - 100);
 
-    ImGui::Checkbox("Show grid", &graph.showGrid);
+    ImGui::Checkbox("Show grid", &gameSettings.showGrid);
     ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(1, 1));
     ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0, 0));
     ImGui::PushStyleColor(ImGuiCol_ChildWindowBg, IM_COL32(60, 60, 70, 200));
     ImGui::BeginChild("scrolling_region", ImVec2(0, 0), true, ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoMove);
     ImGui::PushItemWidth(120.0f);
 
-    ImVec2 offset = ImGui::GetCursorScreenPos() + graph.scrolling;
+    ImVec2 offset = ImGui::GetCursorScreenPos() + gameSettings.scrolling;
     ImDrawList* draw_list = ImGui::GetWindowDrawList();
 
 
@@ -83,20 +83,20 @@ void ShowExampleAppCustomNodeGraph(bool* opened, Graph& graph)
     ImVec2 canvas_sz = ImGui::GetWindowSize();
 
     // Display grid
-    if (graph.showGrid)
+    if (gameSettings.showGrid)
     {
         ImU32 GRID_COLOR = IM_COL32(200, 200, 200, 40);
         float GRID_SZ = 64.0f;
-        for (float x = fmodf(graph.scrolling.x, GRID_SZ); x < canvas_sz.x; x += GRID_SZ)
+        for (float x = fmodf(gameSettings.scrolling.x, GRID_SZ); x < canvas_sz.x; x += GRID_SZ)
             draw_list->AddLine(ImVec2(x, 0.0f) + win_pos, ImVec2(x, canvas_sz.y) + win_pos, GRID_COLOR);
-        for (float y = fmodf(graph.scrolling.y, GRID_SZ); y < canvas_sz.y; y += GRID_SZ)
+        for (float y = fmodf(gameSettings.scrolling.y, GRID_SZ); y < canvas_sz.y; y += GRID_SZ)
             draw_list->AddLine(ImVec2(0.0f, y) + win_pos, ImVec2(canvas_sz.x, y) + win_pos, GRID_COLOR);
     }
 //
 //    // Display links
     draw_list->ChannelsSplit(3);
     draw_list->ChannelsSetCurrent(1);                    // Background
-    for (auto& l : graph.layers){               // Iterate through vector of nodes
+    for (auto& l : game.getLayers()){               // Iterate through vector of nodes
         for(auto& curr : l->getNodes()){
             for (auto &in : curr->parentNodes) {    // Iterate through each nodes inputs and link them
                 ImVec2 p1 = offset + in->getOutputSlotPos();
@@ -111,7 +111,7 @@ void ShowExampleAppCustomNodeGraph(bool* opened, Graph& graph)
 //
     // Display nodes
     // Iterate trough each level
-    for(auto& l : graph.layers) {
+    for(auto& l : game.getLayers()) {
         int nthNode = 0;
         for (auto &n : l->getNodes()) {
             nthNode++;
@@ -133,12 +133,6 @@ void ShowExampleAppCustomNodeGraph(bool* opened, Graph& graph)
             ImVec2 node_rect_max = node_rect_min + n->size;
 
 
-//            if (!graphInited) {
-                // Set initial position
-                ImVec2 newPos(nthNode* graph.levelOffsetXTo + n->size.x,
-                              n->graphLevel * graph.levelOffsetYTo + n->size.y);
-                n->setPos(newPos);
-//            }
 
             // Display node box
             draw_list->ChannelsSetCurrent(1); // Background
@@ -174,9 +168,9 @@ void ShowExampleAppCustomNodeGraph(bool* opened, Graph& graph)
         // Draw levels
         draw_list->ChannelsSetCurrent(0);
         ImU32 levelColor = l->getLevel() % 2 == 0 ? IM_COL32(20, 20, 20, 20) : IM_COL32(255, 255, 255, 20);
-        draw_list->AddRectFilled(ImVec2(0, offset.y + (l->getLevel() * graph.levelOffsetYTo)),
+        draw_list->AddRectFilled(ImVec2(0, offset.y + (l->getLevel() * gameSettings.levelOffsetYTo)),
                                  ImVec2(canvas_sz.x + 500,
-                                        offset.y + ((l->getLevel() + 1) * graph.levelOffsetYTo)),
+                                        offset.y + ((l->getLevel() + 1) * gameSettings.levelOffsetYTo)),
                                  levelColor, 0.f, 0);
 
     }
@@ -226,7 +220,7 @@ void ShowExampleAppCustomNodeGraph(bool* opened, Graph& graph)
 
     // Scrolling
     if (ImGui::IsWindowHovered() && !ImGui::IsAnyItemActive() && ImGui::IsMouseDragging(2, 0.0f))
-        graph.scrolling = graph.scrolling + ImGui::GetIO().MouseDelta;
+        gameSettings.scrolling = gameSettings.scrolling + ImGui::GetIO().MouseDelta;
 
     ImGui::PopItemWidth();
     ImGui::EndChild();

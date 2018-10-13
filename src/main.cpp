@@ -1,12 +1,14 @@
 #include <stdio.h>
 
+
 #include "imgui/imgui.h"
 #include "imgui/imgui_impl_glfw.h"
 #include "imgui/imgui_impl_opengl3.h"
 #include "imgui/imgui_node_graph_test.h"
 
-#include "graph.h"
 #include "game.h"
+#include <chrono>
+#include <thread>
 
 // About OpenGL function loaders: modern OpenGL doesn't have a standard header file and requires individual function pointers to be loaded manually.
 // Helper libraries are often used for this purpose! Here we are supporting a few common ones: gl3w, glew, glad.
@@ -88,14 +90,17 @@ int main(int, char**)
     //ImGui::StyleColorsClassic();
     
 
+    // Settings Setup
     bool show_test_window = true;
-
     ImVec4 clear_color = ImVec4(0.0f, 0.0f, 0.0f, 1.00f);
+    GameSettings gameSettings{ImVec2(0.0f, 0.0f), true, 90, 20, 10};
 
+    // Intialization
+    Game game(Game::PCvsPC, Game::P1, &gameSettings);
 
-    Game game(Game::PCvsPC, Game::P1);
-    Graph graph(false, game.getLayers());
-
+    std::thread t([&game](){
+        game.getNextLayer();
+    });
 
 
 
@@ -111,8 +116,7 @@ int main(int, char**)
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
 
-
-        ShowExampleAppCustomNodeGraph(&show_test_window, graph);
+        ShowExampleAppCustomNodeGraph(&show_test_window, game, gameSettings);
 //        ImGui::ShowDemoWindow(lala);
 
         // Rendering

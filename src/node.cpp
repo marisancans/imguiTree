@@ -22,7 +22,6 @@ ImVec2 Node::getOutputSlotPos() const
 
 Node::Node(int id, Node& parent) {
     this->id = id;
-    pos = ImVec2(0, 0);
     graphLevel = parent.graphLevel + 1;
     this->P1Stats = parent.P1Stats;
     this->P2Stats = parent.P2Stats;
