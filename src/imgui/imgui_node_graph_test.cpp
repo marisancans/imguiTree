@@ -133,6 +133,14 @@ void ShowExampleAppCustomNodeGraph(bool* opened, Game const& game, GameSettings&
             ImVec2 node_rect_max = node_rect_min + n->size;
 
 
+            // Adjust to gameSettings offsets
+            int x = gameSettings.levelOffsetXTo;
+            int y = gameSettings.levelOffsetYTo;
+            ImVec2 newPos(nthNode * x + n->size.x,
+                          l->getLevel() * y + n->size.y);
+            n->setPos(newPos);
+
+
 
             // Display node box
             draw_list->ChannelsSetCurrent(1); // Background

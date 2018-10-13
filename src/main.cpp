@@ -93,7 +93,7 @@ int main(int, char**)
     // Settings Setup
     bool show_test_window = true;
     ImVec4 clear_color = ImVec4(0.0f, 0.0f, 0.0f, 1.00f);
-    GameSettings gameSettings{ImVec2(0.0f, 0.0f), true, 90, 20, 10};
+    GameSettings gameSettings{ImVec2(0.0f, 0.0f), true, 90, 20, 20};
 
     // Intialization
     Game game(Game::PCvsPC, Game::P1, &gameSettings);
