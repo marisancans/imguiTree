@@ -3,18 +3,9 @@
 #include <string>
 #include "imgui/imgui.h"
 #include "game.h"
+#include "playerStats.h"
 #include <vector>
 
-struct PlayerStats {
-    int health;
-    int attack;
-    int defense;
-    int heal;
-
-    inline bool operator==(PlayerStats const& parent){
-        return health == parent.health;
-    }
-};
 
 
 class Node
@@ -23,13 +14,14 @@ class Node
 
 public:
     enum Status{ROOT, MIDDLE, END};
+    enum Move{ATTACK, DEFEND, HEAL};
     Node(int id, const ImVec2 &pos, int graphLevel, int inputsCount,
          int outputsCount, Status status); //   input/output nodes are references to vector of node pointers
     Node(int id, Node& parent);
     ~Node() = default;
     ImVec2 getInputSlotPos() const;
     ImVec2 getOutputSlotPos() const;
-    //inline const char* getCName() { return name.c_str(); }
+
     inline void addParent(Node *n) { parentNodes.push_back(n); parentCount++; }
     inline void addChildren(Node *n) { childrenNodes.push_back(n); childrenCount++; }
     inline void addParent(nodeVec& nodes);
@@ -40,12 +32,14 @@ public:
     inline void setStatus(Status status){ _status = status; }
     inline Status getStatus(){ return _status; }
     inline bool isAlive(){ return P1Stats.health > 0 && P2Stats.health > 0; }
-    void removeChild(Node *child);
-    void setSelected(bool b);
-    bool inline isSelected(Node* child){ return selected && child->selected; }
+    inline bool isSelected(Node* child){ return selected && child->selected; }
     inline PlayerStats* getNextTurnStats(Game::Turn t){ return t == Game::Turn::P1 ? &P2Stats : &P1Stats; }
     inline PlayerStats* getCurrTurnStats(Game::Turn t){ return t == Game::Turn::P1 ? &P1Stats : &P2Stats; }
 
+    void removeChild(Node *child);
+    void setSelected(bool b);
+    const char* getMoveStr();
+    void incMove(Game::Turn t);
 
     int         id;
     ImVec2      pos;
@@ -58,6 +52,8 @@ public:
     PlayerStats P1Stats;
     PlayerStats P2Stats;
     bool        selected;
+    Move        move;
+
 
 private:
     Status      _status;

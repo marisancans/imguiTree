@@ -20,7 +20,6 @@ void Game::getNextLayer() {
                 if(parent->getStatus() != Node::END) {
 
                     for (auto &fn : _moves) {
-
                         auto child = (this->*fn)(parent);
                         std::this_thread::sleep_for(std::chrono::milliseconds(gameSettings->speedMS));
                         // Goes through all layer nodes to find match, if so, cleanup references
@@ -33,8 +32,24 @@ void Game::getNextLayer() {
                             }
                         }
 
+                        // Check if next move is possible
+                        bool np = false;
+                        PlayerStats* s = child->getCurrTurnStats(_turn);
+                        PlayerStats const* i = &gameSettings->initPlayerStats;
+                        switch(child->move) {
+                            case Node::ATTACK:
+                                np = s->attackCount < i->attack;
+                                break;
+                            case Node::DEFEND:
+                                np = s->defenseCount < i->defense;
+                                break;
+                            case Node::HEAL:
+                                np = s->healCount < i->heal;
+                                break;
+                        }
 
-                        if (child->getStatus() != Node::END && !contain) {
+
+                        if (child->getStatus() != Node::END && !contain && np) {
                             child->addParent(parent);
                             l->addNode(child);
                             child->setSelected(true);
@@ -62,8 +77,8 @@ void Game::init() {
     auto inputs = [this](){ return _turn == P1 ? 0 : 1; };
     auto l = new Layer(_turn, 0);
     auto n = new Node(getNodeID(), ImVec2(0, 0), 0, inputs(), 0, Node::ROOT);
-    n->P1Stats = {6, 3, 2, 2};// TODO reduce attack each time ,aka add prev move hisotry
-    n->P2Stats = {6, 3, 2, 2};// TODO sould be passed to game from main, gameSettings
+    n->P1Stats = gameSettings->initPlayerStats;
+    n->P2Stats = gameSettings->initPlayerStats;
     l->addNode(n);
     _layers.push_back(l);
 }
@@ -87,23 +102,37 @@ Node *Game::createChild(Node *parent) {
 
 Node* Game::attack(Node* parent){
     auto child = createChild(parent);
-    child->getNextTurnStats(_turn)->health -= parent->getCurrTurnStats(_turn)->attack;
+    child->move = Node::ATTACK;
+    child->incMove(_turn);
+    child->getNextTurnStats(_turn)->health -=
+            parent->getCurrTurnStats(_turn)->attack - child->getCurrTurnStats(_turn)->attackCount;
 
     return child;
 }
 
 Node* Game::defend(Node* parent){
     auto child = createChild(parent);
-    child->getNextTurnStats(_turn)->health -= parent->getCurrTurnStats(_turn)->attack - child->getNextTurnStats(_turn)->defense;
+    child->move = Node::DEFEND;
+    child->incMove(_turn);
+    child->getNextTurnStats(_turn)->health -=
+            parent->getCurrTurnStats(_turn)->attack -
+            child->getNextTurnStats(_turn)->defense -
+            child->getCurrTurnStats(_turn)->defenseCount;
+
     return child;
 }
 
 Node* Game::heal(Node* parent){
     auto child = createChild(parent);
+    child->move = Node::HEAL;
+    child->incMove(_turn);
     // Following statement is to prevent infinite healing
     if (child->getCurrTurnStats(_turn)->health >= parent->getNextTurnStats(_turn)->health)
         return attack(parent);
-    child->getCurrTurnStats(_turn)->health += child->getCurrTurnStats(_turn)->heal ;
+
+    child->getCurrTurnStats(_turn)->health +=
+            child->getCurrTurnStats(_turn)->heal -
+            child->getCurrTurnStats(_turn)->healCount;
 
     return child;
 }

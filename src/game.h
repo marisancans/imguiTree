@@ -3,6 +3,7 @@
 #include <vector>
 #include <string>
 #include "imgui/imgui.h"
+#include "playerStats.h"
 
 struct GameSettings{
     int layerCount;
@@ -11,6 +12,7 @@ struct GameSettings{
     int levelOffsetYTo;
     int levelOffsetXTo;
     int speedMS;
+    const PlayerStats initPlayerStats;
 };
 
 class Layer;
@@ -24,13 +26,13 @@ public:
     void getNextLayer();
     inline int getLayerCount() const { return _layerCount; };
     inline const std::vector<Layer*>& getLayers() const { return _layers; }
-    inline std::string genName(){ return _turn == P1 ? "P1" : "P2"; }
     inline void swapTurn(){ _turn = _turn == P1 ? P2 : P1; }
     Node* createChild(Node* parent);
     Node* attack(Node* parent);
     Node* defend(Node* parent);
     Node* heal(Node* parent);
     GameSettings* gameSettings;
+
 
 private:
 

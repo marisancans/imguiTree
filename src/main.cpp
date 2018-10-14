@@ -91,16 +91,18 @@ int main(int, char**)
     
 
     // GAME SETTINGS <--------------------------------------------------
-    int levelCount = 9; // -< need to beat this
+    int levelCount = 15; // -< need to beat this
     ImVec2 scrolling = ImVec2(0.0f, 0.0f);
     bool showGid = true;
     int levelOffsetXTo = 65;
     int levelOffsetYTo = 90;
-    int speedMS = 1;
+    int speedMS = 2;
+
+    PlayerStats ps = {6, 3, 2, 2, 0, 0, 0};
 
     bool show_test_window = true;
     ImVec4 clear_color = ImVec4(0.0f, 0.0f, 0.0f, 1.00f);
-    GameSettings gameSettings{levelCount, scrolling, showGid, levelOffsetYTo, levelOffsetXTo, speedMS};
+    GameSettings gameSettings{levelCount, scrolling, showGid, levelOffsetYTo, levelOffsetXTo, speedMS, ps};
 
     // Intialization
     Game game(Game::PCvsPC, Game::P1, &gameSettings);
@@ -124,7 +126,7 @@ int main(int, char**)
         ImGui::NewFrame();
 
         ShowExampleAppCustomNodeGraph(&show_test_window, game, gameSettings);
-        ImGui::ShowDemoWindow(lala);
+//        ImGui::ShowDemoWindow(lala);
 
         // Rendering
         ImGui::Render();

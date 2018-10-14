@@ -57,4 +57,43 @@ void Node::setSelected(bool b) {
     }
 }
 
+const char *Node::getMoveStr(){
+    switch(move){
+        case ATTACK: return std::string("Attack").c_str();
+        case DEFEND: return std::string("Defend").c_str();
+        case HEAL:   return std::string("Heal").c_str();
+        default:     return std::string("Root").c_str();
+    }
+}
+
+void Node::incMove(Game::Turn t) {
+    PlayerStats* s = getCurrTurnStats(t);
+    switch(move){
+        case ATTACK:
+           s->attackCount++;
+           if(s->defenseCount != 0)
+            s->defenseCount--;
+           if(s->healCount != 0)
+                s->healCount--;
+           break;
+        case DEFEND:
+            s->defenseCount++;
+            if(s->attackCount != 0)
+                s->attackCount--;
+            if(s->healCount != 0)
+                s->healCount--;
+            break;
+        case HEAL:
+            s->healCount++;
+            if(s->attackCount != 0)
+                s->attackCount--;
+            if(s->defenseCount != 0)
+                s->defenseCount--;
+            break;
+    }
+
+
+    getCurrTurnStats(t);
+}
+
 

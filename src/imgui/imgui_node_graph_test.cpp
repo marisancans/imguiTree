@@ -46,13 +46,15 @@ void ShowExampleAppCustomNodeGraph(bool* opened, Game const& game, GameSettings&
     ImGui::BeginGroup();
 
 
-    ImGui::BeginChild("Child1", ImVec2(ImGui::GetWindowContentRegionWidth() * 0.15f, 60), false);
+    ImGui::BeginChild("Child1", ImVec2(ImGui::GetWindowContentRegionWidth() * 0.35f, 60), false);
 
     if (nodeClicked != nullptr) {
 
-        ImGui::Columns(5, "mycolumns");
+        ImGui::Columns(6, "mycolumns");//TODO remove id from colum, a it is a duplicate
         ImGui::Separator();
         ImGui::Text("ID");
+        ImGui::NextColumn();
+        ImGui::Text("Move");
         ImGui::NextColumn();
         ImGui::Text("Health");
         ImGui::NextColumn();
@@ -75,13 +77,15 @@ void ShowExampleAppCustomNodeGraph(bool* opened, Game const& game, GameSettings&
                 selected = i;
             bool hovered = ImGui::IsItemHovered();
             ImGui::NextColumn();
-            ImGui::Text(std::to_string(s->health).c_str());
+            ImGui::Text(nodeClicked->getMoveStr());
             ImGui::NextColumn();
-            ImGui::Text(std::to_string(s->attack).c_str());
+            ImGui::Text(std::to_string(s->healCount).c_str());
             ImGui::NextColumn();
-            ImGui::Text(std::to_string(s->defense).c_str());
+            ImGui::Text(std::to_string(s->attackCount).c_str());
             ImGui::NextColumn();
-            ImGui::Text(std::to_string(s->heal).c_str());
+            ImGui::Text(std::to_string(s->defenseCount).c_str());
+            ImGui::NextColumn();
+            ImGui::Text(std::to_string(s->healCount).c_str());
             ImGui::NextColumn();
         }
     }
@@ -184,12 +188,15 @@ void ShowExampleAppCustomNodeGraph(bool* opened, Game const& game, GameSettings&
             if (ImGui::IsItemHovered()) {
                 node_hovered_in_scene = n->id;
                 n->setSelected(true);
+                nodeClicked = n;
             } else {
                 n->setSelected(false);
             }
 
-            if(ImGui::IsItemClicked(0))
+            if(ImGui::IsItemClicked(0)) {
                 nodeClicked = n;
+                n->setSelected(true);
+            }
 
             bool node_moving_active = ImGui::IsItemActive();
 //            if (node_widgets_active || node_moving_active)
@@ -202,7 +209,7 @@ void ShowExampleAppCustomNodeGraph(bool* opened, Game const& game, GameSettings&
             int colorOffset = 0;
             if(n->getStatus() == Node::END)
                 if(n->getNextTurnStats(l->getCurrentTurn())->health <= 0)
-                    colorOffset = 155;
+                    colorOffset = 50;
 
 
 
@@ -220,6 +227,13 @@ void ShowExampleAppCustomNodeGraph(bool* opened, Game const& game, GameSettings&
         }
 
         // Draw levels
+        draw_list->ChannelsSetCurrent(1);
+//        draw_list->AddRect(, ImVec2(100,
+//                                        offset.y + ((l->getLevel() + 1) * gameSettings.levelOffsetYTo)), , 0, 0, 5);
+//        draw_list->AddCircle(ImVec2(25, offset.y + (l->getLevel() * gameSettings.levelOffsetYTo) + gameSettings.levelOffsetYTo/2),
+//                20, IM_COL32(100, 100, 100, 255), 12, 5.0f);
+        draw_list->AddText(ImVec2(25, offset.y + (l->getLevel() * gameSettings.levelOffsetYTo) + gameSettings.levelOffsetYTo/2),
+                           IM_COL32(50, 250, 50, 255), l->getTurnStr().c_str());
         draw_list->ChannelsSetCurrent(0);
         ImU32 levelColor = l->getLevel() % 2 == 0 ? IM_COL32(20, 20, 20, 20) : IM_COL32(255, 255, 255, 20);
         draw_list->AddRectFilled(ImVec2(0, offset.y + (l->getLevel() * gameSettings.levelOffsetYTo)),
