@@ -123,9 +123,9 @@ void ShowExampleAppCustomNodeGraph(bool* opened, Game const& game, GameSettings&
             bool old_any_active = ImGui::IsAnyItemActive();
             ImGui::SetCursorScreenPos(node_rect_min + NODE_WINDOW_PADDING);
             ImGui::BeginGroup(); // Lock horizontal position
-            ImGui::Text("%i", n->P1Stats.health);
-            ImGui::SameLine(30);
-            ImGui::Text("%i", n->P2Stats.health);
+            ImGui::Text("%i |", n->P1Stats.health);
+            ImGui::SameLine(20);
+            ImGui::Text(" %i", n->P2Stats.health);
             ImGui::EndGroup();
 
             // Save the size of what we have emitted and whether any of the widgets are being used
@@ -158,9 +158,11 @@ void ShowExampleAppCustomNodeGraph(bool* opened, Game const& game, GameSettings&
             if (node_moving_active && ImGui::IsMouseDragging(0))
                 n->pos = n->pos + ImGui::GetIO().MouseDelta;
 
+
+            //Show dead node
             int lowestHP = 0;
             int colorOffset = 0;
-            if(l->getLevel() == gameSettings.layerCount) {
+            if(n->getStatus() == Node::END) {
                 lowestHP = l->getLowestNodeHP();
                 if (l->getCurrentTurn() == Game::P1){
                     if(n->P1Stats.health == lowestHP)

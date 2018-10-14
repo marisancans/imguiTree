@@ -22,6 +22,7 @@ public:
     enum Turn{P1, P2};
     Game(GameMode mode, Turn turn, GameSettings* gameSettings);
     void getNextLayer();
+    inline int getLayerCount() const { return _layerCount; };
     inline const std::vector<Layer*>& getLayers() const { return _layers; }
     inline std::string genName(){ return _turn == P1 ? "P1" : "P2"; }
     inline void swapTurn(){ _turn = _turn == P1 ? P2 : P1; }
@@ -36,6 +37,7 @@ private:
     GameMode _mode;
     Turn _turn;
     int _nodeCount;
+    int _layerCount;
     std::vector<Layer*> _layers;
     std::vector<Node* (Game::*)(Node* n)> _moves;
 

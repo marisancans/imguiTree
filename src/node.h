@@ -35,7 +35,8 @@ public:
     inline void setPos(ImVec2 pos){ this->pos = pos; }
     inline void setPos(int nthElem, int level, int xSettingsOffset, int ySettingsOffSet)
         { pos = ImVec2(nthElem * xSettingsOffset + size.x, level * ySettingsOffSet + size.y);}
-    inline void setStatus(Status status){ _status = _status; }
+    inline void setStatus(Status status){ _status = status; }
+    inline Status getStatus(){ return _status; }
     inline bool isAlive(){ return P1Stats.health > 0 && P2Stats.health > 0; }
     void removeChild(Node *child);
     void setSelected(bool b);

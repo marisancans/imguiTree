@@ -10,32 +10,38 @@
 
 void Game::getNextLayer() {
         for(int i = 0; i < gameSettings->layerCount; ++i) {
-            auto l = new Layer(_turn, _layers.back()->getLevel() + 1);
+            auto l = new Layer(_turn, ++_layerCount);
             auto prevNodes = _layers.back()->getNodes();
             _layers.push_back(l);
 
+
+
             for (auto &parent : prevNodes) {
-                for (auto &fn : _moves) {
-                    auto child = (this->*fn)(parent);
-                    std::this_thread::sleep_for(std::chrono::milliseconds(gameSettings->speedMS));
-                    // Goes through all layer nodes to find match, if so, cleanup references
-                    bool contain = false;
-                    for (auto &n : l->getNodes()) {
-                        if (n->P1Stats == child->P1Stats && n->P2Stats == child->P2Stats) {
-                            n->addParent(parent);
-                            parent->removeChild(child);
-                            contain = true;
+                if(parent->getStatus() != Node::END) {
+
+                    for (auto &fn : _moves) {
+
+                        auto child = (this->*fn)(parent);
+                        std::this_thread::sleep_for(std::chrono::milliseconds(gameSettings->speedMS));
+                        // Goes through all layer nodes to find match, if so, cleanup references
+                        bool contain = false;
+                        for (auto &n : l->getNodes()) {
+                            if (n->P1Stats == child->P1Stats && n->P2Stats == child->P2Stats) {
+                                n->addParent(parent);
+                                parent->removeChild(child);
+                                contain = true;
+                            }
                         }
-                    }
 
 
-                    if (child->isAlive() && !contain) {
-                        child->addParent(parent);
-                        l->addNode(child);
-                        child->setSelected(true);
-                    } else {
-                        child->setStatus(Node::END);
-                        // return;
+                        if (child->getStatus() != Node::END && !contain) {
+                            child->addParent(parent);
+                            l->addNode(child);
+                            child->setSelected(true);
+                        }
+                        if (!child->isAlive())
+                            child->setStatus(Node::END);
+
                     }
                 }
             }
@@ -46,7 +52,7 @@ void Game::getNextLayer() {
 }
 
 Game::Game(Game::GameMode mode, Game::Turn turn, GameSettings* gameSettings):
-    _nodeCount(0), gameSettings(gameSettings)
+    _nodeCount(0), gameSettings(gameSettings), _layerCount(0)
 {
     initMoves();
     init();
@@ -56,8 +62,8 @@ void Game::init() {
     auto inputs = [this](){ return _turn == P1 ? 0 : 1; };
     auto l = new Layer(_turn, 0);
     auto n = new Node(getNodeID(), ImVec2(0, 0), 0, inputs(), 0, Node::ROOT);
-    n->P1Stats = {4, 3, 2, 2};
-    n->P2Stats = {4, 3, 2, 2};
+    n->P1Stats = {6, 3, 2, 1};
+    n->P2Stats = {6, 3, 2, 1};// TODO sould be passed to game from main, gameSettings
     l->addNode(n);
     _layers.push_back(l);
 }
@@ -101,10 +107,16 @@ Node* Game::defend(Node* parent){
 
 Node* Game::heal(Node* parent){
     auto child = createChild(parent);
-    if(_turn == P1)
+    if(_turn == P1) {
+        // Following statement is to prevent infinite healing
+        if (child->P1Stats.health >= parent->P2Stats.health)
+            return attack(parent);
         child->P1Stats.health += child->P1Stats.heal;
-    else
+    } else {
+        if (child->P2Stats.health >= parent->P1Stats.health)
+            return attack(parent);
         child->P2Stats.health += child->P2Stats.heal;
+    }
     return child;
 }
 

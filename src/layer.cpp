@@ -12,7 +12,9 @@ bool Layer::linkDuplicate(Node *child) {
 
 // Spaghetti
 int Layer::getLowestNodeHP(){
-    int min = 0;
+    int min = _currentTurn == Game::Turn::P1 ?
+              _nodes.back()->P1Stats.health :  _nodes.back()->P2Stats.health;
+
     auto cmp = [this](Node* n1, Node* n2){
         return this->_currentTurn == Game::Turn::P1 ?
             n1->P1Stats.health < n2->P1Stats.health : n2->P2Stats.health < n1->P2Stats.health; };
