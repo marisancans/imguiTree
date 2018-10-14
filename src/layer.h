@@ -16,7 +16,7 @@ public:
     bool linkDuplicate(Node* child);
     int getNodeCount(){ return int(_nodes.size()); }
     int  getLowestNodeHP();
-    inline Game::Turn getCurrentTurn(){ _currentTurn; }
+    inline Game::Turn getCurrentTurn(){ return _currentTurn; }
 
 
 private:

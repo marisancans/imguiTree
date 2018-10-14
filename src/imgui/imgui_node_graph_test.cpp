@@ -44,7 +44,8 @@ void ShowExampleAppCustomNodeGraph(bool* opened, Game const& game, GameSettings&
     for (auto& l : game.getLayers()) {
         for(auto& n : l->getNodes()) {
             ImGui::PushID(n->id);
-            if (ImGui::Selectable("tmp", n->id == nodeSelected))
+            std::string x = n->getStatus() == Node::END ? "E" : "N";
+            if (ImGui::Selectable(x.c_str(), n->id == nodeSelected))
                 nodeSelected = n->id;
             if (ImGui::IsItemHovered()) {
                 node_hovered_in_list = n->id;
@@ -160,18 +161,11 @@ void ShowExampleAppCustomNodeGraph(bool* opened, Game const& game, GameSettings&
 
 
             //Show dead node
-            int lowestHP = 0;
             int colorOffset = 0;
-            if(n->getStatus() == Node::END) {
-                lowestHP = l->getLowestNodeHP();
-                if (l->getCurrentTurn() == Game::P1){
-                    if(n->P1Stats.health == lowestHP)
-                        colorOffset = 155;
-                } else {
-                    if(n->P2Stats.health == lowestHP)
-                        colorOffset = 155;
-                }
-            }
+            if(n->getStatus() == Node::END)
+                if(n->getNextTurnStats(l->getCurrentTurn())->health <= 0)
+                    colorOffset = 155;
+
 
 
             ImU32 node_bg_color = (node_hovered_in_list == n->id || node_hovered_in_scene == n->id ||

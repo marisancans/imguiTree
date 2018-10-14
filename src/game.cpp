@@ -52,7 +52,7 @@ void Game::getNextLayer() {
 }
 
 Game::Game(Game::GameMode mode, Game::Turn turn, GameSettings* gameSettings):
-    _nodeCount(0), gameSettings(gameSettings), _layerCount(0)
+    _nodeCount(0), _turn(turn), gameSettings(gameSettings), _layerCount(0)
 {
     initMoves();
     init();
@@ -62,8 +62,8 @@ void Game::init() {
     auto inputs = [this](){ return _turn == P1 ? 0 : 1; };
     auto l = new Layer(_turn, 0);
     auto n = new Node(getNodeID(), ImVec2(0, 0), 0, inputs(), 0, Node::ROOT);
-    n->P1Stats = {6, 3, 2, 1};
-    n->P2Stats = {6, 3, 2, 1};// TODO sould be passed to game from main, gameSettings
+    n->P1Stats = {6, 3, 2, 2};// TODO reduce attack each time ,aka add prev move hisotry
+    n->P2Stats = {6, 3, 2, 2};// TODO sould be passed to game from main, gameSettings
     l->addNode(n);
     _layers.push_back(l);
 }
@@ -87,36 +87,24 @@ Node *Game::createChild(Node *parent) {
 
 Node* Game::attack(Node* parent){
     auto child = createChild(parent);
-//    child.health -= parent->attack;
-    if(_turn == P1)
-        child->P2Stats.health -= parent->P1Stats.attack;
-    else
-        child->P1Stats.health -= parent->P2Stats.attack;
+    child->getNextTurnStats(_turn)->health -= parent->getCurrTurnStats(_turn)->attack;
 
     return child;
 }
 
 Node* Game::defend(Node* parent){
     auto child = createChild(parent);
-    if(_turn == P1)
-        child->P2Stats.health -= parent->P1Stats.attack - child->P2Stats.defense;
-    else
-        child->P1Stats.health -= parent->P2Stats.attack - child->P2Stats.defense;
+    child->getNextTurnStats(_turn)->health -= parent->getCurrTurnStats(_turn)->attack - child->getNextTurnStats(_turn)->defense;
     return child;
 }
 
 Node* Game::heal(Node* parent){
     auto child = createChild(parent);
-    if(_turn == P1) {
-        // Following statement is to prevent infinite healing
-        if (child->P1Stats.health >= parent->P2Stats.health)
-            return attack(parent);
-        child->P1Stats.health += child->P1Stats.heal;
-    } else {
-        if (child->P2Stats.health >= parent->P1Stats.health)
-            return attack(parent);
-        child->P2Stats.health += child->P2Stats.heal;
-    }
+    // Following statement is to prevent infinite healing
+    if (child->getCurrTurnStats(_turn)->health >= parent->getNextTurnStats(_turn)->health)
+        return attack(parent);
+    child->getCurrTurnStats(_turn)->health += child->getCurrTurnStats(_turn)->heal ;
+
     return child;
 }
 

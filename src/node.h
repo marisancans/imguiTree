@@ -2,6 +2,7 @@
 
 #include <string>
 #include "imgui/imgui.h"
+#include "game.h"
 #include <vector>
 
 struct PlayerStats {
@@ -14,6 +15,7 @@ struct PlayerStats {
         return health == parent.health;
     }
 };
+
 
 class Node
 {
@@ -41,6 +43,8 @@ public:
     void removeChild(Node *child);
     void setSelected(bool b);
     bool inline isSelected(Node* child){ return selected && child->selected; }
+    inline PlayerStats* getNextTurnStats(Game::Turn t){ return t == Game::Turn::P1 ? &P2Stats : &P1Stats; }
+    inline PlayerStats* getCurrTurnStats(Game::Turn t){ return t == Game::Turn::P1 ? &P1Stats : &P2Stats; }
 
 
     int         id;
