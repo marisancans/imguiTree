@@ -29,7 +29,6 @@ public:
     Node* attack(Node* parent);
     Node* defend(Node* parent);
     Node* heal(Node* parent);
-
     GameSettings* gameSettings;
 
 private:
@@ -39,6 +38,7 @@ private:
     int _nodeCount;
     std::vector<Layer*> _layers;
     std::vector<Node* (Game::*)(Node* n)> _moves;
+
 
 
     void init();

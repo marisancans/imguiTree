@@ -10,7 +10,7 @@
 
 void Game::getNextLayer() {
         for(int i = 0; i < gameSettings->layerCount; ++i) {
-            auto l = new Layer(_layers.back()->getLevel() + 1);
+            auto l = new Layer(_turn, _layers.back()->getLevel() + 1);
             auto prevNodes = _layers.back()->getNodes();
             _layers.push_back(l);
 
@@ -54,7 +54,7 @@ Game::Game(Game::GameMode mode, Game::Turn turn, GameSettings* gameSettings):
 
 void Game::init() {
     auto inputs = [this](){ return _turn == P1 ? 0 : 1; };
-    auto l = new Layer(0);
+    auto l = new Layer(_turn, 0);
     auto n = new Node(getNodeID(), ImVec2(0, 0), 0, inputs(), 0, Node::ROOT);
     n->P1Stats = {4, 3, 2, 2};
     n->P2Stats = {4, 3, 2, 2};

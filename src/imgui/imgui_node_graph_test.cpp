@@ -111,7 +111,8 @@ void ShowExampleAppCustomNodeGraph(bool* opened, Game const& game, GameSettings&
 //
     // Display nodes
     // Iterate trough each level
-    for(auto& l : game.getLayers()) {
+    auto layers = game.getLayers();
+    for(auto& l : layers) {
         int nthNode = 0;
         for (auto &n : l->getNodes()) {
             nthNode++;
@@ -157,10 +158,23 @@ void ShowExampleAppCustomNodeGraph(bool* opened, Game const& game, GameSettings&
             if (node_moving_active && ImGui::IsMouseDragging(0))
                 n->pos = n->pos + ImGui::GetIO().MouseDelta;
 
+            int lowestHP = 0;
+            int colorOffset = 0;
+            if(l->getLevel() == gameSettings.layerCount) {
+                lowestHP = l->getLowestNodeHP();
+                if (l->getCurrentTurn() == Game::P1){
+                    if(n->P1Stats.health == lowestHP)
+                        colorOffset = 155;
+                } else {
+                    if(n->P2Stats.health == lowestHP)
+                        colorOffset = 155;
+                }
+            }
+
 
             ImU32 node_bg_color = (node_hovered_in_list == n->id || node_hovered_in_scene == n->id ||
-                                   (node_hovered_in_list == -1 && nodeSelected == n->id)) ? IM_COL32(75, 75, 75, 255)
-                                                                                          : IM_COL32(60, 60, 60, 255);
+                                   (node_hovered_in_list == -1 && nodeSelected == n->id)) ? IM_COL32(75 + colorOffset , 75, 75, 255)
+                                                                                          : IM_COL32(60 + colorOffset, 60, 60, 255);
             draw_list->AddRectFilled(node_rect_min, node_rect_max, node_bg_color, 4.0f);
             draw_list->AddRect(node_rect_min, node_rect_max, IM_COL32(100, 100, 100, 255), 4.0f);
             //        for (int slot_idx = 0; slot_idx < n->parentCount; slot_idx++)
