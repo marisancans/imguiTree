@@ -12,12 +12,12 @@ Node::Node(int id, const ImVec2 &pos, int graphLevel, int inputsCount,
 
 ImVec2 Node::getInputSlotPos() const
 {
-    return ImVec2(pos.x + size.x  / ((float)parentCount + 1), + pos.y);
+    return ImVec2(pos.x + size.x  / 2, + pos.y);
 }
 
 ImVec2 Node::getOutputSlotPos() const
 {
-    return ImVec2(pos.x + size.x / ((float)childrenCount + 1), pos.y + size.y);
+    return ImVec2(pos.x + size.x / 2, pos.y + size.y);
 }
 
 Node::Node(int id, Node& parent) {

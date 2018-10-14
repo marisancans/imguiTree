@@ -11,6 +11,7 @@
 #include "node.h"
 #include "layer.h"
 #include "game.h"
+#include "iostream"
 
 // NB: You can use math functions/operators on ImVec2 if you #define IMGUI_DEFINE_MATH_OPERATORS and #include "imgui_internal.h"
 // Here we only declare simple +/- operators so others don't leak into the demo code.
@@ -19,60 +20,91 @@ static inline ImVec2 operator-(const ImVec2& lhs, const ImVec2& rhs) { return Im
 
 // Really dumb data structure provided for the example.
 // Note that we storing links are INDICES (not ID) to make example code shorter, obviously a bad idea for any general purpose code.
-void ShowExampleAppCustomNodeGraph(bool* opened, Game const& game, GameSettings& gameSettings)
-{
+void ShowExampleAppCustomNodeGraph(bool* opened, Game const& game, GameSettings& gameSettings) {
     ImGui::SetNextWindowSize(ImVec2(700, 600), ImGuiSetCond_FirstUseEver);
-    if (!ImGui::Begin("Example: Custom Node Graph", opened))
-    {
+    if (!ImGui::Begin("Example: Custom Node Graph", opened)) {
         ImGui::End();
         return;
     }
 
     static bool graphInited = false;
     static int nodeSelected = -1;
-
-
+    static Node *nodeClicked = nullptr;
 
     // Draw a list of nodes on the left side
     bool open_context_menu = false;
     int node_hovered_in_list = -1;
     int node_hovered_in_scene = -1;
-    ImGui::BeginChild("node_list", ImVec2(100, 0));
-    ImGui::Text("Nodes");
-    ImGui::Separator();
 
-    for (auto& l : game.getLayers()) {
-        for(auto& n : l->getNodes()) {
-            ImGui::PushID(n->id);
-            std::string x = n->getStatus() == Node::END ? "E" : "N";
-            if (ImGui::Selectable(x.c_str(), n->id == nodeSelected))
-                nodeSelected = n->id;
-            if (ImGui::IsItemHovered()) {
-                node_hovered_in_list = n->id;
-                open_context_menu |= ImGui::IsMouseClicked(1);
-            }
-            ImGui::PopID();
-        }
-    }
-    ImGui::EndChild();
-
-    ImGui::SameLine();
-    ImGui::BeginGroup();
 
     const float NODE_SLOT_RADIUS = 4.0f;
     const ImVec2 NODE_WINDOW_PADDING(8.0f, 8.0f);
+//
+//
+//    // Create our child canvas
+//    ImGui::Text("Hold middle mouse button to scroll (%.2f,%.2f)", gameSettings.scrolling.x, gameSettings.scrolling.y);
+//    ImGui::SliderInt("slider int2",  &gameSettings.levelOffsetXTo, 0, 255);
+//    ImGui::SliderInt("slider int",  &gameSettings.levelOffsetYTo, 0, 255);
+//    ImGui::SameLine(ImGui::GetWindowWidth() - 100);
+
+    ImGui::BeginGroup();
 
 
-    // Create our child canvas
-    ImGui::Text("Hold middle mouse button to scroll (%.2f,%.2f)", gameSettings.scrolling.x, gameSettings.scrolling.y);
-    ImGui::SliderInt("slider int2",  &gameSettings.levelOffsetXTo, 0, 255);
-    ImGui::SliderInt("slider int",  &gameSettings.levelOffsetYTo, 0, 255);
-    ImGui::SameLine(ImGui::GetWindowWidth() - 100);
+    ImGui::BeginChild("Child1", ImVec2(ImGui::GetWindowContentRegionWidth() * 0.15f, 100), false);
 
+    if (nodeClicked != nullptr) {
+
+        ImGui::Columns(5, "mycolumns");
+        ImGui::Separator();
+        ImGui::Text("ID");
+        ImGui::NextColumn();
+        ImGui::Text("Health");
+        ImGui::NextColumn();
+        ImGui::Text("Attack");
+        ImGui::NextColumn();
+        ImGui::Text("Defense");
+        ImGui::NextColumn();
+        ImGui::Text("Heal");
+        ImGui::NextColumn();
+        ImGui::Separator();
+
+        int i = nodeClicked->id;
+        std::vector<PlayerStats*> stats{&nodeClicked->P1Stats, &nodeClicked->P2Stats};
+
+        for(auto& s : stats) {
+            static int selected = -1;
+            char buffer[25];
+            sprintf(buffer, "%i", i);
+            if (ImGui::Selectable(buffer, selected == i, ImGuiSelectableFlags_SpanAllColumns))
+                selected = i;
+            bool hovered = ImGui::IsItemHovered();
+            ImGui::NextColumn();
+            ImGui::Text(std::to_string(s->health).c_str());
+            ImGui::NextColumn();
+            ImGui::Text(std::to_string(s->attack).c_str());
+            ImGui::NextColumn();
+            ImGui::Text(std::to_string(s->defense).c_str());
+            ImGui::NextColumn();
+            ImGui::Text(std::to_string(s->heal).c_str());
+            ImGui::NextColumn();
+        }
+    }
+
+    ImGui::EndChild();
+
+
+    ImGui::SameLine();
+
+    ImGui::BeginChild("Child2", ImVec2(0,100), true);
+    ImGui::Text("%04d: scrollable region", 2);
+    ImGui::EndChild();
+//
     ImGui::Checkbox("Show grid", &gameSettings.showGrid);
     ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(1, 1));
     ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0, 0));
     ImGui::PushStyleColor(ImGuiCol_ChildWindowBg, IM_COL32(60, 60, 70, 200));
+
+
     ImGui::BeginChild("scrolling_region", ImVec2(0, 0), true, ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoMove);
     ImGui::PushItemWidth(120.0f);
 
@@ -148,14 +180,17 @@ void ShowExampleAppCustomNodeGraph(bool* opened, Game const& game, GameSettings&
             ImGui::InvisibleButton("node", n->size);
             if (ImGui::IsItemHovered()) {
                 node_hovered_in_scene = n->id;
-                open_context_menu |= ImGui::IsMouseClicked(1);
                 n->setSelected(true);
             } else {
                 n->setSelected(false);
             }
+
+            if(ImGui::IsItemClicked(0))
+                nodeClicked = n;
+
             bool node_moving_active = ImGui::IsItemActive();
-            if (node_widgets_active || node_moving_active)
-                nodeSelected = n->id;
+//            if (node_widgets_active || node_moving_active)
+//                nodeSelected = n->id;
             if (node_moving_active && ImGui::IsMouseDragging(0))
                 n->pos = n->pos + ImGui::GetIO().MouseDelta;
 
@@ -169,7 +204,7 @@ void ShowExampleAppCustomNodeGraph(bool* opened, Game const& game, GameSettings&
 
 
             ImU32 node_bg_color = (node_hovered_in_list == n->id || node_hovered_in_scene == n->id ||
-                                   (node_hovered_in_list == -1 && nodeSelected == n->id)) ? IM_COL32(75 + colorOffset , 75, 75, 255)
+                                   (node_hovered_in_list == -1 && n->selected)) ? IM_COL32(75 + colorOffset , 75, 75, 255)
                                                                                           : IM_COL32(60 + colorOffset, 60, 60, 255);
             draw_list->AddRectFilled(node_rect_min, node_rect_max, node_bg_color, 4.0f);
             draw_list->AddRect(node_rect_min, node_rect_max, IM_COL32(100, 100, 100, 255), 4.0f);
@@ -196,43 +231,43 @@ void ShowExampleAppCustomNodeGraph(bool* opened, Game const& game, GameSettings&
 
 
 
-    // Open context menu
-    if (!ImGui::IsAnyItemHovered() && ImGui::IsMouseHoveringWindow() && ImGui::IsMouseClicked(1))
-    {
-        nodeSelected = node_hovered_in_list = node_hovered_in_scene = -1;
-        open_context_menu = true;
-    }
-    if (open_context_menu)
-    {
-        ImGui::OpenPopup("context_menu");
-        if (node_hovered_in_list != -1)
-            nodeSelected = node_hovered_in_list;
-        if (node_hovered_in_scene != -1)
-            nodeSelected = node_hovered_in_scene;
-    }
-
-//    // Draw context menu
-//    ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(8, 8));
-//    if (ImGui::BeginPopup("context_menu"))
+//    // Open context menu
+//    if (!ImGui::IsAnyItemHovered() && ImGui::IsMouseHoveringWindow() && ImGui::IsMouseClicked(1))
 //    {
-//        Node* node = nodeSelected != -1 ? &nodes[nodeSelected] : NULL;
-//        ImVec2 scene_pos = ImGui::GetMousePosOnOpeningCurrentPopup() - offset;
-//        if (node)
-//        {
-//            ImGui::Text("Node '%s'", node->Name);
-//            ImGui::Separator();
-//            if (ImGui::MenuItem("Rename..", NULL, false, false)) {}
-//            if (ImGui::MenuItem("Delete", NULL, false, false)) {}
-//            if (ImGui::MenuItem("Copy", NULL, false, false)) {}
-//        }
-//        else
-//        {
-//            if (ImGui::MenuItem("Add")) { nodes.push_back(Node(nodes.Size, "New node", scene_pos, 0.5f, ImColor(100, 100, 200), 2, 2)); }
-//            if (ImGui::MenuItem("Paste", NULL, false, false)) {}
-//        }
-//        ImGui::EndPopup();
+//        nodeSelected = node_hovered_in_list = node_hovered_in_scene = -1;
+//        open_context_menu = true;
 //    }
-//    ImGui::PopStyleVar();
+//    if (open_context_menu)
+//    {
+//        ImGui::OpenPopup("context_menu");
+//        if (node_hovered_in_list != -1)
+//            nodeSelected = node_hovered_in_list;
+//        if (node_hovered_in_scene != -1)
+//            nodeSelected = node_hovered_in_scene;
+//    }
+
+    // Draw context menu
+    ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(8, 8));
+    if (ImGui::BeginPopup("context_menu"))
+    {
+//        Node* node = nodeSelected != -1 ? &nodes[nodeSelected] : NULL;
+        ImVec2 scene_pos = ImGui::GetMousePosOnOpeningCurrentPopup() - offset;
+        if (true)
+        {
+//            ImGui::Text("Node '%s'", node->Name);
+            ImGui::Separator();
+            if (ImGui::MenuItem("Rename..", NULL, false, false)) {}
+            if (ImGui::MenuItem("Delete", NULL, false, false)) {}
+            if (ImGui::MenuItem("Copy", NULL, false, false)) {}
+        }
+        else
+        {
+//            if (ImGui::MenuItem("Add")) { nodes.push_back(Node(nodes.Size, "New node", scene_pos, 0.5f, ImColor(100, 100, 200), 2, 2)); }
+            if (ImGui::MenuItem("Paste", NULL, false, false)) {}
+        }
+        ImGui::EndPopup();
+    }
+    ImGui::PopStyleVar();
 
     // Scrolling
     if (ImGui::IsWindowHovered() && !ImGui::IsAnyItemActive() && ImGui::IsMouseDragging(2, 0.0f))
