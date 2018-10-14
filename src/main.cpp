@@ -124,7 +124,7 @@ int main(int, char**)
         ImGui::NewFrame();
 
         ShowExampleAppCustomNodeGraph(&show_test_window, game, gameSettings);
-//        ImGui::ShowDemoWindow(lala);
+        ImGui::ShowDemoWindow(lala);
 
         // Rendering
         ImGui::Render();

@@ -41,16 +41,12 @@ void ShowExampleAppCustomNodeGraph(bool* opened, Game const& game, GameSettings&
     const ImVec2 NODE_WINDOW_PADDING(8.0f, 8.0f);
 //
 //
-//    // Create our child canvas
-//    ImGui::Text("Hold middle mouse button to scroll (%.2f,%.2f)", gameSettings.scrolling.x, gameSettings.scrolling.y);
-//    ImGui::SliderInt("slider int2",  &gameSettings.levelOffsetXTo, 0, 255);
-//    ImGui::SliderInt("slider int",  &gameSettings.levelOffsetYTo, 0, 255);
-//    ImGui::SameLine(ImGui::GetWindowWidth() - 100);
+
 
     ImGui::BeginGroup();
 
 
-    ImGui::BeginChild("Child1", ImVec2(ImGui::GetWindowContentRegionWidth() * 0.15f, 100), false);
+    ImGui::BeginChild("Child1", ImVec2(ImGui::GetWindowContentRegionWidth() * 0.15f, 60), false);
 
     if (nodeClicked != nullptr) {
 
@@ -95,15 +91,22 @@ void ShowExampleAppCustomNodeGraph(bool* opened, Game const& game, GameSettings&
 
     ImGui::SameLine();
 
-    ImGui::BeginChild("Child2", ImVec2(0,100), true);
+    ImGui::BeginChild("Child2", ImVec2(0, 50), true);
     ImGui::Text("%04d: scrollable region", 2);
     ImGui::EndChild();
-//
+
+    ImGui::BeginChild("Child3", ImVec2(ImGui::GetWindowContentRegionWidth() * 0.5f, 60));
+    ImGui::Text("Hold middle mouse button to scroll (%.2f,%.2f)", gameSettings.scrolling.x, gameSettings.scrolling.y);
+    ImGui::SliderInt("slider int2",  &gameSettings.levelOffsetXTo, 0, 255);
+    ImGui::SliderInt("slider int",  &gameSettings.levelOffsetYTo, 0, 255);
+    ImGui::SameLine(ImGui::GetWindowWidth() - 100);
     ImGui::Checkbox("Show grid", &gameSettings.showGrid);
+
+    ImGui::EndChild();
+
     ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(1, 1));
     ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0, 0));
     ImGui::PushStyleColor(ImGuiCol_ChildWindowBg, IM_COL32(60, 60, 70, 200));
-
 
     ImGui::BeginChild("scrolling_region", ImVec2(0, 0), true, ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoMove);
     ImGui::PushItemWidth(120.0f);
