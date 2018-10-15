@@ -17,7 +17,7 @@ public:
     int getNodeCount(){ return int(_nodes.size()); }
     int  getLowestNodeHP();
     inline Game::Turn getCurrentTurn(){ return _currentTurn; }
-    inline std::string getTurnStr(){ return _currentTurn == Game::P1 ? "P1" : "P2"; }
+    inline std::string getTurnStr(){ return _currentTurn == Game::P1 ? "P2" : "P1"; }
 
 
 private:

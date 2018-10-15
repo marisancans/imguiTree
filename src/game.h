@@ -3,29 +3,33 @@
 #include <vector>
 #include <string>
 #include "imgui/imgui.h"
-#include "playerStats.h"
+#include "board.h"
+
 
 struct GameSettings{
-    int layerCount;
+    int maxLayer;
+    int maxBoardX;
+    int maxBoardY;
     ImVec2 scrolling;
     bool showGrid;
     int levelOffsetYTo;
     int levelOffsetXTo;
     int speedMS;
-    const PlayerStats initPlayerStats;
+    const MovementRange P1Movement;
+    const MovementRange P2Movement;
 };
 
 class Layer;
 class Node;
+using NODE_VEC = std::vector<Node*>;
 
 class Game {
 public:
-    enum GameMode{ PvsPC, PCvsPC};
-    enum Turn{P1, P2};
+    enum GameMode{PvsPC = 1, PCvsPC = 2};
+    enum Turn{P1 = 1, P2 = 2};
     Game(GameMode mode, Turn turn, GameSettings* gameSettings);
-    void getNextLayer();
-    inline int getLayerCount() const { return _layerCount; };
-    inline const std::vector<Layer*>& getLayers() const { return _layers; }
+    void genLayers(int count);
+    inline const std::vector<NODE_VEC>& getLayers() const { return _nodes; }
     inline void swapTurn(){ _turn = _turn == P1 ? P2 : P1; }
     Node* createChild(Node* parent);
     Node* attack(Node* parent);
@@ -33,21 +37,16 @@ public:
     Node* heal(Node* parent);
     GameSettings* gameSettings;
 
-
 private:
-
-    GameMode _mode;
-    Turn _turn;
-    int _nodeCount;
-    int _layerCount;
-    std::vector<Layer*> _layers;
-    std::vector<Node* (Game::*)(Node* n)> _moves;
-
-
-
     void init();
     void initMoves();
     int getNodeID() { return ++_nodeCount;}
-    Layer* getLastLayer(){ return _layers.back(); }
+
+    GameMode _mode;
+    Turn _turn;
+    Board _board;
+    int _nodeCount;
+    std::vector<NODE_VEC> _nodes;
+    std::vector<Node* (Game::*)(Node* n)> _moves;
 
 };
