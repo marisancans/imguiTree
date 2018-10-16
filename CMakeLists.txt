@@ -18,8 +18,8 @@ set(SOURCES ${SRC_DIR}/main.cpp
             ${SRC_DIR}/imgui/imstb_rectpack.h
             ${SRC_DIR}/imgui/imstb_textedit.h
             ${SRC_DIR}/imgui/imstb_truetype.h
-            ${SRC_DIR}/imgui/imgui_node_graph_test.cpp
-            ${SRC_DIR}/imgui/imgui_node_graph_test.h
+#            ${SRC_DIR}/imgui/imgui_node_graph_test.cpp
+#            ${SRC_DIR}/imgui/imgui_node_graph_test.h
             ${SRC_DIR}/node.cpp
             ${SRC_DIR}/node.h
             ${SRC_DIR}/game.cpp

@@ -6,22 +6,22 @@
 #include "board.h"
 
 
+class Board;
+class Node;
+using NODE_VEC = std::vector<Node*>;
+
 struct GameSettings{
     int maxLayer;
     int maxBoardX;
     int maxBoardY;
+    const Movement P1MovRange;
+    const Movement P2MovRange;
     ImVec2 scrolling;
     bool showGrid;
-    int levelOffsetYTo;
-    int levelOffsetXTo;
+    int levelOffsetY;
+    int levelOffsetX;
     int speedMS;
-    const MovementRange P1Movement;
-    const MovementRange P2Movement;
 };
-
-class Layer;
-class Node;
-using NODE_VEC = std::vector<Node*>;
 
 class Game {
 public:
@@ -44,7 +44,7 @@ private:
 
     GameMode _mode;
     Turn _turn;
-    Board _board;
+    Board* _board;
     int _nodeCount;
     std::vector<NODE_VEC> _nodes;
     std::vector<Node* (Game::*)(Node* n)> _moves;

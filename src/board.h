@@ -1,20 +1,25 @@
 #pragma once
 
-const int MRR = 3; // Max movement range
+//#include "node.h"
 
-enum Movement{
-    UP = 1,
-    UP_RIGHT = 2,
-    RIGHT = 3,
-    DOWN_RIGHT = 4,
-    DOWN = 5,
-    DOWN_LEFT = 6,
-    LEFT = 7,
-    UP_LEFT = 8
-};
+const int MRR = 3; // Max movement range
+const int MMC = 8; // Max movement count
+
+//enum MovDir // Movement directions
+//{
+//    UP = 1,
+//    UP_RIGHT = 2,
+//    RIGHT = 3,
+//    DOWN_RIGHT = 4,
+//    DOWN = 5,
+//    DOWN_LEFT = 6,
+//    LEFT = 7,
+//    UP_LEFT = 8
+//};
 
 // Defines how far a player can go in a direction
-struct MovementRange{
+struct Movement
+{
     int up[MRR];
     int upRight[MRR];
     int right[MRR];
@@ -25,11 +30,16 @@ struct MovementRange{
     int upLeft[MRR];
 };
 
+struct State;
 class Board {
-    inline Board(int xMax, int yMax) : _xMax(xMax), _yMax(yMax){}
-    void get
+public:
+    inline Board(int xMax, int yMax, Movement const& P1MovRange,  Movement const& P2MovRange):
+        _xMax(xMax), _yMax(yMax), _P1MovRange(P1MovRange), _P2MovRange(P2MovRange) {}
+    int* getPossibleMoves(State& state);
 
 private:
     int _xMax;
     int _yMax;
+    Movement const& _P1MovRange; // Movement ranges
+    Movement const& _P2MovRange;
 };

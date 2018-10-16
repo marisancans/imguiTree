@@ -7,6 +7,7 @@
 #include "imgui/imgui_node_graph_test.h"
 
 #include "game.h"
+#include "board.h"
 #include <chrono>
 #include <thread>
 
@@ -88,27 +89,32 @@ int main(int, char**)
     // Setup style
     ImGui::StyleColorsDark();
     //ImGui::StyleColorsClassic();
-    
-
-    // GAME SETTINGS <--------------------------------------------------
-    int levelCount = 10; // -< need to beat this
-    ImVec2 scrolling = ImVec2(0.0f, 0.0f);
-    bool showGid = false;
-    int levelOffsetXTo = 65;
-    int levelOffsetYTo = 90;
-    int speedMS = 2;
-
-    PlayerStats ps = {4, 2, 2, 2, 0, 0, 0};
 
     bool show_test_window = true;
     ImVec4 clear_color = ImVec4(0.0f, 0.0f, 0.0f, 1.00f);
-    GameSettings gameSettings{levelCount, scrolling, showGid, levelOffsetYTo, levelOffsetXTo, speedMS, ps};
+    
+
+    // GAME SETTINGS <--------------------------------------------------
+    int maxLayer = 10;
+    int maxBoardX = 10;
+    int maxBoardY = 10;
+    const Movement P1MovRange{{1, 1, 1}, {1, 1, 1}, {1, 1, 1}, {1, 1, 1}, {1, 1, 1}, {1, 1, 1}, {1, 1, 1}, {1, 1, 1}};
+    const Movement P2MovRange{{1, 1, 1}, {1, 1, 1}, {1, 1, 1}, {1, 1, 1}, {1, 1, 1}, {1, 1, 1}, {1, 1, 1}, {1, 1, 1}};
+    ImVec2 scrolling = ImVec2(0.0f, 0.0f);
+    bool showGrid = false;
+    int levelOffsetX = 65;
+    int levelOffsetY = 90;
+    int speedMS = 10;
+
+
+
+    GameSettings gameSettings{};
 
     // Intialization
     Game game(Game::PCvsPC, Game::P1, &gameSettings);
 
     std::thread t([&game](){
-        game.getNextLayer();
+//        game.getNextLayer();
     });
 
 
@@ -125,7 +131,7 @@ int main(int, char**)
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
 
-        ShowExampleAppCustomNodeGraph(&show_test_window, game, gameSettings);
+//        ShowExampleAppCustomNodeGraph(&show_test_window, game, gameSettings);
 //        ImGui::ShowDemoWindow(lala);
 
         // Rendering

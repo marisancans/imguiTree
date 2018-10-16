@@ -2,25 +2,22 @@
 
 #include <string>
 #include "imgui/imgui.h"
-#include "game.h"
-#include "playerStats.h"
+//#include "game.h"
 #include <vector>
+#include "board.h"
 
 struct State {
-    int           xPos;
-    int           yPos;
-    MovementRange possMove; // Possible movement
-
-//    inline bool operator==(PlayerStats const& parent){
-//        return health == parent.health;
-//    }
+    int     xPos;
+    int     yPos;
+//    Movement potMove; // potential movement
 };
 
-using NODE_VEC = std::vector<Node*>;
+
 
 class Node
 {
 public:
+    using NODE_VEC = std::vector<Node*>;
     enum Status{ROOT = 1, MIDDLE = 2, END = 3};
     inline Node(int id, Status status) : _id(id), _status(status) {};
     Node(int id, Node& parent);
