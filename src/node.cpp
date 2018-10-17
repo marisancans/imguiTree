@@ -1,9 +1,8 @@
 #include "node.h"
 
 
-Node::Node(int id, Node& parent) {
-    _id = id;
-    _status = MIDDLE;
+Node::Node(Node const* parent){
+
 }
 
 

@@ -28,7 +28,7 @@ public:
     enum GameMode{PvsPC = 1, PCvsPC = 2};
     enum Turn{P1 = 1, P2 = 2};
     Game(GameMode mode, Turn turn, GameSettings* gameSettings);
-    void genLayers(int count);
+    void genLayer();
     inline const std::vector<NODE_VEC>& getLayers() const { return _nodes; }
     inline void swapTurn(){ _turn = _turn == P1 ? P2 : P1; }
     Node* createChild(Node* parent);
@@ -39,7 +39,6 @@ public:
 
 private:
     void init();
-    void initMoves();
     int getNodeID() { return ++_nodeCount;}
 
     GameMode _mode;
@@ -47,6 +46,4 @@ private:
     Board* _board;
     int _nodeCount;
     std::vector<NODE_VEC> _nodes;
-    std::vector<Node* (Game::*)(Node* n)> _moves;
-
 };

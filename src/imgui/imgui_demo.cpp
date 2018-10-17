@@ -788,7 +788,7 @@ void ImGui::ShowDemoWindow(bool* p_open)
                         selection[4] = !selection[4];
                 ImGui::TreePop();
             }
-            if (ImGui::TreeNode("Selection State: Single Selection"))
+            if (ImGui::TreeNode("Selection Position: Single Selection"))
             {
                 static int selected = -1;
                 for (int n = 0; n < 5; n++)
@@ -800,7 +800,7 @@ void ImGui::ShowDemoWindow(bool* p_open)
                 }
                 ImGui::TreePop();
             }
-            if (ImGui::TreeNode("Selection State: Multiple Selection"))
+            if (ImGui::TreeNode("Selection Position: Multiple Selection"))
             {
                 ShowHelpMarker("Hold CTRL and click to select multiple items.");
                 static bool selection[5] = { false, false, false, false, false };
@@ -1142,7 +1142,7 @@ void ImGui::ShowDemoWindow(bool* p_open)
             const float   f32_zero = 0.f, f32_one = 1.f, f32_lo_a = -10000000000.0f, f32_hi_a = +10000000000.0f;
             const double  f64_zero = 0.,  f64_one = 1.,  f64_lo_a = -1000000000000000.0, f64_hi_a = +1000000000000000.0;
 
-            // State
+            // Position
             static ImS32  s32_v = -1;
             static ImU32  u32_v = (ImU32)-1;
             static ImS64  s64_v = -1;
@@ -2260,7 +2260,7 @@ void ImGui::ShowDemoWindow(bool* p_open)
         ImGui::Text("WantSetMousePos: %d", io.WantSetMousePos);
         ImGui::Text("NavActive: %d, NavVisible: %d", io.NavActive, io.NavVisible);
 
-        if (ImGui::TreeNode("Keyboard, Mouse & Navigation State"))
+        if (ImGui::TreeNode("Keyboard, Mouse & Navigation Position"))
         {
             if (ImGui::IsMousePosValid())
                 ImGui::Text("Mouse pos: (%g, %g)", io.MousePos.x, io.MousePos.y);

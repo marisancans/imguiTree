@@ -105,17 +105,19 @@ int main(int, char**)
     int levelOffsetX = 65;
     int levelOffsetY = 90;
     int speedMS = 10;
+    
+    Game::Turn firstTurn = Game::P1;
 
 
 
     GameSettings gameSettings{};
 
-    // Intialization
-    Game game(Game::PCvsPC, Game::P1, &gameSettings);
+    // Init
+    Game game(Game::PCvsPC, firstTurn, &gameSettings);
 
-    std::thread t([&game](){
+//    std::thread t([&game](){
 //        game.getNextLayer();
-    });
+//    });
 
 
 
