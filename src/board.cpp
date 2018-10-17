@@ -6,29 +6,28 @@
 #include "node.h"
 
 
-void Board::initMoves() {
-    _moves.push_back(&Board::moveUp);
-    _moves.push_back(&Board::moveUpRight);
-    _moves.push_back(&Board::moveRight);
-    _moves.push_back(&Board::moveDownRight);
-    _moves.push_back(&Board::moveDown);
-    _moves.push_back(&Board::moveDownLeft);
-    _moves.push_back(&Board::moveLeft);
-    _moves.push_back(&Board::moveUpLeft);
-}
+POS_VEC Board::getPossibleMoves(const Position* parentPos) {
+    moveMatrix mov;
+
+    for(int x = 0; x < _xMax; ++x){
+        for(int y = 0; y < _yMax; ++y){
+            mov[UP][0] = 1;
 
 
-std::vector<Movement> Board::getPossibleMoves(Node const* parent) {
-    int a[MMC] = {};
+        }
+    }
+
+    
+    POS_VEC pv;
+    Position p{5, 5};
+    pv.push_back(p);
     
     
     
-    
-    
-    auto child = Node(parent);
-    m.down[1] = 99;
+//    auto child = Node(parent);
+//    m.down[1] = 99;
 //    pm = ^n->P1State.possMove
 //
-    return a;
+    return pv;
 }
 

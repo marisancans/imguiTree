@@ -1,65 +1,40 @@
 #pragma once
 
-//#include "node.h"
+#include <vector>
 
-#include "node.h"
-#include "global.h"
+struct Position;
 
 const int MRR = 3; // Max movement range
-const int MMC = 8; // Max movement count
+using POS_VEC = std::vector<Position>;
 
 enum MovDir // Movement directions
 {
-    UP = 1,
-    UP_RIGHT = 2,
-    RIGHT = 3,
-    DOWN_RIGHT = 4,
-    DOWN = 5,
-    DOWN_LEFT = 6,
-    LEFT = 7,
-    UP_LEFT = 8
+    UP = 0,
+    UP_RIGHT,
+    RIGHT,
+    DOWN_RIGHT,
+    DOWN,
+    DOWN_LEFT ,
+    LEFT,
+    UP_LEFT
 };
 
-// Defines how far a player can go in a direction
-struct Movement
-{
-    int up[MRR];
-    int upRight[MRR];
-    int right[MRR];
-    int downRight[MRR];
-    int down[MRR];
-    int downLeft[MRR];
-    int left[MRR];
-    int upLeft[MRR];
-};
-
-_moves.push_back(&Board::moveUp);
-_moves.push_back(&Board::moveUpRight);
-_moves.push_back(&Board::moveRight);
-_moves.push_back(&Board::moveDownRight);
-_moves.push_back(&Board::moveDown);
-_moves.push_back(&Board::moveDownLeft);
-_moves.push_back(&Board::moveLeft);
-_moves.push_back(&Board::moveUpLeft);
 
 
-struct Position;
+
 class Board {
 public:
-    inline Board(int xMax, int yMax, Movement const& P1MovRange,  Movement const& P2MovRange):
+    using moveMatrix = int[8][MRR];
+    inline Board(int xMax, int yMax, const moveMatrix& P1MovRange,  const moveMatrix& P2MovRange):
         _xMax(xMax), _yMax(yMax), _P1MovRange(P1MovRange), _P2MovRange(P2MovRange) {}
-    std::vector<Movement> getPossibleMoves(Node const* parent);
+    POS_VEC getPossibleMoves(const Position* parentPos);
 
 private:
-    std::vector<Movement* (Board::*)(Movement* n)> _moves;
-    void initMoves();
-    void moveUp(Position P1PrevMove, Position P2PrevMove);
-    )
-    
+
     
     int _xMax;
     int _yMax;
-    Movement const& _P1MovRange; // Movement ranges
-    Movement const& _P2MovRange;
+    const moveMatrix& _P1MovRange; // Movement ranges
+    const moveMatrix& _P2MovRange;
     
 };

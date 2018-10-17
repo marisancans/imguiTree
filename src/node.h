@@ -2,14 +2,12 @@
 
 #include <string>
 #include "imgui/imgui.h"
-//#include "game.h"
 #include <vector>
 #include "board.h"
 
 struct Position {
-    int      xPos;
-    int      yPos;
-    Movement move;
+    int xPos;
+    int yPos;
 };
 
 

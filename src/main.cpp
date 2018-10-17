@@ -4,7 +4,9 @@
 #include "imgui/imgui.h"
 #include "imgui/imgui_impl_glfw.h"
 #include "imgui/imgui_impl_opengl3.h"
-#include "imgui/imgui_node_graph_test.h"
+
+#include "gridWindow.h"
+#include "treeWindow.h"
 
 #include "game.h"
 #include "board.h"
@@ -90,7 +92,8 @@ int main(int, char**)
     ImGui::StyleColorsDark();
     //ImGui::StyleColorsClassic();
 
-    bool show_test_window = true;
+    bool showGridWindow = true;
+    bool showTreeWindow = true;
     ImVec4 clear_color = ImVec4(0.0f, 0.0f, 0.0f, 1.00f);
     
 
@@ -98,8 +101,8 @@ int main(int, char**)
     int maxLayer = 10;
     int maxBoardX = 10;
     int maxBoardY = 10;
-    const Movement P1MovRange{{1, 1, 1}, {1, 1, 1}, {1, 1, 1}, {1, 1, 1}, {1, 1, 1}, {1, 1, 1}, {1, 1, 1}, {1, 1, 1}};
-    const Movement P2MovRange{{1, 1, 1}, {1, 1, 1}, {1, 1, 1}, {1, 1, 1}, {1, 1, 1}, {1, 1, 1}, {1, 1, 1}, {1, 1, 1}};
+//    const Board::moveMatrix P1MovRange;
+//    const Board::moveMatrix P2MovRange;
     ImVec2 scrolling = ImVec2(0.0f, 0.0f);
     bool showGrid = false;
     int levelOffsetX = 65;
@@ -109,8 +112,11 @@ int main(int, char**)
     Game::Turn firstTurn = Game::P1;
 
 
-
-    GameSettings gameSettings{};
+    GameSettings gameSettings{maxLayer, maxBoardX, maxBoardY,
+                              {{1, 1, 1}, {1, 1, 1}, {1, 1, 1}, {1, 1, 1}, {1, 1, 1}, {1, 1, 1}, {1, 1, 1}, {1, 1, 1}},
+                              {{1, 1, 1}, {1, 1, 1}, {1, 1, 1}, {1, 1, 1}, {1, 1, 1}, {1, 1, 1}, {1, 1, 1}, {1, 1, 1}},
+                              scrolling, showGrid,
+                              levelOffsetX, levelOffsetY, speedMS};
 
     // Init
     Game game(Game::PCvsPC, firstTurn, &gameSettings);
@@ -133,7 +139,8 @@ int main(int, char**)
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
 
-//        ShowExampleAppCustomNodeGraph(&show_test_window, game, gameSettings);
+        gridWindow(&showGridWindow, game, gameSettings);
+        treeWindow(&showTreeWindow, game, gameSettings);
 //        ImGui::ShowDemoWindow(lala);
 
         // Rendering

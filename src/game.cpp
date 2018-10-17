@@ -11,7 +11,8 @@
 
 void Game::genLayer() {
         for(auto& parent : _nodes.back()) { // Last vector (Parent nodes)
-            _board->getPossibleMoves(parent);
+            auto pos = _turn == P1 ? &parent->P1State : &parent->P2State;
+            _board->getPossibleMoves(pos);
         }
 //    _board->getPossibleMoves();
     swapTurn();
@@ -20,7 +21,6 @@ void Game::genLayer() {
 Game::Game(Game::GameMode mode, Game::Turn turn, GameSettings* gameSettings):
     _nodeCount(0), _turn(turn), gameSettings(gameSettings)
 {
-    initMoves();
     init();
     genLayer();
 }
@@ -36,27 +36,3 @@ void Game::init() {
     _nodes.push_back(v);
     swapTurn();
 }
-
-
-
-Node *Game::createChild(Node *parent) {
-    Node* child = new Node(getNodeID(), *parent);
-    return child;
-}
-
-Node* Game::attack(Node* parent){
-    auto child = createChild(parent);
-    return child;
-}
-
-Node* Game::defend(Node* parent){
-    auto child = createChild(parent);
-    return child;
-}
-
-Node* Game::heal(Node* parent){
-    auto child = createChild(parent);
-    return child;
-}
-
-

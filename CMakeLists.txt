@@ -18,14 +18,16 @@ set(SOURCES ${SRC_DIR}/main.cpp
     ${SRC_DIR}/imgui/imstb_rectpack.h
     ${SRC_DIR}/imgui/imstb_textedit.h
     ${SRC_DIR}/imgui/imstb_truetype.h
-    #            ${SRC_DIR}/imgui/imgui_node_graph_test.cpp
-    #            ${SRC_DIR}/imgui/imgui_node_graph_test.h
     ${SRC_DIR}/node.cpp
     ${SRC_DIR}/node.h
     ${SRC_DIR}/game.cpp
     ${SRC_DIR}/game.h
     ${SRC_DIR}/board.cpp
-    ${SRC_DIR}/board.h src/global.h)
+    ${SRC_DIR}/board.h
+    ${SRC_DIR}/gridWindow.cpp
+    ${SRC_DIR}/gridWindow.h
+    ${SRC_DIR}/treeWindow.cpp
+    ${SRC_DIR}/treeWindow.h)
 
 
 add_executable(${PROJECT_NAME} ${SOURCES})

@@ -6,16 +6,18 @@
 #include "board.h"
 
 
-class Board;
+
 class Node;
+struct moveMatrix;
 using NODE_VEC = std::vector<Node*>;
+
 
 struct GameSettings{
     int maxLayer;
     int maxBoardX;
     int maxBoardY;
-    const Movement P1MovRange;
-    const Movement P2MovRange;
+    const Board::moveMatrix P1MovRange;
+    const Board::moveMatrix P2MovRange;
     ImVec2 scrolling;
     bool showGrid;
     int levelOffsetY;
@@ -31,10 +33,6 @@ public:
     void genLayer();
     inline const std::vector<NODE_VEC>& getLayers() const { return _nodes; }
     inline void swapTurn(){ _turn = _turn == P1 ? P2 : P1; }
-    Node* createChild(Node* parent);
-    Node* attack(Node* parent);
-    Node* defend(Node* parent);
-    Node* heal(Node* parent);
     GameSettings* gameSettings;
 
 private:
