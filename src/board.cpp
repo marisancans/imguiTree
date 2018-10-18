@@ -60,41 +60,6 @@ POS_VEC Board::getPossibleMoves(const Position& p) {
 
     }
 
-
-
-
-
-//    UP = 0,
-//    UP_RIGHT,
-//    RIGHT,
-//    DOWN_RIGHT,
-//    DOWN,
-//    DOWN_LEFT ,
-//    LEFT,
-//    UP_LEFT
-
-
-
-
-
-
-    for(auto& m : mov[UP]){
-//        if()
-    }
-
-//    if(p.x)
-
-    
-
-    Position pa{5, 5};
-    pv.push_back(pa);
-    
-    
-    
-//    auto child = Node(parent);
-//    m.down[1] = 99;
-//    pm = ^n->P1Pos.possMove
-//
     return pv;
 }
 

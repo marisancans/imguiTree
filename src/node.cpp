@@ -1,19 +1,19 @@
 #include "node.h"
 
 
-Node::Node(Node const* parent){
-
+Node::Node(int id, Node const* parent): _id(id), _status(MIDDLE){
+    parentNodes.push_back(parent->_id);
 }
 
 
 void Node::setHighlighted(bool b) {
-    if(b) {
-        for (auto &p : parentNodes)
-            p->setHighlighted(true);
-        selected = true;
-    } else {
-        selected = false;
-    }
+//    if(b) {
+//        for (auto &p : parentNodes)
+//            p->setHighlighted(true);
+//        selected = true;
+//    } else {
+//        selected = false;
+//    }
 }
 
 

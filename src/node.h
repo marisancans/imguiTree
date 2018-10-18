@@ -20,17 +20,17 @@ public:
     inline Node(int id, Status status, Position P1StartPos, Position P2StartPos):
         _id(id), _status(status), P1Pos(P1StartPos), P2Pos(P2StartPos){};
     inline Node(Status status) : _status(status) {};
-    Node(Node const* parent);
+    Node(int id, Node const* parent);
     ~Node() = default;
 
     void setHighlighted(bool b);
 
-    NODE_VEC    parentNodes = {};
-    NODE_VEC    childNodes = {};
-    Position       P1Pos;
-    Position       P2Pos;
-    int         interspace; //Distance P1 <---> P2
-    bool        selected;
+    std::vector<int> parentNodes;
+    std::vector<int> childNodes;
+    Position         P1Pos;
+    Position         P2Pos;
+    int              interspace; //Distance P1 <---> P2
+    bool             selected;
 
 private:
     int        _id;

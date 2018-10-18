@@ -39,11 +39,9 @@ public:
 
 private:
     void init();
-    int getNodeID() { return ++_nodeCount;}
 
     GameMode _mode;
     Turn _turn;
     Board* _board;
-    int _nodeCount;
     std::vector<NODE_VEC> _nodes;
 };
