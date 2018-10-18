@@ -18,6 +18,9 @@ void treeWindow(bool* opened, Game const& game, GameSettings& gameSettings){
     ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0, 0));
     ImGui::PushStyleColor(ImGuiCol_ChildWindowBg, IM_COL32(60, 60, 70, 200));
 
+    ImGui::BeginChild("scrolling_region", ImVec2(0, 0), true, ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoMove);
+
+    ImVec2 offset = ImGui::GetCursorScreenPos() + gameSettings.scrolling;
     ImDrawList* draw_list = ImGui::GetWindowDrawList();
 
 
@@ -34,7 +37,7 @@ void treeWindow(bool* opened, Game const& game, GameSettings& gameSettings){
     draw_list->ChannelsSplit(3);
     draw_list->ChannelsSetCurrent(1);                    // Background
 
-    ImGui::BeginGroup(); // Lock horizontal position
+
 
     int y = 0;
     for(auto& layers : game.getLayers()){
@@ -58,9 +61,13 @@ void treeWindow(bool* opened, Game const& game, GameSettings& gameSettings){
     }
 //    draw_list->AddLine(ImVec2(x * spacingX, 1) + win_pos, ImVec2(x * spacingX, canvas_sz.y) + win_pos, GRID_COLOR);
 
-    ImGui::EndGroup();
 
-//    draw_list->AddCircleFilled(ImVec2(50 ,50), 100, IM_COL32(150, 150, 150, 150));
+
+    // Scrolling
+    if (ImGui::IsWindowHovered() && !ImGui::IsAnyItemActive() && ImGui::IsMouseDragging(2, 0.0f))
+        gameSettings.scrolling = gameSettings.scrolling + ImGui::GetIO().MouseDelta;
+
+
 
     draw_list->ChannelsSetCurrent(1);
 
@@ -71,6 +78,7 @@ void treeWindow(bool* opened, Game const& game, GameSettings& gameSettings){
 
     ImGui::PopStyleColor();
     ImGui::PopStyleVar(2);
+    ImGui::EndChild();
     ImGui::EndGroup();
 
     ImGui::End();

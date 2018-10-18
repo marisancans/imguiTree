@@ -98,7 +98,7 @@ int main(int, char**)
     
 
     // GAME SETTINGS <--------------------------------------------------
-    int maxLayer = 10;
+    int maxLayer = 2;
     int maxBoardX = 10;
     int maxBoardY = 10;
 //    const Board::moveMatrix P1MovRange;

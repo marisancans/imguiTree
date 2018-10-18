@@ -10,18 +10,24 @@
 
 
 void Game::genLayer() {
+    NODE_VEC newLayer;
+
     for(auto parent : _nodes.back()) { // Last vector (Parent nodes)
-        auto pos = _turn == P1 ? &parent->P1Pos : &parent->P1Pos;
-        POS_VEC possPositions = _board->getPossibleMoves(*pos);
-        NODE_VEC newLayer;
+        auto parentPos = _turn == P1 ? &parent->P1Pos : &parent->P1Pos;
+        POS_VEC possPositions = _board->getPossibleMoves(*parentPos);
 
         for(int i = 0; i < possPositions.size(); ++i){
             auto child = new Node(i, parent);
+            if(_turn == P1)
+                child->P1Pos = possPositions[i];
+            else
+                child->P1Pos = possPositions[i];
+
             newLayer.push_back(child);
         }
-
-        _nodes.push_back(newLayer);
     }
+
+    _nodes.push_back(newLayer);
 
     swapTurn();
 }
@@ -30,7 +36,10 @@ Game::Game(Game::GameMode mode, Game::Turn turn, GameSettings* gameSettings):
     _turn(turn), gameSettings(gameSettings)
 {
     init();
-    genLayer();
+
+    for(int i = 0; i < gameSettings->maxLayer; ++i){
+        genLayer();
+    }
 }
 
 void Game::init() {
