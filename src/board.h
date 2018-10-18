@@ -27,7 +27,7 @@ public:
     using moveMatrix = int[8][MRR];
     inline Board(int xMax, int yMax, const moveMatrix& P1MovRange,  const moveMatrix& P2MovRange):
         _xMax(xMax), _yMax(yMax), _P1MovRange(P1MovRange), _P2MovRange(P2MovRange) {}
-    POS_VEC getPossibleMoves(const Position* parentPos);
+    POS_VEC getPossibleMoves(const Position& p);
 
 private:
 

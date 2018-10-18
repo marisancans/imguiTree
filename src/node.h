@@ -6,8 +6,8 @@
 #include "board.h"
 
 struct Position {
-    int xPos;
-    int yPos;
+    int x;
+    int y;
 };
 
 
@@ -25,8 +25,8 @@ public:
 
     void setHighlighted(bool b);
 
-    NODE_VEC    parentNodes;
-    NODE_VEC    childNodes;
+    NODE_VEC    parentNodes = {};
+    NODE_VEC    childNodes = {};
     Position       P1Pos;
     Position       P2Pos;
     int         interspace; //Distance P1 <---> P2
