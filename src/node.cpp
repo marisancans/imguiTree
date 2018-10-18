@@ -15,3 +15,6 @@ void Node::setHighlighted(bool b) {
         selected = false;
     }
 }
+
+
+

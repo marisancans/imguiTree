@@ -4,7 +4,7 @@
 #include <string>
 #include "imgui/imgui.h"
 #include "board.h"
-
+#include "node.h"
 
 
 class Node;
@@ -18,6 +18,8 @@ struct GameSettings{
     int maxBoardY;
     const Board::moveMatrix P1MovRange;
     const Board::moveMatrix P2MovRange;
+    const Position P1StartPos;
+    const Position P2StartPos;
     ImVec2 scrolling;
     bool showGrid;
     int levelOffsetY;

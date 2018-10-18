@@ -7,15 +7,12 @@
 
 
 POS_VEC Board::getPossibleMoves(const Position* parentPos) {
+    Position pos = *parentPos;
     moveMatrix mov;
 
-    for(int x = 0; x < _xMax; ++x){
-        for(int y = 0; y < _yMax; ++y){
-            mov[UP][0] = 1;
 
+    // Up
 
-        }
-    }
 
     
     POS_VEC pv;
@@ -26,7 +23,7 @@ POS_VEC Board::getPossibleMoves(const Position* parentPos) {
     
 //    auto child = Node(parent);
 //    m.down[1] = 99;
-//    pm = ^n->P1State.possMove
+//    pm = ^n->P1Pos.possMove
 //
     return pv;
 }

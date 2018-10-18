@@ -11,7 +11,7 @@
 
 void Game::genLayer() {
         for(auto& parent : _nodes.back()) { // Last vector (Parent nodes)
-            auto pos = _turn == P1 ? &parent->P1State : &parent->P2State;
+            auto pos = _turn == P1 ? &parent->P1Pos : &parent->P2Pos;
             _board->getPossibleMoves(pos);
         }
 //    _board->getPossibleMoves();
@@ -30,7 +30,7 @@ void Game::init() {
                        gameSettings->P1MovRange, gameSettings->P2MovRange);
 
     // Initial layer creation
-    auto n = Node(getNodeID(), Node::ROOT);
+    auto n = Node(getNodeID(), Node::ROOT, gameSettings->P1StartPos, gameSettings->P2StartPos);
     NODE_VEC v;
     v.push_back(&n);
     _nodes.push_back(v);

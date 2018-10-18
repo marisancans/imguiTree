@@ -115,6 +115,7 @@ int main(int, char**)
     GameSettings gameSettings{maxLayer, maxBoardX, maxBoardY,
                               {{1, 1, 1}, {1, 1, 1}, {1, 1, 1}, {1, 1, 1}, {1, 1, 1}, {1, 1, 1}, {1, 1, 1}, {1, 1, 1}},
                               {{1, 1, 1}, {1, 1, 1}, {1, 1, 1}, {1, 1, 1}, {1, 1, 1}, {1, 1, 1}, {1, 1, 1}, {1, 1, 1}},
+                              {0, 0}, {9, 9},
                               scrolling, showGrid,
                               levelOffsetX, levelOffsetY, speedMS};
 
