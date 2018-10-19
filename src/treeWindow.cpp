@@ -1,4 +1,5 @@
 #include "treeWindow.h"
+#include <math.h>
 
 static inline ImVec2 operator+(const ImVec2& lhs, const ImVec2& rhs) { return ImVec2(lhs.x + rhs.x, lhs.y + rhs.y); }
 static inline ImVec2 operator-(const ImVec2& lhs, const ImVec2& rhs) { return ImVec2(lhs.x - rhs.x, lhs.y - rhs.y); }
@@ -14,11 +15,14 @@ void treeWindow(bool* opened, Game const& game, GameSettings& gameSettings){
 
     ImGui::BeginGroup();
 
+
+
     ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(1, 1));
     ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0, 0));
     ImGui::PushStyleColor(ImGuiCol_ChildWindowBg, IM_COL32(60, 60, 70, 200));
 
     ImGui::BeginChild("scrolling_region", ImVec2(0, 0), true, ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoMove);
+    ImGui::PushItemWidth(120.0f);
 
     ImVec2 offset = ImGui::GetCursorScreenPos() + gameSettings.scrolling;
     ImDrawList* draw_list = ImGui::GetWindowDrawList();
@@ -28,10 +32,6 @@ void treeWindow(bool* opened, Game const& game, GameSettings& gameSettings){
     ImVec2 canvas_sz = ImGui::GetWindowSize();
 
 // ------------------  GRID -----------------------
-
-    ImU32 GRID_COLOR = IM_COL32(200, 0, 0,150);
-    float spacingX = canvas_sz.x;
-    float spacingY = canvas_sz.y;
 
 
     draw_list->ChannelsSplit(3);
@@ -49,10 +49,9 @@ void treeWindow(bool* opened, Game const& game, GameSettings& gameSettings){
                                        ImVec2(gameSettings.levelOffsetX * x, gameSettings.levelOffsetY * y) + win_pos,
                                        IM_COL32(200, 0, 0, 150));
                 }
-
                 draw_list->AddCircleFilled(ImVec2(gameSettings.levelOffsetX * x,
-                                                  gameSettings.levelOffsetY * y) + win_pos,
-                                           50, IM_COL32(150, 150, 150, 150));
+                                                  gameSettings.levelOffsetY * y) + win_pos + offset,
+                                           50, IM_COL32(150, 250, 150, 150));
 
             x++;
         }
@@ -60,6 +59,14 @@ void treeWindow(bool* opened, Game const& game, GameSettings& gameSettings){
         y++;
     }
 //    draw_list->AddLine(ImVec2(x * spacingX, 1) + win_pos, ImVec2(x * spacingX, canvas_sz.y) + win_pos, GRID_COLOR);
+    ImU32 GRID_COLOR = IM_COL32(200, 0, 0,150);
+
+    float GRID_SZ = 64.0f;
+
+    for (float x = fmodf(gameSettings.scrolling.x, GRID_SZ); x < canvas_sz.x; x += GRID_SZ)
+        draw_list->AddLine(ImVec2(x, 0.0f) + win_pos, ImVec2(x, canvas_sz.y) + win_pos, GRID_COLOR);
+    for (float y = fmodf(gameSettings.scrolling.y, GRID_SZ); y < canvas_sz.y; y += GRID_SZ)
+        draw_list->AddLine(ImVec2(0.0f, y) + win_pos, ImVec2(canvas_sz.x, y) + win_pos, GRID_COLOR);
 
 
 
