@@ -98,15 +98,15 @@ int main(int, char**)
     
 
     // GAME SETTINGS <--------------------------------------------------
-    int maxLayer = 2;
+    int maxLayer = 5;
     int maxBoardX = 10;
     int maxBoardY = 10;
 //    const Board::moveMatrix P1MovRange;
 //    const Board::moveMatrix P2MovRange;
     ImVec2 scrolling = ImVec2(0.0f, 0.0f);
     bool showGrid = false;
-    int levelOffsetX = 65;
-    int levelOffsetY = 90;
+    int levelOffsetX = 40;
+    int levelOffsetY = 150;
     int speedMS = 10;
     
     Game::Turn firstTurn = Game::P1;

@@ -22,8 +22,8 @@ struct GameSettings{
     const Position P2StartPos;
     ImVec2 scrolling;
     bool showGrid;
-    int levelOffsetY;
     int levelOffsetX;
+    int levelOffsetY;
     int speedMS;
 };
 

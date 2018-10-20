@@ -3,6 +3,8 @@
 
 Node::Node(int id, Node const* parent): _id(id), _status(MIDDLE){
     parentNodes.push_back(parent->_id);
+    P1Pos = parent->P1Pos;
+    P2Pos = parent->P2Pos;
 }
 
 

@@ -45,13 +45,13 @@ void treeWindow(bool* opened, Game const& game, GameSettings& gameSettings){
 
         for(auto& node : layers){
                 for(auto& parentID : node->parentNodes) {
-                    draw_list->AddLine(ImVec2(gameSettings.levelOffsetX * (parentID + 1), gameSettings.levelOffsetY * (y - 1)) + win_pos,
-                                       ImVec2(gameSettings.levelOffsetX * x, gameSettings.levelOffsetY * y) + win_pos,
-                                       IM_COL32(200, 0, 0, 150));
+                    draw_list->AddLine(ImVec2(gameSettings.levelOffsetX * (parentID + 1), gameSettings.levelOffsetY * (y - 1)) + win_pos + offset,
+                                       ImVec2(gameSettings.levelOffsetX * x, gameSettings.levelOffsetY * y) + win_pos + offset,
+                                       IM_COL32(100, 100, 100, 150), 2.f);
                 }
                 draw_list->AddCircleFilled(ImVec2(gameSettings.levelOffsetX * x,
                                                   gameSettings.levelOffsetY * y) + win_pos + offset,
-                                           50, IM_COL32(150, 250, 150, 150));
+                                           10, IM_COL32(150, 250, 150, 150));
 
             x++;
         }
@@ -63,10 +63,10 @@ void treeWindow(bool* opened, Game const& game, GameSettings& gameSettings){
 
     float GRID_SZ = 64.0f;
 
-    for (float x = fmodf(gameSettings.scrolling.x, GRID_SZ); x < canvas_sz.x; x += GRID_SZ)
-        draw_list->AddLine(ImVec2(x, 0.0f) + win_pos, ImVec2(x, canvas_sz.y) + win_pos, GRID_COLOR);
-    for (float y = fmodf(gameSettings.scrolling.y, GRID_SZ); y < canvas_sz.y; y += GRID_SZ)
-        draw_list->AddLine(ImVec2(0.0f, y) + win_pos, ImVec2(canvas_sz.x, y) + win_pos, GRID_COLOR);
+//    for (float x = fmodf(gameSettings.scrolling.x, GRID_SZ); x < canvas_sz.x; x += GRID_SZ)
+//        draw_list->AddLine(ImVec2(x, 0.0f) + win_pos, ImVec2(x, canvas_sz.y) + win_pos, GRID_COLOR);
+//    for (float y = fmodf(gameSettings.scrolling.y, GRID_SZ); y < canvas_sz.y; y += GRID_SZ)
+//        draw_list->AddLine(ImVec2(0.0f, y) + win_pos, ImVec2(canvas_sz.x, y) + win_pos, GRID_COLOR);
 
 
 

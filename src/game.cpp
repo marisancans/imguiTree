@@ -6,25 +6,32 @@
 #include <algorithm>
 #include <chrono>
 #include <thread>
+#include <unordered_set>
 
 
 
 void Game::genLayer() {
     NODE_VEC newLayer;
+    std::unordered_set<Position> setOfPositions;
 
     for(auto parent : _nodes.back()) { // Last vector (Parent nodes)
-        auto parentPos = _turn == P1 ? &parent->P1Pos : &parent->P1Pos;
+        auto parentPos = _turn == P1 ? &parent->P1Pos : &parent->P2Pos;
         POS_VEC possPositions = _board->getPossibleMoves(*parentPos);
 
-        for(int i = 0; i < possPositions.size(); ++i){
-            auto child = new Node(i, parent);
-            if(_turn == P1)
-                child->P1Pos = possPositions[i];
-            else
-                child->P1Pos = possPositions[i];
+        int nth = 0;
+        for(auto& pos : possPositions){
+            auto res = setOfPositions.insert(pos);
 
-            newLayer.push_back(child);
+            if (res.second) {
+                auto child = new Node(nth++, parent);
+                if (_turn == P1)
+                    child->P1Pos = pos;
+                else
+                    child->P2Pos = pos;
+                newLayer.push_back(child);
+            }
         }
+
     }
 
     _nodes.push_back(newLayer);

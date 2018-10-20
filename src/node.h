@@ -4,13 +4,26 @@
 #include "imgui/imgui.h"
 #include <vector>
 #include "board.h"
+#include <iostream>
 
 struct Position {
     int x;
     int y;
+
+    inline bool operator ==(const Position & obj) const
+    {
+        return x == obj.x && y == obj.y;
+    }
 };
 
-
+template<>
+struct std::hash<Position>
+{
+    size_t operator()(const Position & obj) const
+    {
+        return hash<int>()(1/2*(obj.x + obj.y)*(obj.x + obj.y + 1) + obj.y);
+    }
+};
 
 class Node
 {
