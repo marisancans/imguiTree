@@ -55,10 +55,13 @@ public:
     inline void swapTurn(){ _turn = _turn == P1 ? P2 : P1; }
     void makeTurns();
     bool checkWinner();
-    double getMaxInterspace();
-    double getMinInterspace();
-    POS_VEC getPossibleMoves(const Position& p);
+    void minMaxInterspace();
+    POS_VEC getPossibleMoves(const Position& p, Turn turn) const;
+    POS_VEC getRanges() const;
+
     GameSettings gameSettings;
+    const Node* currNodeP1;
+    const Node* currNodeP2;
 
 private:
     void init();
@@ -66,5 +69,5 @@ private:
     GameMode _mode;
     Turn _turn;
     std::vector<NODE_VEC> _nodes;
-    Node _currNode;
+
 };

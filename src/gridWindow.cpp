@@ -64,16 +64,38 @@ void gridWindow(bool* opened, Game const& game, GameSettings& gameSettings) {
         }
     }
 
-    auto node = game.getLayers().front()[0];
-    draw_list->AddRectFilled(ImVec2(node.P1Pos.x, node.P1Pos.y) + win_pos,
-                             ImVec2(node.P1Pos.x + spacingX, node.P1Pos.y + spacingY) + win_pos,
-                             IM_COL32(0, 100, 0,150));
+
 
     for(int x = 0; x < gameSettings.maxBoardX; ++x){
         for(int y = 0; y < gameSettings.maxBoardY; ++y) {
 //            draw_list->AddRectFilled(ImVec2())
         }
     }
+
+
+    auto lDrawPos = [&](const Position& pos, ImU32 col){
+                                       draw_list->AddRectFilled(ImVec2(pos.x * spacingX, pos.y * spacingY) + win_pos,
+                                       ImVec2((pos.x + 1 )* spacingX, (pos.y + 1) * spacingY) + win_pos,
+                                       col);
+                                      };
+
+    auto lDrawCurr = [&](const Position& pos, ImU32 col){
+        draw_list->AddCircleFilled(ImVec2(pos.x * spacingX + spacingX/2, pos.y * spacingY + spacingY/2) + win_pos,
+                                 50, col);
+    };
+
+//    Display current nodes
+//    lDrawPos(game.currNodeP1->P1Pos, IM_COL32(100, 0, 0, 150));
+//    lDrawPos(game.currNodeP2->P2Pos, IM_COL32(0, 0, 100, 150));
+    lDrawCurr(game.currNodeP1->P1Pos, IM_COL32(200, 0, 0, 150));
+    lDrawCurr(game.currNodeP2->P2Pos, IM_COL32(0, 0, 200, 150));
+//    and ranges
+
+    POS_VEC ranges = game.getRanges();
+
+    for(const auto& p : ranges)
+        lDrawPos(p, IM_COL32(0, 100, 0, 50));
+
 
 
 

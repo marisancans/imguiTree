@@ -106,14 +106,14 @@ int main(int, char**)
     bool showGrid = false;
     int levelOffsetX = 250;
     int levelOffsetY = 750;
-    int speedMS = 10;
+    int speedMS = 200;
     
-    Game::Turn firstTurn = Game::P2;
+    Game::Turn firstTurn = Game::P1;
 
 
     GameSettings gameSettings{maxLayer, maxBoardX, maxBoardY,
-                              {{0, 0, 0}, {1, 0, 0}, {0, 0, 0}, {1, 0, 0}, {1, 0, 0}, {1, 0, 0}, {1, 0, 0}, {0, 0, 0}},
-                              {{1, 0, 0}, {0, 0, 0}, {0, 0, 0}, {1, 0, 0}, {0, 0, 0}, {1, 0, 0}, {0, 0, 0}, {1, 0, 0}},
+                              {{1, 0, 0}, {1, 0, 0}, {1, 0, 0}, {1, 0, 0}, {1, 0, 0}, {1, 0, 0}, {1, 0, 0}, {1, 0, 0}},
+                              {{1, 0, 0}, {1, 0, 0}, {1, 0, 0}, {1, 0, 0}, {1, 0, 0}, {1, 0, 0}, {1, 0, 0}, {1, 0, 0}},
                               {0, 0}, {9, 9},
                               scrolling, showGrid,
                               levelOffsetX, levelOffsetY, speedMS};
@@ -140,7 +140,7 @@ int main(int, char**)
         ImGui::NewFrame();
 
         gridWindow(&showGridWindow, game, gameSettings);
-        treeWindow(&showTreeWindow, game, gameSettings);
+//        treeWindow(&showTreeWindow, game, gameSettings);
 //        ImGui::ShowDemoWindow(lala);
 
         // Rendering

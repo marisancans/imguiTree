@@ -12,7 +12,7 @@ struct Position {
     int x;
     int y;
 
-    inline bool operator ==(const Position & obj) const
+    bool operator ==(const Position & obj) const
     {
         return x == obj.x && y == obj.y;
     }
@@ -29,7 +29,8 @@ public:
     inline Node(Status status) : _status(status) {};
     inline int getID(){ return _id; };
     inline bool operator ==(const Node& obj) const { return P1Pos == obj.P1Pos && P2Pos == obj.P2Pos; }
-    inline void calcInterspace(){ interspace = sqrt(pow((P1Pos.x - P2Pos.x), 2) + pow((P2Pos.y - P2Pos.y), 2));};
+    inline void calcInterspace(){
+        interspace = std::hypot(P2Pos.x-P1Pos.x, P2Pos.y-P1Pos.y);};
     Node(int id, Node const* parent);
     inline Node():_status(ROOT), _id(0){};
 //    inline bool compareStats(Position childPos){ return p1 == P1Pos && p2 == P2Pos; }
