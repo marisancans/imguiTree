@@ -17,6 +17,8 @@ void treeWindow(bool* opened, Game const& game, GameSettings& gameSettings){
 
     ImGui::BeginGroup();
 
+    ImGui::SliderInt("slider int2",  &gameSettings.levelOffsetX, 0, 255);
+    ImGui::SliderInt("slider int",  &gameSettings.levelOffsetY, 0, 255);
 
 
     ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(1, 1));
@@ -47,8 +49,6 @@ void treeWindow(bool* opened, Game const& game, GameSettings& gameSettings){
 
         for(auto& node : layers){
             draw_list->ChannelsSetCurrent(1);
-                std::ostringstream out;
-                out << node.P1Pos.x << " | " << node.P1Pos.y << "\n" << node.P2Pos.x << " | " << node.P2Pos.y;
                 for(auto& parentID : node.parentNodes) {
                     draw_list->AddLine(ImVec2(gameSettings.levelOffsetX * (parentID + 1), gameSettings.levelOffsetY * (y - 1)) + win_pos + offset,
                                        ImVec2(gameSettings.levelOffsetX * x, gameSettings.levelOffsetY * y) + win_pos + offset,
@@ -59,7 +59,12 @@ void treeWindow(bool* opened, Game const& game, GameSettings& gameSettings){
                                                   gameSettings.levelOffsetY * y) + win_pos + offset,
                                            10, IM_COL32(150, 250, 150, 150));
             draw_list->ChannelsSetCurrent(2);
-                draw_list->AddText(ImVec2(gameSettings.levelOffsetX * x,
+
+
+            std::ostringstream out;
+            out << node.P1Pos.x << " | " << node.P1Pos.y << "\n" << node.P2Pos.x << " | " << node.P2Pos.y << "\n" << node.interspace;
+
+            draw_list->AddText(ImVec2(gameSettings.levelOffsetX * x,
                                                   gameSettings.levelOffsetY * y) + win_pos + offset,
                                    IM_COL32(250, 100, 100, 250), out.str().c_str());
 
