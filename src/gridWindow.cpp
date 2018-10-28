@@ -57,10 +57,21 @@ void gridWindow(bool* opened, Game const& game, GameSettings& gameSettings) {
 
     int grid[gameSettings.maxBoardX][gameSettings.maxBoardY] = {};
 
-    for(int x = 1; x < gameSettings.maxBoardX; ++x){
-        for(int y = 1; y < gameSettings.maxBoardY; ++y){
+    for(int x = 0; x < gameSettings.maxBoardX; ++x){
+        for(int y = 0; y < gameSettings.maxBoardY; ++y){
             draw_list->AddLine(ImVec2(x * spacingX, 1) + win_pos, ImVec2(x * spacingX, canvas_sz.y) + win_pos, GRID_COLOR);
             draw_list->AddLine(ImVec2(1, y * spacingY) + win_pos, ImVec2(canvas_sz.x, y * spacingY) + win_pos, GRID_COLOR);
+        }
+    }
+
+    auto node = game.getLayers().front()[0];
+    draw_list->AddRectFilled(ImVec2(node.P1Pos.x, node.P1Pos.y) + win_pos,
+                             ImVec2(node.P1Pos.x + spacingX, node.P1Pos.y + spacingY) + win_pos,
+                             IM_COL32(0, 100, 0,150));
+
+    for(int x = 0; x < gameSettings.maxBoardX; ++x){
+        for(int y = 0; y < gameSettings.maxBoardY; ++y) {
+//            draw_list->AddRectFilled(ImVec2())
         }
     }
 

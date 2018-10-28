@@ -5,6 +5,9 @@
 #include <vector>
 #include "board.h"
 #include <iostream>
+#include <cmath>
+
+class Node;
 
 struct Position {
     int x;
@@ -16,14 +19,6 @@ struct Position {
     }
 };
 
-template<>
-struct std::hash<Position>
-{
-    size_t operator()(const Position & obj) const
-    {
-        return hash<int>()(1/2*(obj.x + obj.y)*(obj.x + obj.y + 1) + obj.y);
-    }
-};
 
 class Node
 {
@@ -33,7 +28,13 @@ public:
     inline Node(int id, Status status, Position P1StartPos, Position P2StartPos):
         _id(id), _status(status), P1Pos(P1StartPos), P2Pos(P2StartPos){};
     inline Node(Status status) : _status(status) {};
+    inline int getID(){ return _id; };
+    inline bool operator ==(const Node& obj) const { return P1Pos == obj.P1Pos && P2Pos == obj.P2Pos; }
+    inline void calcInterspace(){ interspace = sqrt(pow((P1Pos.x - P2Pos.x), 2) + pow((P2Pos.y - P2Pos.y), 2));};
     Node(int id, Node const* parent);
+    inline Node():_status(ROOT), _id(0){};
+//    inline bool compareStats(Position childPos){ return p1 == P1Pos && p2 == P2Pos; }
+
     ~Node() = default;
 
     void setHighlighted(bool b);
@@ -42,7 +43,7 @@ public:
     std::vector<int> childNodes;
     Position         P1Pos;
     Position         P2Pos;
-    int              interspace; //Distance P1 <---> P2
+    double           interspace; //Distance P1 <---> P2
     bool             selected;
 
 private:

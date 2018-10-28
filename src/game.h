@@ -9,7 +9,7 @@
 
 class Node;
 struct moveMatrix;
-using NODE_VEC = std::vector<Node*>;
+using NODE_VEC = std::vector<Node>;
 
 
 struct GameSettings{
@@ -29,12 +29,16 @@ struct GameSettings{
 
 class Game {
 public:
-    enum GameMode{PvsPC = 1, PCvsPC = 2};
+    enum GameMode{PvsPC = 1, PCvsPC =2};
     enum Turn{P1 = 1, P2 = 2};
     Game(GameMode mode, Turn turn, GameSettings* gameSettings);
     void genLayer();
     inline const std::vector<NODE_VEC>& getLayers() const { return _nodes; }
     inline void swapTurn(){ _turn = _turn == P1 ? P2 : P1; }
+    void makeTurns();
+    bool checkWinner();
+    double getMaxInterspace();
+    double getMinInterspace();
     GameSettings* gameSettings;
 
 private:
@@ -44,4 +48,5 @@ private:
     Turn _turn;
     Board* _board;
     std::vector<NODE_VEC> _nodes;
+    Node _currNode;
 };

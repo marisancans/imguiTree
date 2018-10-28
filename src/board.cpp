@@ -11,10 +11,10 @@ POS_VEC Board::getPossibleMoves(const Position& p) {
     POS_VEC pv;
     moveMatrix mov{};
 
-    auto canRight = [&](int i){ return p.x + i > 0 && p.x + i <= _xMax; };
+    auto canRight = [&](int i){ return p.x + i > 0 && p.x + i < _xMax; };
     auto canLeft = [&](int i){ return p.x - i >= 0 && p.x - i < _xMax; };
     auto canUp = [&](int i){ return p.y - i >= 0 && p.y - i < _yMax; };
-    auto canDown = [&](int i){ return p.y + i > 0 && p.y + i <= _yMax; };
+    auto canDown = [&](int i){ return p.y + i > 0 && p.y + i < _yMax; };
 
     // Up
     for(int i = 1; i < MRR + 1; ++i){
@@ -55,7 +55,7 @@ POS_VEC Board::getPossibleMoves(const Position& p) {
 
         if(canLeft(i) && canUp(i)) {
             mov[UP_LEFT][i] = 1;
-            pv.push_back(Position{p.x - i, p.y + i});
+            pv.push_back(Position{p.x - i, p.y - i});
         }
 
     }

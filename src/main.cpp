@@ -98,23 +98,23 @@ int main(int, char**)
     
 
     // GAME SETTINGS <--------------------------------------------------
-    int maxLayer = 5;
+    int maxLayer = 3;
     int maxBoardX = 10;
     int maxBoardY = 10;
 //    const Board::moveMatrix P1MovRange;
 //    const Board::moveMatrix P2MovRange;
     ImVec2 scrolling = ImVec2(0.0f, 0.0f);
     bool showGrid = false;
-    int levelOffsetX = 40;
-    int levelOffsetY = 150;
+    int levelOffsetX = 250;
+    int levelOffsetY = 350;
     int speedMS = 10;
     
-    Game::Turn firstTurn = Game::P1;
+    Game::Turn firstTurn = Game::P2;
 
 
     GameSettings gameSettings{maxLayer, maxBoardX, maxBoardY,
-                              {{1, 1, 1}, {1, 1, 1}, {1, 1, 1}, {1, 1, 1}, {1, 1, 1}, {1, 1, 1}, {1, 1, 1}, {1, 1, 1}},
-                              {{1, 1, 1}, {1, 1, 1}, {1, 1, 1}, {1, 1, 1}, {1, 1, 1}, {1, 1, 1}, {1, 1, 1}, {1, 1, 1}},
+                              {{1, 0, 0}, {1, 0, 0}, {1, 0, 0}, {1, 0, 0}, {1, 0, 0}, {1, 0, 0}, {1, 0, 0}, {1, 0, 0}},
+                              {{1, 0, 0}, {1, 0, 0}, {1, 0, 0}, {1, 0, 0}, {1, 0, 0}, {1, 0, 0}, {1, 0, 0}, {1, 0, 0}},
                               {0, 0}, {9, 9},
                               scrolling, showGrid,
                               levelOffsetX, levelOffsetY, speedMS};
@@ -122,9 +122,9 @@ int main(int, char**)
     // Init
     Game game(Game::PCvsPC, firstTurn, &gameSettings);
 
-//    std::thread t([&game](){
-//        game.getNextLayer();
-//    });
+    std::thread t([&game](){
+        game.makeTurns();
+    });
 
 
 
