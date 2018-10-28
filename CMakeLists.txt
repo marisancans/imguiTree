@@ -22,8 +22,6 @@ set(SOURCES ${SRC_DIR}/main.cpp
     ${SRC_DIR}/node.h
     ${SRC_DIR}/game.cpp
     ${SRC_DIR}/game.h
-    ${SRC_DIR}/board.cpp
-    ${SRC_DIR}/board.h
     ${SRC_DIR}/gridWindow.cpp
     ${SRC_DIR}/gridWindow.h
     ${SRC_DIR}/treeWindow.cpp

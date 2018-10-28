@@ -3,7 +3,6 @@
 #include <string>
 #include "imgui/imgui.h"
 #include <vector>
-#include "board.h"
 #include <iostream>
 #include <cmath>
 

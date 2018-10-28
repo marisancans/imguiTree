@@ -9,7 +9,6 @@
 #include "treeWindow.h"
 
 #include "game.h"
-#include "board.h"
 #include <chrono>
 #include <thread>
 
@@ -106,21 +105,21 @@ int main(int, char**)
     ImVec2 scrolling = ImVec2(0.0f, 0.0f);
     bool showGrid = false;
     int levelOffsetX = 250;
-    int levelOffsetY = 350;
+    int levelOffsetY = 750;
     int speedMS = 10;
     
     Game::Turn firstTurn = Game::P2;
 
 
     GameSettings gameSettings{maxLayer, maxBoardX, maxBoardY,
-                              {{1, 0, 0}, {1, 0, 0}, {1, 0, 0}, {1, 0, 0}, {1, 0, 0}, {1, 0, 0}, {1, 0, 0}, {1, 0, 0}},
-                              {{1, 0, 0}, {1, 0, 0}, {1, 0, 0}, {1, 0, 0}, {1, 0, 0}, {1, 0, 0}, {1, 0, 0}, {1, 0, 0}},
+                              {{0, 0, 0}, {1, 0, 0}, {0, 0, 0}, {1, 0, 0}, {1, 0, 0}, {1, 0, 0}, {1, 0, 0}, {0, 0, 0}},
+                              {{1, 0, 0}, {0, 0, 0}, {0, 0, 0}, {1, 0, 0}, {0, 0, 0}, {1, 0, 0}, {0, 0, 0}, {1, 0, 0}},
                               {0, 0}, {9, 9},
                               scrolling, showGrid,
                               levelOffsetX, levelOffsetY, speedMS};
 
     // Init
-    Game game(Game::PCvsPC, firstTurn, &gameSettings);
+    Game game(Game::PCvsPC, firstTurn, gameSettings);
 
     std::thread t([&game](){
         game.makeTurns();
