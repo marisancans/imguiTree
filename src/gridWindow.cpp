@@ -28,7 +28,14 @@ void gridWindow(bool* opened, Game const& game, GameSettings& gameSettings) {
     const float NODE_SLOT_RADIUS = 4.0f;
     const ImVec2 NODE_WINDOW_PADDING(8.0f, 8.0f);
 //
-//
+    bool won = false;
+    ImGui::Begin("About Dear ImGui", &won, ImGuiWindowFlags_AlwaysAutoResize);
+    ImGui::Text("Dear ImGui, %s", ImGui::GetVersion());
+    ImGui::Separator();
+    ImGui::Text("By Omar Cornut and all dear imgui contributors.");
+    ImGui::Text("Dear ImGui is licensed under the MIT License, see LICENSE for more information.");
+    ImGui::End();
+
 
 
     ImGui::BeginGroup();
@@ -81,7 +88,7 @@ void gridWindow(bool* opened, Game const& game, GameSettings& gameSettings) {
 
     auto lDrawCurr = [&](const Position& pos, ImU32 col){
         draw_list->AddCircleFilled(ImVec2(pos.x * spacingX + spacingX/2, pos.y * spacingY + spacingY/2) + win_pos,
-                                 50, col);
+                                   spacingX/2, col);
     };
 
 //    Display current nodes

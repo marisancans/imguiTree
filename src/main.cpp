@@ -106,14 +106,14 @@ int main(int, char**)
     bool showGrid = false;
     int levelOffsetX = 100;
     int levelOffsetY = 100;
-    int speedMS = 200;
+    int speedMS = 1000;
     
     Game::Turn firstTurn = Game::P1;
 
 
     GameSettings gameSettings{maxLayer, maxBoardX, maxBoardY,
                               {{1, 0, 0}, {1, 0, 0}, {1, 0, 0}, {1, 0, 0}, {1, 0, 0}, {1, 0, 0}, {1, 0, 0}, {1, 0, 0}},
-                              {{1, 0, 0}, {1, 0, 0}, {1, 0, 0}, {1, 0, 0}, {1, 0, 0}, {1, 0, 0}, {1, 0, 0}, {1, 0, 0}},
+                              {{1, 1, 0}, {1, 0, 0}, {1, 1, 0}, {1, 0, 0}, {1, 1, 0}, {1, 0, 0}, {1, 1, 0}, {1, 0, 0}},
                               {0, 0}, {9, 9},
                               scrolling, showGrid,
                               levelOffsetX, levelOffsetY, speedMS};

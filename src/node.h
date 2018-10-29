@@ -27,11 +27,11 @@ public:
     inline Node(int id, Status status, Position P1StartPos, Position P2StartPos):
         _id(id), _status(status), P1Pos(P1StartPos), P2Pos(P2StartPos), selected(0){};
     inline Node(Status status) : _status(status) {};
-    inline int getID(){ return _id; };
+    inline int getID() const { return _id; };
     inline bool operator ==(const Node& obj) const { return P1Pos == obj.P1Pos && P2Pos == obj.P2Pos; }
     inline void calcInterspace(){
         interspace = std::hypot(P2Pos.x-P1Pos.x, P2Pos.y-P1Pos.y);};
-    Node(int id, Node const* parent);
+    Node(int id, Node* parent);
     inline Node():_status(ROOT), _id(0), selected(0){};
 //    inline bool compareStats(Position childPos){ return p1 == P1Pos && p2 == P2Pos; }
 
@@ -39,7 +39,7 @@ public:
 
     void setHighlighted(bool b);
 
-    std::vector<int> parentNodes;
+    int              parentNodeID;
     std::vector<int> childNodes;
     Position         P1Pos;
     Position         P2Pos;

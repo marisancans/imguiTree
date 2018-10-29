@@ -1,8 +1,9 @@
 #include "node.h"
 
 
-Node::Node(int id, Node const* parent): _id(id), _status(MIDDLE){
-    parentNodes.push_back(parent->_id);
+Node::Node(int id, Node* parent): _id(id), _status(MIDDLE){
+    parent->childNodes.push_back(id);
+    parentNodeID = parent->_id;
     P1Pos = parent->P1Pos;
     P2Pos = parent->P2Pos;
 }

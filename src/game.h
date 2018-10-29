@@ -32,6 +32,10 @@ struct GameSettings{
     int speedMS;
 };
 
+struct Traverse{
+    double val;
+    int ID;
+};
 
 enum MovDir // Movement directions
 {
@@ -53,15 +57,18 @@ public:
     void genLayer();
     inline const std::vector<NODE_VEC>& getLayers() const { return _nodes; }
     inline void swapTurn(){ _turn = _turn == P1 ? P2 : P1; }
+    inline int getNewID(){ return ++_newID; }
+    
     void makeTurns();
     bool checkWinner();
-    void minMaxInterspace();
     POS_VEC getPossibleMoves(const Position& p, Turn turn) const;
     POS_VEC getRanges() const;
+    
 
     GameSettings gameSettings;
-    const Node* currNodeP1;
-    const Node* currNodeP2;
+    Node* currNodeP1;
+    Node* currNodeP2;
+    Turn winner;
 
 private:
     void init();
@@ -69,6 +76,6 @@ private:
     GameMode _mode;
     Turn _turn;
     std::vector<NODE_VEC> _nodes;
-
+    int _newID;
 
 };
