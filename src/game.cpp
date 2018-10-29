@@ -36,7 +36,7 @@ void Game::genLayer() {
                             n.parentNodes.push_back(parent.getID());
                             break;
                         } else {
-                            child.calcInterspace();
+
                             newLayer.push_back(child);
                             break;
                         }
@@ -80,26 +80,27 @@ void Game::init() {
 }
 
 void Game::makeTurns() {
-    int turns = 50;
-    for(int i = 0; i < turns; ++i){
-        genLayer();
-        minMaxInterspace();
-        checkWinner();
-
-        if(i < turns - 1) {
-            _nodes.clear();
-
-            auto n = Node(0, Node::ROOT, currNodeP1->P1Pos, currNodeP2->P2Pos);
-            n.calcInterspace();
-            NODE_VEC nv;
-            nv.push_back(n);
-            _nodes.push_back(nv);
-        }
 
 
-        std::this_thread::sleep_for(std::chrono::milliseconds(gameSettings.speedMS));
-        swapTurn();
-    }
+//            if (i < turns - 1) {
+    _nodes.clear();
+
+    auto n = Node(0, Node::ROOT, currNodeP1->P1Pos, currNodeP2->P2Pos);
+    n.calcInterspace();
+    NODE_VEC nv;
+    nv.push_back(n);
+    _nodes.push_back(nv);
+//            }
+
+    genLayer();
+    minMaxInterspace();
+    checkWinner();
+
+
+
+    std::this_thread::sleep_for(std::chrono::milliseconds(gameSettings.speedMS));
+    swapTurn();
+//}
 
 
 
@@ -111,22 +112,27 @@ bool Game::checkWinner() {
 
 
 void Game::minMaxInterspace() {
+    _nodes.back().back().calcInterspace();
     double min = _nodes.back().back().interspace;
     double max = 0.f;
 
-
-    for(const auto& layer : _nodes){
-        for(const auto& n : layer) {
+    // Note the prefix ++ for _nodes, that means we start from second element
+    for(auto itLayer = ++_nodes.begin(); itLayer != _nodes.end(); ++itLayer){
+        for(auto& n : *itLayer) {
+            n.calcInterspace();
             if(n.interspace < min && _turn == P1) {
                 min = n.interspace;
                 currNodeP1 = &n;
+                n.selected = 1;
             }
             if(n.interspace > max && _turn == P2) {
                 max = n.interspace;
                 currNodeP2 = &n;
+                n.selected = 2;
             }
         }
     }
+fix gme ends when interspace = 0
 }
 
 POS_VEC Game::getPossibleMoves(const Position &p, Turn turn) const{

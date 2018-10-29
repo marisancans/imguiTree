@@ -70,4 +70,5 @@ private:
     Turn _turn;
     std::vector<NODE_VEC> _nodes;
 
+
 };

@@ -7,7 +7,7 @@ static inline ImVec2 operator+(const ImVec2& lhs, const ImVec2& rhs) { return Im
 static inline ImVec2 operator-(const ImVec2& lhs, const ImVec2& rhs) { return ImVec2(lhs.x - rhs.x, lhs.y - rhs.y); }
 
 
-void treeWindow(bool* opened, Game const& game, GameSettings& gameSettings){
+void treeWindow(bool* opened, Game& game, GameSettings& gameSettings){
     ImGui::SetNextWindowSize(ImVec2(700, 600), ImGuiSetCond_FirstUseEver);
     if (!ImGui::Begin("Tree view", opened)) {
         ImGui::End();
@@ -19,6 +19,9 @@ void treeWindow(bool* opened, Game const& game, GameSettings& gameSettings){
 
     ImGui::SliderInt("slider int2",  &gameSettings.levelOffsetX, 0, 255);
     ImGui::SliderInt("slider int",  &gameSettings.levelOffsetY, 0, 255);
+
+    if (ImGui::Button("Next generation"))
+        game.makeTurns();
 
 
     ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(1, 1));
@@ -55,9 +58,16 @@ void treeWindow(bool* opened, Game const& game, GameSettings& gameSettings){
                                        IM_COL32(100, 100, 100, 150), 2.f);
                 }
 
+            ImU32 col;
+            switch(node.selected){
+                case 1: col = IM_COL32(250, 0, 0, 150); break;
+                case 2: col = IM_COL32(0, 0, 250, 150); break;
+                default: col = IM_COL32(150, 250, 150, 150);
+                }
+
             draw_list->AddCircleFilled(ImVec2(gameSettings.levelOffsetX * x,
                                                   gameSettings.levelOffsetY * y) + win_pos + offset,
-                                           10, IM_COL32(150, 250, 150, 150));
+                                           10, col);
             draw_list->ChannelsSetCurrent(2);
 
 

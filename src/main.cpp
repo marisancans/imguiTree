@@ -104,8 +104,8 @@ int main(int, char**)
 //    const Board::moveMatrix P2MovRange;
     ImVec2 scrolling = ImVec2(0.0f, 0.0f);
     bool showGrid = false;
-    int levelOffsetX = 250;
-    int levelOffsetY = 750;
+    int levelOffsetX = 100;
+    int levelOffsetY = 100;
     int speedMS = 200;
     
     Game::Turn firstTurn = Game::P1;
@@ -140,7 +140,7 @@ int main(int, char**)
         ImGui::NewFrame();
 
         gridWindow(&showGridWindow, game, gameSettings);
-//        treeWindow(&showTreeWindow, game, gameSettings);
+        treeWindow(&showTreeWindow, game, gameSettings);
 //        ImGui::ShowDemoWindow(lala);
 
         // Rendering
