@@ -106,7 +106,7 @@ int main(int, char**)
     bool showGrid = false;
     int levelOffsetX = 100;
     int levelOffsetY = 100;
-    int speedMS = 1000;
+    int speedMS = 100;
     
     Game::Turn firstTurn = Game::P1;
 
@@ -122,7 +122,10 @@ int main(int, char**)
     Game game(Game::PCvsPC, firstTurn, gameSettings);
 
     std::thread t([&game](){
-        game.makeTurns();
+        for(int i = 0; i < 5000; ++i) {
+            game.makeTurns();
+            std::this_thread::sleep_for(std::chrono::milliseconds(game.gameSettings.speedMS));
+        }
     });
 
 

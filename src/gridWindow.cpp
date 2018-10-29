@@ -94,8 +94,8 @@ void gridWindow(bool* opened, Game const& game, GameSettings& gameSettings) {
 //    Display current nodes
 //    lDrawPos(game.currNodeP1->P1Pos, IM_COL32(100, 0, 0, 150));
 //    lDrawPos(game.currNodeP2->P2Pos, IM_COL32(0, 0, 100, 150));
-    lDrawCurr(game.currNodeP1->P1Pos, IM_COL32(200, 0, 0, 150));
-    lDrawCurr(game.currNodeP2->P2Pos, IM_COL32(0, 0, 200, 150));
+    lDrawCurr(game.currPosP1, IM_COL32(200, 0, 0, 150));
+    lDrawCurr(game.currPosP2, IM_COL32(0, 0, 200, 150));
 //    and ranges
 
     POS_VEC ranges = game.getRanges();

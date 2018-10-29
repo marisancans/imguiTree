@@ -22,13 +22,14 @@ void Game::genLayer()
     for(int i = 0; i < 3; ++i) {
         NODE_VEC newLayer;
         
-        for(auto parent : _nodes.back()) { // Last vector (Parent nodes)
-            auto parentPos = t == P1 ? &parent.P1Pos : &parent.P2Pos;
-            POS_VEC possPositions = getPossibleMoves(*parentPos, t);
+        for(auto& parent : _nodes.back()) { // Last vector (Parent nodes)
+            auto parentPos = t == P1 ? parent.P1Pos : parent.P2Pos;
+            POS_VEC possPositions = getPossibleMoves(parentPos, t);
             
             // --------------  Append to vector or add to parents ---------
             for(auto& pos : possPositions) {
                 auto child = Node(getNewID(), &parent);
+
                 auto childPos = t == P1 ? &child.P1Pos : &child.P2Pos;
                 childPos->x = pos.x;
                 childPos->y = pos.y;
@@ -36,9 +37,10 @@ void Game::genLayer()
                 if(newLayer.empty())
                     newLayer.push_back(child);
                 else {
+                    int nth = 0;
                     for(auto& n : newLayer) {
                         if(n.P1Pos == child.P1Pos && n.P2Pos == child.P2Pos) {
-                            parent.childNodes.push_back(n.getID());
+                            parent.childNodes.push_back(nth++);
                             break;
                         } else {
                             newLayer.push_back(child);
@@ -78,27 +80,27 @@ void Game::genLayer()
     
     
 
-    if(_turn == P1) {
-        for(int i = int(_nodes.size()); --i > 1;)
-            for(auto& node : _nodes[i])
-                if(min.ID == node.getID()) {
+    if(_turn == P2) {
+        for(int i = int(_nodes.size()); --i >= 1;)
+            for(auto& node : _nodes[i]) {
+                if (min.ID == node.getID()) {
                     min.ID = node.parentNodeID;
-                    currNodeP1 = &node;
+                    currPosP1 = node.P1Pos;
                     break;
                 }
-        currNodeP1->selected = 1;
+            }
     }
     
 
-    if(_turn == P2) {
-        for(int i = int(_nodes.size()); --i > 1;)
-            for(auto& node : _nodes[i])
-                if(max.ID == node.getID()) {
+    if(_turn == P1) {
+        for(int i = int(_nodes.size()); --i >= 1;)
+            for(auto& node : _nodes[i]) {
+                if (max.ID == node.getID()) {
                     max.ID = node.parentNodeID;
-                    currNodeP2 = &node;
+                    currPosP2 = node.P2Pos;
                     break;
                 }
-        currNodeP2->selected = 2;
+            }
     }
     
 }
@@ -110,49 +112,37 @@ Game::Game(Game::GameMode mode, Game::Turn turn, GameSettings gameSettings):
 }
 
 void Game::init() {
-    // Initial layer creation
-    auto n = Node(getNewID(), Node::ROOT, gameSettings.P1StartPos, gameSettings.P2StartPos);
+    currPosP1 = gameSettings.P1StartPos;
+    currPosP2 = gameSettings.P2StartPos;
+    swapTurn();
+    makeTurns();
+}
+
+void Game::makeTurns() {
+     _newID = -1;
+    Node n;
+    n = Node(getNewID(), Node::ROOT, currPosP1, currPosP2);
     n.calcInterspace();
+
+
+    _nodes.clear();
+
+
     NODE_VEC nv;
     nv.push_back(n);
     _nodes.push_back(nv);
 
-    currNodeP1 = &_nodes[0][0];
-    currNodeP2 = &_nodes[0][0];
-    
+    genLayer();
+    checkWinner();
+
     swapTurn();
 }
 
-void Game::makeTurns() {
-    for(int i = 0; i < 5000; ++i) {
-        Node* pn = _turn == P1 ? currNodeP2 : currNodeP1;
-        auto n = Node(getNewID(), Node::ROOT, pn->P1Pos, pn->P2Pos);
-        n.calcInterspace();
-        
-        
-        _nodes.clear();
-        _newID = 0;
-        
-        NODE_VEC nv;
-        nv.push_back(n);
-        _nodes.push_back(nv);
-        
-        genLayer();
-        checkWinner();
-        
-        
-        std::this_thread::sleep_for(std::chrono::milliseconds(gameSettings.speedMS));
-        swapTurn();
-        
-        
-    }
-}
-
 bool Game::checkWinner() {
-    if(currNodeP1->interspace == 0)
-        winner = P1;
-    if(currNodeP2->interspace == 0)
-        winner = P2;
+//    if(currNodeP1.interspace == 0)
+//        winner = P1;
+//    if(currNodeP2.interspace == 0)
+//        winner = P2;
 }
 
 
@@ -215,8 +205,8 @@ POS_VEC Game::getPossibleMoves(const Position &p, Turn turn) const{
 }
 
 POS_VEC Game::getRanges() const{
-    auto pv = getPossibleMoves(currNodeP1->P1Pos, P1);
-    auto tmp = getPossibleMoves(currNodeP2->P2Pos, P2);
+    auto pv = getPossibleMoves(currPosP1, P1);
+    auto tmp = getPossibleMoves(currPosP2, P2);
     for(auto& v : tmp)
         pv.push_back(v);
 

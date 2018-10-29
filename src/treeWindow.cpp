@@ -52,11 +52,13 @@ void treeWindow(bool* opened, Game& game, GameSettings& gameSettings){
 
         for(auto& node : layers){
             draw_list->ChannelsSetCurrent(1);
-//                for(auto& childID : node.childNodes) {
-//                    draw_list->AddLine(ImVec2(gameSettings.levelOffsetX * (childID + 1), gameSettings.levelOffsetY * (y - 1)) + win_pos + offset,
-//                                       ImVec2(gameSettings.levelOffsetX * x, gameSettings.levelOffsetY * y) + win_pos + offset,
-//                                       IM_COL32(100, 100, 100, 150), 2.f);
-//                }
+            if(!node.childNodes.empty()) {
+                for (auto &childID : node.childNodes) {
+                    draw_list->AddLine(ImVec2(childID * x, childID * y) + win_pos + offset,
+                                       ImVec2(100, 100) + win_pos + offset,
+                                       IM_COL32(100, 100, 100, 150), 2.f);
+                }
+            }
 
             ImU32 col;
             switch(node.selected){

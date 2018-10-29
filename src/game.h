@@ -66,8 +66,8 @@ public:
     
 
     GameSettings gameSettings;
-    Node* currNodeP1;
-    Node* currNodeP2;
+    Position currPosP1;
+    Position currPosP2;
     Turn winner;
 
 private:

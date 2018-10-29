@@ -6,21 +6,21 @@
 
 #IncludeRegexTransform: 
 
-/home/maris/CLionProjects/imguiTree/src/game.h
+/home/maris/src/imguitest/src/game.h
 vector
 -
 string
 -
 imgui/imgui.h
-/home/maris/CLionProjects/imguiTree/src/imgui/imgui.h
+/home/maris/src/imguitest/src/imgui/imgui.h
 node.h
-/home/maris/CLionProjects/imguiTree/src/node.h
+/home/maris/src/imguitest/src/node.h
 
-/home/maris/CLionProjects/imguiTree/src/imgui/imconfig.h
+/home/maris/src/imguitest/src/imgui/imconfig.h
 
-/home/maris/CLionProjects/imguiTree/src/imgui/imgui.h
+/home/maris/src/imguitest/src/imgui/imgui.h
 imconfig.h
-/home/maris/CLionProjects/imguiTree/src/imgui/imconfig.h
+/home/maris/src/imguitest/src/imgui/imconfig.h
 float.h
 -
 stdarg.h
@@ -34,13 +34,13 @@ assert.h
 stdint.h
 -
 imgui_user.h
-/home/maris/CLionProjects/imguiTree/src/imgui/imgui_user.h
+/home/maris/src/imguitest/src/imgui/imgui_user.h
 
-/home/maris/CLionProjects/imguiTree/src/node.h
+/home/maris/src/imguitest/src/node.h
 string
 -
 imgui/imgui.h
-/home/maris/CLionProjects/imguiTree/src/imgui/imgui.h
+/home/maris/src/imguitest/src/imgui/imgui.h
 vector
 -
 iostream
@@ -48,15 +48,15 @@ iostream
 cmath
 -
 
-/home/maris/CLionProjects/imguiTree/src/treeWindow.cpp
+/home/maris/src/imguitest/src/treeWindow.cpp
 treeWindow.h
-/home/maris/CLionProjects/imguiTree/src/treeWindow.h
+/home/maris/src/imguitest/src/treeWindow.h
 math.h
 -
 sstream
 -
 
-/home/maris/CLionProjects/imguiTree/src/treeWindow.h
+/home/maris/src/imguitest/src/treeWindow.h
 game.h
-/home/maris/CLionProjects/imguiTree/src/game.h
+/home/maris/src/imguitest/src/game.h
 

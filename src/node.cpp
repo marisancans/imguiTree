@@ -2,7 +2,6 @@
 
 
 Node::Node(int id, Node* parent): _id(id), _status(MIDDLE){
-    parent->childNodes.push_back(id);
     parentNodeID = parent->_id;
     P1Pos = parent->P1Pos;
     P2Pos = parent->P2Pos;
