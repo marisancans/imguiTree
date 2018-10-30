@@ -6,6 +6,22 @@
 
 #IncludeRegexTransform: 
 
+/home/maris/src/imguitest/src/game.cpp
+game.h
+/home/maris/src/imguitest/src/game.h
+node.h
+/home/maris/src/imguitest/src/node.h
+iostream
+-
+algorithm
+-
+chrono
+-
+thread
+-
+unordered_set
+-
+
 /home/maris/src/imguitest/src/game.h
 vector
 -
@@ -15,6 +31,8 @@ imgui/imgui.h
 /home/maris/src/imguitest/src/imgui/imgui.h
 node.h
 /home/maris/src/imguitest/src/node.h
+deque
+/home/maris/src/imguitest/src/deque
 
 /home/maris/src/imguitest/src/imgui/imconfig.h
 
@@ -47,16 +65,4 @@ iostream
 -
 cmath
 -
-
-/home/maris/src/imguitest/src/treeWindow.cpp
-treeWindow.h
-/home/maris/src/imguitest/src/treeWindow.h
-math.h
--
-sstream
--
-
-/home/maris/src/imguitest/src/treeWindow.h
-game.h
-/home/maris/src/imguitest/src/game.h
 

@@ -8,12 +8,14 @@
 static inline ImVec2 operator+(const ImVec2& lhs, const ImVec2& rhs) { return ImVec2(lhs.x + rhs.x, lhs.y + rhs.y); }
 static inline ImVec2 operator-(const ImVec2& lhs, const ImVec2& rhs) { return ImVec2(lhs.x - rhs.x, lhs.y - rhs.y); }
 
-void gridWindow(bool* opened, Game const& game, GameSettings& gameSettings) {
+void gridWindow(bool* opened, Game& game, GameSettings& gameSettings) {
     ImGui::SetNextWindowSize(ImVec2(700, 600), ImGuiSetCond_FirstUseEver);
     if (!ImGui::Begin("Example: Custom Node Graph", opened)) {
         ImGui::End();
         return;
     }
+
+    game.makeTurns();
 
     static bool graphInited = false;
     static int nodeSelected = -1;
@@ -62,7 +64,6 @@ void gridWindow(bool* opened, Game const& game, GameSettings& gameSettings) {
     float spacingX = canvas_sz.x / gameSettings.maxBoardX;
     float spacingY = canvas_sz.y / gameSettings.maxBoardY;
 
-    int grid[gameSettings.maxBoardX][gameSettings.maxBoardY] = {};
 
     for(int x = 0; x < gameSettings.maxBoardX; ++x){
         for(int y = 0; y < gameSettings.maxBoardY; ++y){
@@ -92,11 +93,22 @@ void gridWindow(bool* opened, Game const& game, GameSettings& gameSettings) {
     };
 
 //    Display current nodes
-//    lDrawPos(game.currNodeP1->P1Pos, IM_COL32(100, 0, 0, 150));
-//    lDrawPos(game.currNodeP2->P2Pos, IM_COL32(0, 0, 100, 150));
     lDrawCurr(game.currPosP1, IM_COL32(200, 0, 0, 150));
     lDrawCurr(game.currPosP2, IM_COL32(0, 0, 200, 150));
-//    and ranges
+
+
+    // FOOLING AROUND HERE
+    draw_list->AddLine(ImVec2(game.currPosP1.x * spacingX + spacingX/2, game.currPosP1.y * spacingY + spacingY/2) + win_pos,
+                       ImVec2(game.currPosP2.x * spacingX + spacingX/2, game.currPosP2.y * spacingY + spacingY/2) + win_pos, IM_COL32(0, 150, 0 ,250));
+
+    for(int i = 0; i < game.tracersP1.size(); ++i)
+        lDrawCurr(game.tracersP1[i], IM_COL32(20 * i, 0, 0, 250));
+    for(int i = 0; i < game.tracersP2.size(); ++i)
+        lDrawCurr(game.tracersP2[i], IM_COL32(0, 0, 20 * i, 250));
+
+
+
+    //    and ranges
 
     POS_VEC ranges = game.getRanges();
 

@@ -105,7 +105,7 @@ void Game::genLayer()
     
 }
 
-Game::Game(Game::GameMode mode, Game::Turn turn, GameSettings gameSettings):
+Game::Game(Game::GameMode mode, Game::Turn turn, GameSettings& gameSettings):
     _turn(turn), gameSettings(gameSettings), _newID(0)
 {
     init();
@@ -119,23 +119,38 @@ void Game::init() {
 }
 
 void Game::makeTurns() {
-     _newID = -1;
-    Node n;
-    n = Node(getNewID(), Node::ROOT, currPosP1, currPosP2);
-    n.calcInterspace();
+    static auto started = std::chrono::high_resolution_clock::now();
+    // Clock
+    auto done = std::chrono::high_resolution_clock::now();
+    auto ms = std::chrono::duration_cast<std::chrono::milliseconds>(done-started).count();
+    if(ms > gameSettings.speedMS) {
+
+        _newID = -1;
+        Node n;
+        n = Node(getNewID(), Node::ROOT, currPosP1, currPosP2);
+        n.calcInterspace();
+
+        tracersP1.emplace_back(currPosP1);
+        if(tracersP1.size() > 10)
+            tracersP1.pop_front();
+
+        tracersP2.emplace_back(currPosP2);
+        if(tracersP2.size() > 10)
+            tracersP2.pop_front();
+
+        _nodes.clear();
 
 
-    _nodes.clear();
+        NODE_VEC nv;
+        nv.push_back(n);
+        _nodes.push_back(nv);
 
+        genLayer();
+        checkWinner();
 
-    NODE_VEC nv;
-    nv.push_back(n);
-    _nodes.push_back(nv);
-
-    genLayer();
-    checkWinner();
-
-    swapTurn();
+        swapTurn();
+        started = std::chrono::high_resolution_clock::now();
+    }
 }
 
 bool Game::checkWinner() {

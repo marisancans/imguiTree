@@ -1,6 +1,7 @@
 #include "treeWindow.h"
 #include <math.h>
 #include <sstream>
+#include <vector>
 
 
 static inline ImVec2 operator+(const ImVec2& lhs, const ImVec2& rhs) { return ImVec2(lhs.x + rhs.x, lhs.y + rhs.y); }
@@ -19,7 +20,7 @@ void treeWindow(bool* opened, Game& game, GameSettings& gameSettings){
 
     ImGui::SliderInt("slider int2",  &gameSettings.levelOffsetX, 0, 255);
     ImGui::SliderInt("slider int",  &gameSettings.levelOffsetY, 0, 255);
-
+    ImGui::SliderInt("Speed",  &gameSettings.speedMS, 1, 1000);
     if (ImGui::Button("Next generation"))
         game.makeTurns();
 
@@ -47,16 +48,19 @@ void treeWindow(bool* opened, Game& game, GameSettings& gameSettings){
 
 
     int y = 0;
-    for(auto& layers : game.getLayers()){
+    const std::vector<NODE_VEC>& layers = game.getLayers();
+
+    int maxLayers = int(game.getLayers().size()) > 4 ? 3 : int(game.getLayers().size());
+    for(int cLayer = 0; cLayer < maxLayers; ++cLayer){
         int x = 1;
 
-        for(auto& node : layers){
+        for(auto& node : layers[cLayer]){
             draw_list->ChannelsSetCurrent(1);
             if(!node.childNodes.empty()) {
                 for (auto &childID : node.childNodes) {
-                    draw_list->AddLine(ImVec2(childID * x, childID * y) + win_pos + offset,
-                                       ImVec2(100, 100) + win_pos + offset,
-                                       IM_COL32(100, 100, 100, 150), 2.f);
+//                    draw_list->AddLine(ImVec2(childID * x, childID * y) + win_pos + offset,
+//                                       ImVec2(100, 100) + win_pos + offset,
+//                                       IM_COL32(100, 100, 100, 150), 2.f);
                 }
             }
 

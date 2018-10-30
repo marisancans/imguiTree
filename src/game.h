@@ -4,6 +4,7 @@
 #include <string>
 #include "imgui/imgui.h"
 #include "node.h"
+#include "deque"
 
 const int MRR = 3; // Max movement range
 
@@ -53,7 +54,7 @@ class Game {
 public:
     enum GameMode{PvsPC = 1, PCvsPC =2};
     enum Turn{P1 = 1, P2 = 2};
-    Game(GameMode mode, Turn turn, GameSettings gameSettings);
+    Game(GameMode mode, Turn turn, GameSettings& gameSettings);
     void genLayer();
     inline const std::vector<NODE_VEC>& getLayers() const { return _nodes; }
     inline void swapTurn(){ _turn = _turn == P1 ? P2 : P1; }
@@ -65,10 +66,12 @@ public:
     POS_VEC getRanges() const;
     
 
-    GameSettings gameSettings;
+    GameSettings& gameSettings;
     Position currPosP1;
     Position currPosP2;
     Turn winner;
+    std::deque<Position> tracersP1;
+    std::deque<Position> tracersP2;
 
 private:
     void init();

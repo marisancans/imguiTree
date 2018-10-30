@@ -98,8 +98,8 @@ int main(int, char**)
 
     // GAME SETTINGS <--------------------------------------------------
     int maxLayer = 3;
-    int maxBoardX = 10;
-    int maxBoardY = 10;
+    int maxBoardX = 20;
+    int maxBoardY = 20;
 //    const Board::moveMatrix P1MovRange;
 //    const Board::moveMatrix P2MovRange;
     ImVec2 scrolling = ImVec2(0.0f, 0.0f);
@@ -112,21 +112,22 @@ int main(int, char**)
 
 
     GameSettings gameSettings{maxLayer, maxBoardX, maxBoardY,
+                              //   UP      UP_RIGHT   RIGHT      DOWN_RIGHT   DOWN     DOWN_LEFT   LEFT      UP_LEFT
                               {{1, 0, 0}, {1, 0, 0}, {1, 0, 0}, {1, 0, 0}, {1, 0, 0}, {1, 0, 0}, {1, 0, 0}, {1, 0, 0}},
                               {{1, 1, 0}, {1, 0, 0}, {1, 1, 0}, {1, 0, 0}, {1, 1, 0}, {1, 0, 0}, {1, 1, 0}, {1, 0, 0}},
-                              {0, 0}, {9, 9},
+                              {0, 0}, {19, 19},
                               scrolling, showGrid,
                               levelOffsetX, levelOffsetY, speedMS};
 
     // Init
     Game game(Game::PCvsPC, firstTurn, gameSettings);
 
-    std::thread t([&game](){
-        for(int i = 0; i < 5000; ++i) {
-            game.makeTurns();
-            std::this_thread::sleep_for(std::chrono::milliseconds(game.gameSettings.speedMS));
-        }
-    });
+//    std::thread t([&game](){
+//        for(int i = 0; i < 500; ++i) {
+//            game.makeTurns();
+//            std::this_thread::sleep_for(std::chrono::milliseconds(game.gameSettings.speedMS));
+//        }
+//    });
 
 
 
