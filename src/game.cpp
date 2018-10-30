@@ -27,6 +27,7 @@ void Game::genLayer()
             POS_VEC possPositions = getPossibleMoves(parentPos, t);
             
             // --------------  Append to vector or add to parents ---------
+            int nth = 0;
             for(auto& pos : possPositions) {
                 auto child = Node(getNewID(), &parent);
 
@@ -37,10 +38,12 @@ void Game::genLayer()
                 if(newLayer.empty())
                     newLayer.push_back(child);
                 else {
-                    int nth = 0;
                     for(auto& n : newLayer) {
+                        nth++;
                         if(n.P1Pos == child.P1Pos && n.P2Pos == child.P2Pos) {
-                            parent.childNodes.push_back(nth++);
+                            parent.childNodes.push_back(nth);
+                            if(parent.childNodes.size() > 1)
+                                std::cout<<0;
                             break;
                         } else {
                             newLayer.push_back(child);
@@ -51,7 +54,8 @@ void Game::genLayer()
                 }
             }
         }
-        
+
+
         
         
         //-----------------   Get minmax interspaces ------------------

@@ -20,7 +20,7 @@ void treeWindow(bool* opened, Game& game, GameSettings& gameSettings){
 
     ImGui::SliderInt("slider int2",  &gameSettings.levelOffsetX, 0, 255);
     ImGui::SliderInt("slider int",  &gameSettings.levelOffsetY, 0, 255);
-    ImGui::SliderInt("Speed",  &gameSettings.speedMS, 1, 1000);
+    ImGui::SliderInt("Speed",  &gameSettings.speedMS, 1, 5000);
     if (ImGui::Button("Next generation"))
         game.makeTurns();
 
@@ -58,9 +58,11 @@ void treeWindow(bool* opened, Game& game, GameSettings& gameSettings){
             draw_list->ChannelsSetCurrent(1);
             if(!node.childNodes.empty()) {
                 for (auto &childID : node.childNodes) {
-//                    draw_list->AddLine(ImVec2(childID * x, childID * y) + win_pos + offset,
-//                                       ImVec2(100, 100) + win_pos + offset,
-//                                       IM_COL32(100, 100, 100, 150), 2.f);
+                    draw_list->AddLine(ImVec2(x * gameSettings.levelOffsetX, y * gameSettings.levelOffsetY) + win_pos + offset,
+                                       ImVec2(childID * gameSettings.levelOffsetX, (y+1) *  gameSettings.levelOffsetY) + win_pos + offset,
+                                       IM_COL32(100, 100, 100, 150), 2.f);
+                    draw_list->AddCircleFilled(ImVec2(x * gameSettings.levelOffsetX, y * gameSettings.levelOffsetY)
+                    + win_pos + offset, 35, IM_COL32(100, 100, 100, 255));
                 }
             }
 

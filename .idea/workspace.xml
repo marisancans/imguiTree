@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/src/game.cpp" line="146" mnemonic="9" />
+    <bookmark url="file://$PROJECT_DIR$/src/game.cpp" line="153" mnemonic="9" />
   </component>
   <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true" buildAllGenerated="true">
     <generated>
@@ -15,12 +15,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5d200ac4-aa4f-435c-bc87-7d8df8121ac6" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/game.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/game.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/game.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/game.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/gridWindow.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/gridWindow.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/gridWindow.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/gridWindow.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/treeWindow.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/treeWindow.cpp" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
@@ -75,13 +70,13 @@
     <session id="-592901887">
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="cpp" value="1668" />
-          <entry key="h" value="70" />
+          <entry key="cpp" value="1985" />
+          <entry key="h" value="74" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="ObjectiveC" value="1738" />
+          <entry key="ObjectiveC" value="2059" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -110,21 +105,21 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/gridWindow.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="103" column="17" selection-start-line="103" selection-start-column="17" selection-end-line="103" selection-end-column="17" />
+            <state relative-caret-position="600">
+              <caret line="100" selection-start-line="100" selection-end-line="100" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
-                <marker date="1540931975042" expanded="true" signature="9101:9813" ph="..." />
+                <marker date="1540932207010" expanded="true" signature="9224:9936" ph="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/treeWindow.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="142">
-              <caret line="22" column="44" selection-start-line="22" selection-start-column="32" selection-end-line="22" selection-end-column="44" />
+            <state relative-caret-position="277">
+              <caret line="61" column="64" selection-start-line="61" selection-start-column="64" selection-end-line="61" selection-end-column="64" />
               <folding>
                 <element signature="e#0#23#0" expanded="true" />
               </folding>
@@ -171,11 +166,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/game.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="202">
-              <caret line="134" column="31" selection-start-line="134" selection-start-column="31" selection-end-line="134" selection-end-column="31" />
+            <state relative-caret-position="277">
+              <caret line="40" column="42" selection-start-line="40" selection-start-column="34" selection-end-line="40" selection-end-column="42" />
               <folding>
                 <element signature="e#0#17#0" expanded="true" />
               </folding>
@@ -186,8 +181,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/game.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="71" column="16" lean-forward="true" selection-start-line="71" selection-start-column="16" selection-end-line="71" selection-end-column="16" />
+            <state relative-caret-position="195">
+              <caret line="73" column="34" selection-start-line="73" selection-start-column="34" selection-end-line="73" selection-end-column="34" />
               <folding>
                 <element signature="e#14#31#0" expanded="true" />
               </folding>
@@ -222,11 +217,11 @@
         <option value="$PROJECT_DIR$/src/node.h" />
         <option value="$PROJECT_DIR$/src/node.cpp" />
         <option value="$PROJECT_DIR$/src/gridWindow.h" />
-        <option value="$PROJECT_DIR$/src/treeWindow.cpp" />
         <option value="$PROJECT_DIR$/src/main.cpp" />
-        <option value="$PROJECT_DIR$/src/gridWindow.cpp" />
         <option value="$PROJECT_DIR$/src/game.h" />
+        <option value="$PROJECT_DIR$/src/gridWindow.cpp" />
         <option value="$PROJECT_DIR$/src/game.cpp" />
+        <option value="$PROJECT_DIR$/src/treeWindow.cpp" />
       </list>
     </option>
   </component>
@@ -315,12 +310,12 @@
       <workItem from="1540226553541" duration="392000" />
       <workItem from="1540561872127" duration="1069000" />
       <workItem from="1540818291678" duration="15218000" />
-      <workItem from="1540926643070" duration="5435000" />
+      <workItem from="1540926643070" duration="7592000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="34568000" />
+    <option name="totallyTimeSpent" value="36725000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1920" y="0" width="1366" height="732" extended-state="6" />
@@ -331,13 +326,13 @@
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32829374" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.24709785" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.24709785" />
       <window_info anchor="bottom" id="Cvs" order="3" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="4" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="5" weight="0.3283582" />
       <window_info anchor="bottom" id="Database Changes" order="6" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Messages" order="7" visible="true" weight="0.20563847" />
-      <window_info anchor="bottom" id="Terminal" order="8" weight="0.25289255" />
+      <window_info anchor="bottom" id="Messages" order="7" weight="0.20563847" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.25207296" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="10" weight="0.32829374" />
       <window_info anchor="bottom" id="CMake" order="11" weight="0.2526998" />
@@ -345,7 +340,7 @@
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Database" order="3" />
-      <window_info active="true" anchor="right" id="Debug" order="4" visible="true" weight="0.29848486" />
+      <window_info anchor="right" id="Debug" order="4" visible="true" weight="0.20378788" />
     </layout>
     <layout-to-restore>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.10530303" />
@@ -482,16 +477,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/treeWindow.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="142">
-          <caret line="22" column="44" selection-start-line="22" selection-start-column="32" selection-end-line="22" selection-end-column="44" />
-          <folding>
-            <element signature="e#0#23#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/imgui/imgui_draw.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="154">
@@ -499,20 +484,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/node.cpp">
+    <entry file="file://$PROJECT_DIR$/src/game.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="6" selection-start-line="3" selection-start-column="6" selection-end-line="3" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/gridWindow.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="103" column="17" selection-start-line="103" selection-start-column="17" selection-end-line="103" selection-end-column="17" />
+        <state relative-caret-position="195">
+          <caret line="73" column="34" selection-start-line="73" selection-start-column="34" selection-end-line="73" selection-end-column="34" />
           <folding>
-            <element signature="e#0#26#0" expanded="true" />
-            <marker date="1540931975042" expanded="true" signature="9101:9813" ph="..." />
+            <element signature="e#14#31#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -527,22 +504,40 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/game.h">
+    <entry file="file://$PROJECT_DIR$/src/node.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="71" column="16" lean-forward="true" selection-start-line="71" selection-start-column="16" selection-end-line="71" selection-end-column="16" />
-          <folding>
-            <element signature="e#14#31#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="45">
+          <caret line="3" column="6" selection-start-line="3" selection-start-column="6" selection-end-line="3" selection-end-column="6" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/game.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="202">
-          <caret line="134" column="31" selection-start-line="134" selection-start-column="31" selection-end-line="134" selection-end-column="31" />
+        <state relative-caret-position="277">
+          <caret line="40" column="42" selection-start-line="40" selection-start-column="34" selection-end-line="40" selection-end-column="42" />
           <folding>
             <element signature="e#0#17#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gridWindow.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="600">
+          <caret line="100" selection-start-line="100" selection-end-line="100" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+            <marker date="1540932207010" expanded="true" signature="9224:9936" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/treeWindow.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="277">
+          <caret line="61" column="64" selection-start-line="61" selection-start-column="64" selection-end-line="61" selection-end-column="64" />
+          <folding>
+            <element signature="e#0#23#0" expanded="true" />
           </folding>
         </state>
       </provider>
