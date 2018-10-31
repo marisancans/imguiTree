@@ -6,5 +6,5 @@ CXX_FLAGS =  -std=c++17 -pthread -g
 
 CXX_DEFINES = -DGLFW_DLL
 
-CXX_INCLUDES = -I/home/maris/src/imguitest/src 
+CXX_INCLUDES = -I/home/maris/CLionProjects/imguiTree/src 
 

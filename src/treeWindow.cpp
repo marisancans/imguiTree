@@ -49,22 +49,31 @@ void treeWindow(bool* opened, Game& game, GameSettings& gameSettings){
 
     int y = 0;
     const std::vector<NODE_VEC>& layers = game.getLayers();
+    int prevNodeCount = 0;
 
     int maxLayers = int(game.getLayers().size()) > 4 ? 3 : int(game.getLayers().size());
     for(int cLayer = 0; cLayer < maxLayers; ++cLayer){
-        int x = 1;
-
+        prevNodeCount += layers[cLayer].size();
+        
         for(auto& node : layers[cLayer]){
+            int x = prevNodeCount - node.ID;
+            
             draw_list->ChannelsSetCurrent(1);
+            
+            
+            // Need to change this logic, this block draws only child nodes and these are obtained if there were duplicates
             if(!node.childNodes.empty()) {
                 for (auto &childID : node.childNodes) {
+                    int childXPos = prevNodeCount + int(layers[cLayer + 1].size()) - node.ID;
                     draw_list->AddLine(ImVec2(x * gameSettings.levelOffsetX, y * gameSettings.levelOffsetY) + win_pos + offset,
-                                       ImVec2(childID * gameSettings.levelOffsetX, (y+1) *  gameSettings.levelOffsetY) + win_pos + offset,
+                                       ImVec2(childXPos * gameSettings.levelOffsetX, (y+1) *  gameSettings.levelOffsetY) + win_pos + offset,
                                        IM_COL32(100, 100, 100, 150), 2.f);
-                    draw_list->AddCircleFilled(ImVec2(x * gameSettings.levelOffsetX, y * gameSettings.levelOffsetY)
-                    + win_pos + offset, 35, IM_COL32(100, 100, 100, 255));
+                    
+                        draw_list->AddCircleFilled(ImVec2(x * gameSettings.levelOffsetX, y * gameSettings.levelOffsetY)
+                        + win_pos + offset, 20, IM_COL32(100, 100, 100, 255));
                 }
             }
+            
 
             ImU32 col;
             switch(node.selected){
@@ -85,8 +94,7 @@ void treeWindow(bool* opened, Game& game, GameSettings& gameSettings){
             draw_list->AddText(ImVec2(gameSettings.levelOffsetX * x,
                                                   gameSettings.levelOffsetY * y) + win_pos + offset,
                                    IM_COL32(250, 100, 100, 250), out.str().c_str());
-
-            x++;
+            
         }
 
         y++;

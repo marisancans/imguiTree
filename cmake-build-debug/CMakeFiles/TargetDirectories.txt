@@ -1,3 +1,3 @@
-/home/maris/src/imguitest/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/maris/src/imguitest/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/home/maris/src/imguitest/cmake-build-debug/CMakeFiles/imguitest.dir
+/home/maris/CLionProjects/imguiTree/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/maris/CLionProjects/imguiTree/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/maris/CLionProjects/imguiTree/cmake-build-debug/CMakeFiles/imguitest.dir

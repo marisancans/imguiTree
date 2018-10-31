@@ -27,23 +27,22 @@ void Game::genLayer()
             POS_VEC possPositions = getPossibleMoves(parentPos, t);
             
             // --------------  Append to vector or add to parents ---------
-            int nth = 0;
+            
             for(auto& pos : possPositions) {
-                auto child = Node(getNewID(), &parent);
+                auto child = Node(&parent);
+                child.ID = getNewID();
 
                 auto childPos = t == P1 ? &child.P1Pos : &child.P2Pos;
                 childPos->x = pos.x;
                 childPos->y = pos.y;
                 
+                // Check if node already exists
                 if(newLayer.empty())
                     newLayer.push_back(child);
                 else {
                     for(auto& n : newLayer) {
-                        nth++;
                         if(n.P1Pos == child.P1Pos && n.P2Pos == child.P2Pos) {
-                            parent.childNodes.push_back(nth);
-                            if(parent.childNodes.size() > 1)
-                                std::cout<<0;
+                            parent.childNodes.push_back(child.ID);
                             break;
                         } else {
                             newLayer.push_back(child);
@@ -67,11 +66,11 @@ void Game::genLayer()
             for(auto& n : newLayer) {
                 if(n.interspace < min.val && t == P1) {
                     min.val = n.interspace;
-                    min.ID = n.getID();
+                    min.ID = n.ID;
                 }
                 if(n.interspace > max.val && t == P2) {
                     max.val = n.interspace;
-                    max.ID = n.getID();
+                    max.ID = n.ID;
                 }
             }
             
@@ -87,7 +86,7 @@ void Game::genLayer()
     if(_turn == P2) {
         for(int i = int(_nodes.size()); --i >= 1;)
             for(auto& node : _nodes[i]) {
-                if (min.ID == node.getID()) {
+                if (min.ID == node.ID) {
                     min.ID = node.parentNodeID;
                     currPosP1 = node.P1Pos;
                     break;
@@ -99,7 +98,7 @@ void Game::genLayer()
     if(_turn == P1) {
         for(int i = int(_nodes.size()); --i >= 1;)
             for(auto& node : _nodes[i]) {
-                if (max.ID == node.getID()) {
+                if (max.ID == node.ID) {
                     max.ID = node.parentNodeID;
                     currPosP2 = node.P2Pos;
                     break;
