@@ -1,38 +1,203 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/src/game.cpp" line="152" mnemonic="9" />
+    <bookmark url="file://$PROJECT_DIR$/src/game.cpp" line="155" mnemonic="9" />
   </component>
   <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true" buildAllGenerated="true">
     <generated>
       <config projectName="imguitest" targetName="imguitest" />
     </generated>
   </component>
-  <component name="CMakeSettings">
+  <component name="CMakeSettings" AUTO_RELOAD="true">
     <configurations>
       <configuration PROFILE_NAME="Debug" CONFIG_NAME="Debug" BUILD_OPTIONS="-j 4" />
     </configurations>
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5d200ac4-aa4f-435c-bc87-7d8df8121ac6" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/strategies.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CMakeOutput.log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CMakeOutput.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile2" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile2" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-log.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/imguitest.dir/CXX.includecache" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/imguitest.dir/CXX.includecache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/imguitest.dir/DependInfo.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/imguitest.dir/DependInfo.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/imguitest.dir/build.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/imguitest.dir/build.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/imguitest.dir/cmake_clean.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/imguitest.dir/cmake_clean.cmake" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/imguitest.dir/depend.internal" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/imguitest.dir/depend.internal" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/imguitest.dir/depend.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/imguitest.dir/depend.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/imguitest.dir/link.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/imguitest.dir/link.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/imguitest.dir/progress.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/imguitest.dir/progress.make" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/imguitest.dir/src/game.cpp.o" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/imguitest.dir/src/gridWindow.cpp.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/imguitest.dir/src/imgui/imgui.cpp.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/imguitest.dir/src/imgui/imgui_demo.cpp.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/imguitest.dir/src/imgui/imgui_draw.cpp.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/imguitest.dir/src/imgui/imgui_impl_glfw.cpp.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/imguitest.dir/src/imgui/imgui_impl_opengl3.cpp.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/imguitest.dir/src/imgui/imgui_widgets.cpp.o" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/imguitest.dir/src/main.cpp.o" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/imguitest.dir/src/node.cpp.o" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/imguitest.dir/src/treeWindow.cpp.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/progress.marks" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/progress.marks" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Makefile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/imgui.ini" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/imgui.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/imguitest" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/imguitest.cbp" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/imguitest.cbp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/.directory" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/game.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/game.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/examples/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/examples/README.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/examples/example_allegro5/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/examples/example_allegro5/example_allegro5.vcxproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/examples/example_allegro5/example_allegro5.vcxproj.filters" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/examples/example_allegro5/imconfig_allegro5.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/examples/example_allegro5/main.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/examples/example_apple_metal/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/examples/example_apple_metal/Shared/AppDelegate.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/examples/example_apple_metal/Shared/AppDelegate.m" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/examples/example_apple_metal/Shared/Renderer.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/examples/example_apple_metal/Shared/Renderer.mm" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/examples/example_apple_metal/Shared/ViewController.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/examples/example_apple_metal/Shared/ViewController.mm" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/examples/example_apple_metal/Shared/main.m" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/examples/example_apple_metal/example_apple_metal.xcodeproj/project.pbxproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/examples/example_apple_metal/iOS/Base.lproj/Main.storyboard" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/examples/example_apple_metal/iOS/Default-568h@2x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/examples/example_apple_metal/iOS/Info-iOS.plist" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/examples/example_apple_metal/iOS/Launch Screen.storyboard" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/examples/example_apple_metal/macOS/Base.lproj/Main.storyboard" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/examples/example_apple_metal/macOS/Info-macOS.plist" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/examples/example_apple_opengl2/example_apple_opengl2.xcodeproj/project.pbxproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/examples/example_apple_opengl2/main.mm" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/examples/example_freeglut_opengl2/example_freeglut_opengl2.vcxproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/examples/example_freeglut_opengl2/example_freeglut_opengl2.vcxproj.filters" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/examples/example_freeglut_opengl2/main.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/examples/example_glfw_opengl2/Makefile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/examples/example_glfw_opengl2/build_win32.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/examples/example_glfw_opengl2/example_glfw_opengl2.vcxproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/examples/example_glfw_opengl2/example_glfw_opengl2.vcxproj.filters" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/examples/example_glfw_opengl2/main.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/examples/example_glfw_opengl3/Makefile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/examples/example_glfw_opengl3/build_win32.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/examples/example_glfw_opengl3/example_glfw_opengl3.vcxproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/examples/example_glfw_opengl3/example_glfw_opengl3.vcxproj.filters" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/examples/example_glfw_opengl3/main.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/examples/example_glfw_vulkan/CMakeLists.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/examples/example_glfw_vulkan/build_win32.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/examples/example_glfw_vulkan/build_win64.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/examples/example_glfw_vulkan/example_glfw_vulkan.vcxproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/examples/example_glfw_vulkan/example_glfw_vulkan.vcxproj.filters" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/examples/example_glfw_vulkan/gen_spv.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/examples/example_glfw_vulkan/glsl_shader.frag" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/examples/example_glfw_vulkan/glsl_shader.vert" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/examples/example_glfw_vulkan/main.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/examples/example_marmalade/data/app.icf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/examples/example_marmalade/main.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/examples/example_marmalade/marmalade_example.mkb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/examples/example_null/build_win32.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/examples/example_null/main.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/examples/example_sdl_opengl2/Makefile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/examples/example_sdl_opengl2/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/examples/example_sdl_opengl2/build_win32.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/examples/example_sdl_opengl2/example_sdl_opengl2.vcxproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/examples/example_sdl_opengl2/example_sdl_opengl2.vcxproj.filters" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/examples/example_sdl_opengl2/main.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/examples/example_sdl_opengl3/Makefile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/examples/example_sdl_opengl3/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/examples/example_sdl_opengl3/build_win32.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/examples/example_sdl_opengl3/example_sdl_opengl3.vcxproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/examples/example_sdl_opengl3/example_sdl_opengl3.vcxproj.filters" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/examples/example_sdl_opengl3/main.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/examples/example_sdl_vulkan/example_sdl_vulkan.vcxproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/examples/example_sdl_vulkan/example_sdl_vulkan.vcxproj.filters" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/examples/example_sdl_vulkan/main.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/examples/example_win32_directx10/build_win32.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/examples/example_win32_directx10/example_win32_directx10.vcxproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/examples/example_win32_directx10/example_win32_directx10.vcxproj.filters" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/examples/example_win32_directx10/main.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/examples/example_win32_directx11/build_win32.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/examples/example_win32_directx11/example_win32_directx11.vcxproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/examples/example_win32_directx11/example_win32_directx11.vcxproj.filters" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/examples/example_win32_directx11/main.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/examples/example_win32_directx12/build_win32.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/examples/example_win32_directx12/example_win32_directx12.vcxproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/examples/example_win32_directx12/example_win32_directx12.vcxproj.filters" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/examples/example_win32_directx12/main.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/examples/example_win32_directx9/build_win32.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/examples/example_win32_directx9/example_win32_directx9.vcxproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/examples/example_win32_directx9/example_win32_directx9.vcxproj.filters" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/examples/example_win32_directx9/main.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/examples/imgui_examples.sln" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/examples/imgui_impl_allegro5.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/examples/imgui_impl_allegro5.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/examples/imgui_impl_dx10.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/examples/imgui_impl_dx10.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/examples/imgui_impl_dx11.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/examples/imgui_impl_dx11.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/examples/imgui_impl_dx12.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/examples/imgui_impl_dx12.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/examples/imgui_impl_dx9.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/examples/imgui_impl_dx9.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/examples/imgui_impl_freeglut.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/examples/imgui_impl_freeglut.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/examples/imgui_impl_glfw.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/examples/imgui_impl_glfw.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/examples/imgui_impl_marmalade.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/examples/imgui_impl_marmalade.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/examples/imgui_impl_metal.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/examples/imgui_impl_metal.mm" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/examples/imgui_impl_opengl2.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/examples/imgui_impl_opengl2.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/examples/imgui_impl_opengl3.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/examples/imgui_impl_opengl3.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/examples/imgui_impl_osx.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/examples/imgui_impl_osx.mm" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/examples/imgui_impl_sdl.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/examples/imgui_impl_sdl.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/examples/imgui_impl_vulkan.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/examples/imgui_impl_vulkan.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/examples/imgui_impl_win32.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/examples/imgui_impl_win32.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/examples/libs/gl3w/GL/gl3w.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/examples/libs/gl3w/GL/gl3w.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/examples/libs/gl3w/GL/glcorearb.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/examples/libs/glfw/COPYING.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/examples/libs/glfw/include/GLFW/glfw3.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/examples/libs/glfw/include/GLFW/glfw3native.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/examples/libs/glfw/lib-vc2010-32/glfw3.lib" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/examples/libs/glfw/lib-vc2010-64/glfw3.lib" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/examples/libs/usynergy/README.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/examples/libs/usynergy/uSynergy.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/examples/libs/usynergy/uSynergy.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/imconfig.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/imgui.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/imgui.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/imgui_demo.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/imgui_draw.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/imgui_impl_glfw.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/imgui_impl_glfw.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/imgui_impl_opengl3.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/imgui_impl_opengl3.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/imgui_internal.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/imgui_widgets.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/imstb_rectpack.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/imstb_textedit.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui/imstb_truetype.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui_node_graph_test.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/imgui_node_graph_test.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/layer.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/layer.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/main.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/node.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/node.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src COPY/playerStats.h" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/game.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/game.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/game.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/gridWindow.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/gridWindow.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/node.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/node.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/gridWindow.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/gridWindow.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/node.cpp" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/node.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/node.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/treeWindow.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/treeWindow.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/treeWindow.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/treeWindow.h" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -47,39 +212,44 @@
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="Unnamed (disassembly)" value="5" />
-          <entry key="cpp" value="8" />
-          <entry key="h" value="5" />
+          <entry key="cpp" value="13" />
+          <entry key="h" value="19" />
           <entry key="thread" value="1" />
-          <entry key="txt" value="3" />
+          <entry key="txt" value="5" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="CMakeLists.txt" value="3" />
+          <entry key="CMakeLists.txt" value="5" />
           <entry key="Disassembly" value="5" />
-          <entry key="ObjectiveC" value="14" />
+          <entry key="ObjectiveC" value="33" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="5" />
+          <entry key="project.closed" value="7" />
           <entry key="project.open.time.12" value="1" />
+          <entry key="project.open.time.14" value="1" />
           <entry key="project.open.time.16" value="1" />
           <entry key="project.open.time.20" value="1" />
           <entry key="project.open.time.23" value="1" />
+          <entry key="project.open.time.26" value="1" />
           <entry key="project.open.time.27" value="1" />
-          <entry key="project.opened" value="5" />
+          <entry key="project.open.time.35" value="1" />
+          <entry key="project.opened" value="8" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="cpp" value="3828" />
-          <entry key="h" value="713" />
+          <entry key="cpp" value="5303" />
+          <entry key="h" value="947" />
+          <entry key="txt" value="23" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="ObjectiveC" value="4541" />
+          <entry key="CMakeLists.txt" value="23" />
+          <entry key="ObjectiveC" value="6250" />
         </counts>
       </usages-collector>
     </session>
@@ -119,58 +289,61 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/game.cpp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15">
-              <caret line="39" column="36" lean-forward="true" selection-start-line="39" selection-start-column="36" selection-end-line="39" selection-end-column="36" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/imgui/imgui.cpp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="228">
-              <caret line="3398" selection-start-line="3398" selection-end-line="3398" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/gridWindow.cpp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="474">
-              <caret line="101" column="22" selection-start-line="101" selection-start-column="15" selection-end-line="101" selection-end-column="22" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/treeWindow.cpp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="405">
-              <caret line="75" column="12" selection-start-line="75" selection-start-column="12" selection-end-line="75" selection-end-column="12" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1830">
-              <caret line="122" column="51" selection-start-line="122" selection-start-column="51" selection-end-line="122" selection-end-column="51" />
+            <state relative-caret-position="-180">
+              <caret line="123" column="12" selection-start-line="123" selection-start-column="12" selection-end-line="123" selection-end-column="12" />
               <folding>
-                <element signature="e#0#18#0" expanded="true" />
+                <element signature="e#866#968#0" expanded="true" />
+                <element signature="e#1371#1708#0" expanded="true" />
+                <element signature="e#2414#2441#0" expanded="true" />
+                <element signature="e#2574#2603#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/imgui/imgui_demo.cpp">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/game.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2925">
-              <caret line="195" column="24" selection-start-line="192" selection-start-column="8" selection-end-line="197" selection-end-column="21" />
+            <state relative-caret-position="460">
+              <caret line="93" column="51" lean-forward="true" selection-start-line="93" selection-start-column="51" selection-end-line="93" selection-end-column="51" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/treeWindow.cpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="394">
+              <caret line="97" column="22" selection-start-line="97" selection-start-column="22" selection-end-line="97" selection-end-column="22" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/gridWindow.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <caret column="12" selection-start-column="12" selection-end-column="12" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/treeWindow.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="45">
+              <caret line="3" selection-start-line="3" selection-end-line="3" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="705">
+              <caret line="47" column="54" selection-start-line="47" selection-start-column="54" selection-end-line="47" selection-end-column="54" />
             </state>
           </provider>
         </entry>
@@ -178,8 +351,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/game.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="540">
-              <caret line="36" column="15" selection-start-line="36" selection-start-column="15" selection-end-line="36" selection-end-column="15" />
+            <state relative-caret-position="496">
+              <caret line="69" column="7" selection-start-line="69" selection-start-column="7" selection-end-line="69" selection-end-column="7" />
             </state>
           </provider>
         </entry>
@@ -187,17 +360,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/node.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="279">
-              <caret line="32" column="4" selection-start-line="32" selection-start-column="4" selection-end-line="32" selection-end-column="4" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/node.cpp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="4" column="16" selection-start-line="4" selection-start-column="4" selection-end-line="4" selection-end-column="16" />
+            <state relative-caret-position="361">
+              <caret line="27" column="22" lean-forward="true" selection-start-line="27" selection-start-column="22" selection-end-line="27" selection-end-column="22" />
             </state>
           </provider>
         </entry>
@@ -209,6 +373,7 @@
       <find>text</find>
       <find>get</find>
       <find>childNodes</find>
+      <find>start</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -217,7 +382,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/CMakeLists.txt" />
         <option value="$PROJECT_DIR$/src/layer.h" />
         <option value="$PROJECT_DIR$/src/layer.cpp" />
         <option value="$PROJECT_DIR$/src/graph.cpp" />
@@ -226,14 +390,17 @@
         <option value="$PROJECT_DIR$/src/global.h" />
         <option value="$PROJECT_DIR$/src/board.h" />
         <option value="$PROJECT_DIR$/src/board.cpp" />
-        <option value="$PROJECT_DIR$/src/gridWindow.h" />
-        <option value="$PROJECT_DIR$/src/main.cpp" />
-        <option value="$PROJECT_DIR$/src/game.h" />
-        <option value="$PROJECT_DIR$/src/gridWindow.cpp" />
-        <option value="$PROJECT_DIR$/src/node.h" />
         <option value="$PROJECT_DIR$/src/node.cpp" />
-        <option value="$PROJECT_DIR$/src/game.cpp" />
+        <option value="$PROJECT_DIR$/src/gridWindow.h" />
+        <option value="$PROJECT_DIR$/src/strategies.h" />
+        <option value="$PROJECT_DIR$/src/gridWindow.cpp" />
+        <option value="$PROJECT_DIR$/CMakeLists.txt" />
+        <option value="$PROJECT_DIR$/src/treeWindow.h" />
+        <option value="$PROJECT_DIR$/src/node.h" />
+        <option value="$PROJECT_DIR$/src/main.cpp" />
         <option value="$PROJECT_DIR$/src/treeWindow.cpp" />
+        <option value="$PROJECT_DIR$/src/game.h" />
+        <option value="$PROJECT_DIR$/src/game.cpp" />
       </list>
     </option>
   </component>
@@ -263,6 +430,11 @@
             <path>
               <item name="imguitest" type="b2602c69:ProjectViewProjectNode" />
               <item name="imguiTree" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="imguitest" type="b2602c69:ProjectViewProjectNode" />
+              <item name="imguiTree" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -319,18 +491,21 @@
       <workItem from="1540561872127" duration="1069000" />
       <workItem from="1540818291678" duration="15218000" />
       <workItem from="1540926643070" duration="7592000" />
-      <workItem from="1541003101847" duration="2359000" />
+      <workItem from="1541003101847" duration="3014000" />
+      <workItem from="1541081894414" duration="5991000" />
+      <workItem from="1541157798855" duration="1092000" />
+      <workItem from="1541173343156" duration="3357000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="39063000" />
+    <option name="totallyTimeSpent" value="50158000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-4" y="-4" width="1928" height="1058" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" weight="0.10530303" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.08057631" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -340,8 +515,8 @@
       <window_info anchor="bottom" id="Inspection" order="4" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="5" weight="0.3283582" />
       <window_info anchor="bottom" id="Database Changes" order="6" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Messages" order="7" visible="true" weight="0.20518358" />
-      <window_info anchor="bottom" id="Terminal" order="8" weight="0.25207296" />
+      <window_info anchor="bottom" id="Messages" order="7" weight="0.33909288" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="8" visible="true" weight="0.25161988" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="10" weight="0.32829374" />
       <window_info anchor="bottom" id="CMake" order="11" weight="0.2526998" />
@@ -349,7 +524,7 @@
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Database" order="3" />
-      <window_info active="true" anchor="right" id="Debug" order="4" visible="true" weight="0.27588046" />
+      <window_info anchor="right" id="Debug" order="4" weight="0.27588046" />
     </layout>
     <layout-to-restore>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.10530303" />
@@ -411,23 +586,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="23" column="21" selection-start-line="23" selection-start-column="21" selection-end-line="23" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/global.h" />
     <entry file="file://$PROJECT_DIR$/src/board.cpp" />
     <entry file="file://$PROJECT_DIR$/src/board.h" />
-    <entry file="file://$PROJECT_DIR$/src/imgui/imgui_demo.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2925">
-          <caret line="195" column="24" selection-start-line="192" selection-start-column="8" selection-end-line="197" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file:///usr/include/c++/7/thread">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="219">
@@ -442,30 +603,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/treeWindow.h">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file:///usr/include/c++/7/bits/stl_vector.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="572" selection-start-line="572" selection-end-line="572" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/imgui/imgui_internal.h">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/imgui/imgui.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="154">
           <caret line="1706" selection-start-line="1706" selection-end-line="1706" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/gridWindow.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="34" selection-start-line="5" selection-start-column="34" selection-end-line="5" selection-end-column="34" />
         </state>
       </provider>
     </entry>
@@ -476,62 +617,118 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main.cpp">
+    <entry file="file://$PROJECT_DIR$/src/imgui/imgui.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1830">
-          <caret line="122" column="51" selection-start-line="122" selection-start-column="51" selection-end-line="122" selection-end-column="51" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="50970">
+          <caret line="3398" selection-start-line="3398" selection-end-line="3398" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/node.h">
+    <entry file="file://$PROJECT_DIR$/src/imgui/imgui_demo.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="279">
-          <caret line="32" column="4" selection-start-line="32" selection-start-column="4" selection-end-line="32" selection-end-column="4" />
+        <state relative-caret-position="2925">
+          <caret line="195" column="24" selection-start-line="192" selection-start-column="8" selection-end-line="197" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/node.cpp" />
+    <entry file="file://$PROJECT_DIR$/src/strategies.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="525">
+          <caret line="35" selection-start-line="35" selection-end-line="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/include/c++/7/bits/stl_vector.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="343" column="6" selection-start-line="343" selection-start-column="6" selection-end-line="343" selection-end-column="6" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/gridWindow.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="474">
-          <caret line="101" column="22" selection-start-line="101" selection-start-column="15" selection-end-line="101" selection-end-column="22" />
+        <state relative-caret-position="270">
+          <caret line="18" column="4" lean-forward="true" selection-start-line="18" selection-start-column="4" selection-end-line="18" selection-end-column="4" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/game.h">
+    <entry file="file:///usr/include/GL/glu.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="540">
-          <caret line="36" column="15" selection-start-line="36" selection-start-column="15" selection-end-line="36" selection-end-column="15" />
+        <state relative-caret-position="418">
+          <caret line="326" column="50" lean-forward="true" selection-start-line="326" selection-start-column="50" selection-end-line="326" selection-end-column="50" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/node.cpp">
+    <entry file="file:///usr/include/GL/glew.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="16" selection-start-line="4" selection-start-column="4" selection-end-line="4" selection-end-column="16" />
+        <state relative-caret-position="223">
+          <caret line="1036" column="22" selection-start-line="1036" selection-start-column="22" selection-end-line="1036" selection-end-column="22" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/imgui/imgui.cpp">
+    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="3398" selection-start-line="3398" selection-end-line="3398" />
+        <state relative-caret-position="705">
+          <caret line="47" column="54" selection-start-line="47" selection-start-column="54" selection-end-line="47" selection-end-column="54" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/game.cpp">
+    <entry file="file://$PROJECT_DIR$/src/imgui/imgui_internal.h">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/node.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="39" column="36" lean-forward="true" selection-start-line="39" selection-start-column="36" selection-end-line="39" selection-end-column="36" />
+        <state relative-caret-position="361">
+          <caret line="27" column="22" lean-forward="true" selection-start-line="27" selection-start-column="22" selection-end-line="27" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-180">
+          <caret line="123" column="12" selection-start-line="123" selection-start-column="12" selection-end-line="123" selection-end-column="12" />
+          <folding>
+            <element signature="e#866#968#0" expanded="true" />
+            <element signature="e#1371#1708#0" expanded="true" />
+            <element signature="e#2414#2441#0" expanded="true" />
+            <element signature="e#2574#2603#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/treeWindow.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" selection-start-line="3" selection-end-line="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gridWindow.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="12" selection-start-column="12" selection-end-column="12" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/treeWindow.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="75" column="12" selection-start-line="75" selection-start-column="12" selection-end-line="75" selection-end-column="12" />
+        <state relative-caret-position="394">
+          <caret line="97" column="22" selection-start-line="97" selection-start-column="22" selection-end-line="97" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/game.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="496">
+          <caret line="69" column="7" selection-start-line="69" selection-start-column="7" selection-end-line="69" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/game.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="460">
+          <caret line="93" column="51" lean-forward="true" selection-start-line="93" selection-start-column="51" selection-end-line="93" selection-end-column="51" />
         </state>
       </provider>
     </entry>

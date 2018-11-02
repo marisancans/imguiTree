@@ -145,10 +145,10 @@
 		<Unit filename="/home/maris/CLionProjects/imguiTree/src/main.cpp">
 			<Option target="imguitest"/>
 		</Unit>
-		<Unit filename="/home/maris/CLionProjects/imguiTree/src/node.cpp">
+		<Unit filename="/home/maris/CLionProjects/imguiTree/src/node.h">
 			<Option target="imguitest"/>
 		</Unit>
-		<Unit filename="/home/maris/CLionProjects/imguiTree/src/node.h">
+		<Unit filename="/home/maris/CLionProjects/imguiTree/src/strategies.h">
 			<Option target="imguitest"/>
 		</Unit>
 		<Unit filename="/home/maris/CLionProjects/imguiTree/src/treeWindow.cpp">

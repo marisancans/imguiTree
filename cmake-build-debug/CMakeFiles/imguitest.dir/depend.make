@@ -6,12 +6,14 @@ CMakeFiles/imguitest.dir/src/game.cpp.o: ../src/game.h
 CMakeFiles/imguitest.dir/src/game.cpp.o: ../src/imgui/imconfig.h
 CMakeFiles/imguitest.dir/src/game.cpp.o: ../src/imgui/imgui.h
 CMakeFiles/imguitest.dir/src/game.cpp.o: ../src/node.h
+CMakeFiles/imguitest.dir/src/game.cpp.o: ../src/strategies.h
 
 CMakeFiles/imguitest.dir/src/gridWindow.cpp.o: ../src/game.h
 CMakeFiles/imguitest.dir/src/gridWindow.cpp.o: ../src/gridWindow.cpp
 CMakeFiles/imguitest.dir/src/gridWindow.cpp.o: ../src/imgui/imconfig.h
 CMakeFiles/imguitest.dir/src/gridWindow.cpp.o: ../src/imgui/imgui.h
 CMakeFiles/imguitest.dir/src/gridWindow.cpp.o: ../src/node.h
+CMakeFiles/imguitest.dir/src/gridWindow.cpp.o: ../src/strategies.h
 
 CMakeFiles/imguitest.dir/src/imgui/imgui.cpp.o: ../src/imgui/imconfig.h
 CMakeFiles/imguitest.dir/src/imgui/imgui.cpp.o: ../src/imgui/imgui.cpp
@@ -55,17 +57,14 @@ CMakeFiles/imguitest.dir/src/main.cpp.o: ../src/imgui/imgui_impl_glfw.h
 CMakeFiles/imguitest.dir/src/main.cpp.o: ../src/imgui/imgui_impl_opengl3.h
 CMakeFiles/imguitest.dir/src/main.cpp.o: ../src/main.cpp
 CMakeFiles/imguitest.dir/src/main.cpp.o: ../src/node.h
+CMakeFiles/imguitest.dir/src/main.cpp.o: ../src/strategies.h
 CMakeFiles/imguitest.dir/src/main.cpp.o: ../src/treeWindow.h
-
-CMakeFiles/imguitest.dir/src/node.cpp.o: ../src/imgui/imconfig.h
-CMakeFiles/imguitest.dir/src/node.cpp.o: ../src/imgui/imgui.h
-CMakeFiles/imguitest.dir/src/node.cpp.o: ../src/node.cpp
-CMakeFiles/imguitest.dir/src/node.cpp.o: ../src/node.h
 
 CMakeFiles/imguitest.dir/src/treeWindow.cpp.o: ../src/game.h
 CMakeFiles/imguitest.dir/src/treeWindow.cpp.o: ../src/imgui/imconfig.h
 CMakeFiles/imguitest.dir/src/treeWindow.cpp.o: ../src/imgui/imgui.h
 CMakeFiles/imguitest.dir/src/treeWindow.cpp.o: ../src/node.h
+CMakeFiles/imguitest.dir/src/treeWindow.cpp.o: ../src/strategies.h
 CMakeFiles/imguitest.dir/src/treeWindow.cpp.o: ../src/treeWindow.cpp
 CMakeFiles/imguitest.dir/src/treeWindow.cpp.o: ../src/treeWindow.h
 

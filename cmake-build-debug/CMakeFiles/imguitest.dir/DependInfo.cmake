@@ -13,7 +13,6 @@ set(CMAKE_DEPENDS_CHECK_CXX
   "/home/maris/CLionProjects/imguiTree/src/imgui/imgui_impl_opengl3.cpp" "/home/maris/CLionProjects/imguiTree/cmake-build-debug/CMakeFiles/imguitest.dir/src/imgui/imgui_impl_opengl3.cpp.o"
   "/home/maris/CLionProjects/imguiTree/src/imgui/imgui_widgets.cpp" "/home/maris/CLionProjects/imguiTree/cmake-build-debug/CMakeFiles/imguitest.dir/src/imgui/imgui_widgets.cpp.o"
   "/home/maris/CLionProjects/imguiTree/src/main.cpp" "/home/maris/CLionProjects/imguiTree/cmake-build-debug/CMakeFiles/imguitest.dir/src/main.cpp.o"
-  "/home/maris/CLionProjects/imguiTree/src/node.cpp" "/home/maris/CLionProjects/imguiTree/cmake-build-debug/CMakeFiles/imguitest.dir/src/node.cpp.o"
   "/home/maris/CLionProjects/imguiTree/src/treeWindow.cpp" "/home/maris/CLionProjects/imguiTree/cmake-build-debug/CMakeFiles/imguitest.dir/src/treeWindow.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")

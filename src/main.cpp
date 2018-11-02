@@ -18,6 +18,7 @@
 #if defined(IMGUI_IMPL_OPENGL_LOADER_GL3W)
 #include <GL/gl3w.h>    // Initialize with gl3wInit()
 #elif defined(IMGUI_IMPL_OPENGL_LOADER_GLEW)
+#define GLEW_STATIC
 #include <GL/glew.h>    // Initialize with glewInit()
 #elif defined(IMGUI_IMPL_OPENGL_LOADER_GLAD)
 #include <glad/glad.h>  // Initialize with gladLoadGL()
@@ -90,71 +91,84 @@ int main(int, char**)
     // Setup style
     ImGui::StyleColorsDark();
     //ImGui::StyleColorsClassic();
-
+    
     bool showGridWindow = true;
     bool showTreeWindow = true;
     ImVec4 clear_color = ImVec4(0.0f, 0.0f, 0.0f, 1.00f);
     
-
-    // GAME SETTINGS <--------------------------------------------------
-    int maxLayer = 3;
-    int maxBoardX = 20;
-    int maxBoardY = 20;
-//    const Board::moveMatrix P1MovRange;
-//    const Board::moveMatrix P2MovRange;
-    ImVec2 scrolling = ImVec2(0.0f, 0.0f);
-    bool showGrid = false;
-    int levelOffsetX = 100;
-    int levelOffsetY = 100;
-    int speedMS = 100;
     
-    Game::Turn firstTurn = Game::P1;
-
-
-    GameSettings gameSettings{maxLayer, maxBoardX, maxBoardY,
-                              //   UP      UP_RIGHT   RIGHT      DOWN_RIGHT   DOWN     DOWN_LEFT   LEFT      UP_LEFT
-                              {{1, 0, 0}, {1, 0, 0}, {1, 0, 0}, {1, 0, 0}, {1, 0, 0}, {1, 0, 0}, {1, 0, 0}, {1, 0, 0}},
-                              {{1, 1, 0}, {1, 0, 0}, {1, 1, 0}, {1, 0, 0}, {1, 1, 0}, {1, 0, 0}, {1, 1, 0}, {1, 0, 0}},
-                              {0, 0}, {19, 19},
-                              scrolling, showGrid,
-                              levelOffsetX, levelOffsetY, speedMS};
-
+    // GAME SETTINGS <--------------------------------------------------
+    
+    PlayerIdx firstTurn = P1;
+    
+    
+    GameSettings gameSettings;
+    gameSettings.maxLayer = 3;
+    gameSettings.maxBoardX = 20;
+    gameSettings.maxBoardY = 20;
+    gameSettings.scrolling = ImVec2(0.0f, 0.0f);
+    gameSettings.showGrid = false;
+    gameSettings.levelOffsetX = 100;
+    gameSettings.levelOffsetY = 100;
+    gameSettings.speedMS = 100;
+    for(int p = 0; p < PLAYER_COUNT; p++)
+        for(int i = 0; i < 8; i++)
+            gameSettings.movRange[p][i][0] = 1;
+    for(int i = 0; i < 8; i += 2)
+        gameSettings.movRange[P2][i][1] = 1;
+    
+    gameSettings.startPos[P1] = {0, 0};
+    gameSettings.startPos[P2] = {gameSettings.maxBoardX - 1, gameSettings.maxBoardY - 1};
+    
     // Init
-    Game game(Game::PCvsPC, firstTurn, gameSettings);
-
-//    std::thread t([&game](){
-//        for(int i = 0; i < 500; ++i) {
-//            game.makeTurns();
-//            std::this_thread::sleep_for(std::chrono::milliseconds(game.gameSettings.speedMS));
-//        }
-//    });
-
-
-
+    game::init(game::PCvsPC, firstTurn, gameSettings);
+    
+    
+    
+    float angle = 0;
+    
     bool* lala;
     // Main loop
     while (!glfwWindowShouldClose(window))
     {
-
+    
         glfwPollEvents();
-        
+    
         // Start the Dear ImGui frame
         ImGui_ImplOpenGL3_NewFrame();
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
-
-        gridWindow(&showGridWindow, game, gameSettings);
-        treeWindow(&showTreeWindow, game, gameSettings);
-//        ImGui::ShowDemoWindow(lala);
-
-        // Rendering
-        ImGui::Render();
         int display_w, display_h;
         glfwMakeContextCurrent(window);
         glfwGetFramebufferSize(window, &display_w, &display_h);
-        glViewport(0, 0, display_w, display_h);
+    
         glClearColor(clear_color.x, clear_color.y, clear_color.z, clear_color.w);
         glClear(GL_COLOR_BUFFER_BIT);
+    
+        glMatrixMode(GL_MODELVIEW_MATRIX);
+        glLoadIdentity();
+        angle += 1.f;
+        glRotatef(angle, 0, 1, 0);
+        
+        glMatrixMode(GL_PROJECTION_MATRIX);
+        
+        glOrtho(-display_w/2,display_w/2, -display_h/2,display_h/2, -1000, 1000);
+        
+        glBegin(GL_TRIANGLES);
+        glColor3f(1, 1, 1);
+    
+        glVertex2f(50, 50);
+        glVertex2f(0, 50);
+        glVertex2f(50, 0);
+        glEnd();
+        
+        gridWindow(&showGridWindow, gameSettings);
+        treeWindow(&showTreeWindow, gameSettings);
+//        ImGui::ShowDemoWindow(lala);
+        
+        // Rendering
+        ImGui::Render();
+        glViewport(0, 0, display_w, display_h);
         ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
         
         glfwMakeContextCurrent(window);

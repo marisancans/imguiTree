@@ -18,14 +18,14 @@ set(SOURCES ${SRC_DIR}/main.cpp
     ${SRC_DIR}/imgui/imstb_rectpack.h
     ${SRC_DIR}/imgui/imstb_textedit.h
     ${SRC_DIR}/imgui/imstb_truetype.h
-    ${SRC_DIR}/node.cpp
     ${SRC_DIR}/node.h
     ${SRC_DIR}/game.cpp
     ${SRC_DIR}/game.h
     ${SRC_DIR}/gridWindow.cpp
     ${SRC_DIR}/gridWindow.h
     ${SRC_DIR}/treeWindow.cpp
-    ${SRC_DIR}/treeWindow.h)
+    ${SRC_DIR}/treeWindow.h
+    ${SRC_DIR}/strategies.h)
 
 
 add_executable(${PROJECT_NAME} ${SOURCES})
@@ -45,4 +45,4 @@ find_package(GLEW REQUIRED)
 include_directories(${GLEW_INCLUDE_DIRS})
 
 target_include_directories(${PROJECT_NAME} PRIVATE "${SRC_DIR}")
-target_link_libraries(${PROJECT_NAME} glfw GLEW GL)
+target_link_libraries(${PROJECT_NAME} glfw GLEW GL GLU)

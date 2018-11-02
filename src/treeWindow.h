@@ -2,4 +2,4 @@
 
 #include "game.h"
 
-void treeWindow(bool* opened, Game& game, GameSettings& gameSettings);
+void treeWindow(bool* opened, GameSettings& gameSettings);

@@ -8,230 +8,213 @@
 #include <thread>
 #include <unordered_set>
 
+namespace game {
+GameSettings gameSettings;
+Position currPos[PLAYER_COUNT];
+std::deque<Position> tracers[PLAYER_COUNT];
+PlayerIdx winner;
 
+GameMode _mode;
+PlayerIdx _currPlayer;
+std::vector<NODE_VEC> nodes;
+POS_VEC chosenPath;
 
+int newID;
 
-// SPAGHETTI OVERLOAD ~~~~~~  ~~~~  ~~    ~~~~     ~~~
-void Game::genLayer()
+inline void swapTurn(){ _currPlayer = nextPlayer(_currPlayer); }
+
+void genLayer()
 {
-    Turn t = _turn == P1 ? P2 : P1;
+    // currPlayer in simulated prediction context, not globally
+    PlayerIdx currPlayer = nextPlayer(_currPlayer);
     
-    Traverse min{_nodes[0][0].interspace, -1};
-    Traverse max{0.f, -1};
-    
+    Traverse decision{nodes[0][0].interspace, -1};
     for(int i = 0; i < 3; ++i) {
         NODE_VEC newLayer;
-        
-        for(auto& parent : _nodes.back()) { // Last vector (Parent nodes)
-            auto parentPos = t == P1 ? parent.P1Pos : parent.P2Pos;
-            POS_VEC possPositions = getPossibleMoves(parentPos, t);
+        for(auto& parent : nodes.back()) { // Last vector (Parent nodes)
+            auto parentPos = parent.pos[currPlayer];
+            POS_VEC possPositions = getPossibleMoves(parentPos, currPlayer);
             
             // --------------  Append to vector or add to parents ---------
             
             for(auto& pos : possPositions) {
-                auto child = Node(&parent);
-                child.ID = getNewID();
-
-                auto childPos = t == P1 ? &child.P1Pos : &child.P2Pos;
-                childPos->x = pos.x;
-                childPos->y = pos.y;
-                
+                bool found = false;
                 // Check if node already exists
-                if(newLayer.empty())
-                    newLayer.push_back(child);
-                else {
-                    for(auto& n : newLayer) {
-                        if(n.P1Pos == child.P1Pos && n.P2Pos == child.P2Pos) {
-                            parent.childNodes.push_back(child.ID);
-                            break;
-                        } else {
-                            newLayer.push_back(child);
-                            break;
-                        }
-                        
+                for(auto& n : newLayer) {
+                    if(n.pos[currPlayer] == pos) {
+                        parent.childNodes.push_back(n.ID);
+                        found = true;
+                        break;
                     }
                 }
+                
+                if(found)
+                    continue;
+    
+    
+                Node child;
+                child.ID = ++newID;
+                child._status = Node::MIDDLE;
+                child.parentNodeID = parent.ID;
+                for(int i = 0; i < PLAYER_COUNT; i++)
+                    child.pos[i] = parent.pos[i];
+    
+                auto childPos = &child.pos[currPlayer];
+                childPos->x = pos.x;
+                childPos->y = pos.y;
+                parent.childNodes.push_back(child.ID);
+                newLayer.push_back(child);
             }
         }
-
-
         
         
-        //-----------------   Get minmax interspaces ------------------
+        // look for best move depending on player strategy
         if(!newLayer.empty()) {
-            for(auto& n : newLayer)
-                n.calcInterspace();
-            
-            
             for(auto& n : newLayer) {
-                if(n.interspace < min.val && t == P1) {
-                    min.val = n.interspace;
-                    min.ID = n.ID;
-                }
-                if(n.interspace > max.val && t == P2) {
-                    max.val = n.interspace;
-                    max.ID = n.ID;
+                n.calcInterspace();
+                if(strategies[currPlayer](n.interspace, decision.val)) {
+                    decision.val = n.interspace;
+                    decision.ID = n.ID;
                 }
             }
-            
         }
         
         
-        _nodes.push_back(newLayer);
-        t = t == P1 ? P2 : P1;
+        nodes.push_back(newLayer);
+        currPlayer = nextPlayer(_currPlayer);
     }
     
     
-
-    if(_turn == P2) {
-        for(int i = int(_nodes.size()); --i >= 1;)
-            for(auto& node : _nodes[i]) {
-                if (min.ID == node.ID) {
-                    min.ID = node.parentNodeID;
-                    currPosP1 = node.P1Pos;
-                    break;
-                }
+    
+    // @fixme
+    auto pIdx = nextPlayer(_currPlayer);
+    for(int i = int(nodes.size()); --i >= 1;)
+        for(auto& node : nodes[i]) {
+            if (decision.ID == node.ID) {
+                chosenPath.push_back(Position({}));
+                decision.ID = node.parentNodeID;
+                currPos[pIdx] = node.pos[pIdx];
+                break;
             }
-    }
-    
-
-    if(_turn == P1) {
-        for(int i = int(_nodes.size()); --i >= 1;)
-            for(auto& node : _nodes[i]) {
-                if (max.ID == node.ID) {
-                    max.ID = node.parentNodeID;
-                    currPosP2 = node.P2Pos;
-                    break;
-                }
-            }
-    }
-    
+        }
 }
 
-Game::Game(Game::GameMode mode, Game::Turn turn, GameSettings& gameSettings):
-    _turn(turn), gameSettings(gameSettings), _newID(0)
+void init(game::GameMode mode, PlayerIdx turn, GameSettings& gs)
 {
-    init();
-}
-
-void Game::init() {
-    currPosP1 = gameSettings.P1StartPos;
-    currPosP2 = gameSettings.P2StartPos;
+    _currPlayer = turn;
+    gameSettings = gs;
+    newID = 0;
+    for(int i = 0; i < PLAYER_COUNT; i++)
+        currPos[i] = gameSettings.startPos[i];
     swapTurn();
-    makeTurns();
+    makeTurns(gs);
 }
 
-void Game::makeTurns() {
+void makeTurns(GameSettings& gs) {
     static auto started = std::chrono::high_resolution_clock::now();
     // Clock
     auto done = std::chrono::high_resolution_clock::now();
     auto ms = std::chrono::duration_cast<std::chrono::milliseconds>(done-started).count();
-    if(ms > gameSettings.speedMS) {
-
-        _newID = -1;
+    if(ms > gs.speedMS) {
+        newID = -1;
         Node n;
-        n = Node(getNewID(), Node::ROOT, currPosP1, currPosP2);
+        n.ID = ++newID;
+        for(int i = 0; i < PLAYER_COUNT; i++)
+            n.pos[i] = currPos[i];
         n.calcInterspace();
-
-        tracersP1.emplace_back(currPosP1);
-        if(tracersP1.size() > 10)
-            tracersP1.pop_front();
-
-        tracersP2.emplace_back(currPosP2);
-        if(tracersP2.size() > 10)
-            tracersP2.pop_front();
-
-        _nodes.clear();
-
-
+        
+        for(int i = 0; i < PLAYER_COUNT; i++) {
+            tracers[i].emplace_back(currPos[i]);
+            if(tracers[i].size() > 10)
+                tracers[i].pop_front();
+        }
+        
+        nodes.clear();
+        
+        
         NODE_VEC nv;
         nv.push_back(n);
-        _nodes.push_back(nv);
-
+        nodes.push_back(nv);
+        
         genLayer();
         checkWinner();
-
+        
         swapTurn();
         started = std::chrono::high_resolution_clock::now();
     }
 }
 
-bool Game::checkWinner() {
-//    if(currNodeP1.interspace == 0)
-//        winner = P1;
-//    if(currNodeP2.interspace == 0)
-//        winner = P2;
+bool checkWinner() {
+    // @todo
+    return true;
 }
 
 
-POS_VEC Game::getPossibleMoves(const Position &p, Turn turn) const{
+POS_VEC getPossibleMoves(const Position &p, PlayerIdx turn) {
     POS_VEC pv;
     moveMatrix mov{};
-
+    
     auto canRight = [&](int i){ return p.x + i > 0 && p.x + i < gameSettings.maxBoardX; };
     auto canLeft = [&](int i){ return p.x - i >= 0 && p.x - i < gameSettings.maxBoardX; };
     auto canUp = [&](int i){ return p.y - i >= 0 && p.y - i < gameSettings.maxBoardY; };
     auto canDown = [&](int i){ return p.y + i > 0 && p.y + i < gameSettings.maxBoardY; };
-
-    const moveMatrix& rmovRange = turn == P1 ? gameSettings.P1MovRange : gameSettings.P2MovRange;
-
+    
+    const auto& rmovRange = gameSettings.movRange[turn];
+    
     // Up
     for(int i = 1; i < MRR + 1; ++i){
         if(canUp(i) && rmovRange[0][i - 1]) {
-            mov[UP][i] = 1;
+            mov[NORTH][i] = 1;
             pv.push_back(Position{p.x, p.y - i});
         }
-
+        
         if(canRight(i) && canUp(i) && rmovRange[1][i - 1]) {
-            mov[UP_RIGHT][i] = 1;
+            mov[NORTH_EAST][i] = 1;
             pv.push_back(Position{p.x + i, p.y - i});
         }
-
+        
         if(canRight(i) && rmovRange[2][i - 1]) {
-            mov[RIGHT][i] = 1;
+            mov[EAST][i] = 1;
             pv.push_back(Position{p.x + i, p.y});
         }
-
+        
         if(canRight(i) && canDown(i) && rmovRange[3][i - 1]) {
-            mov[DOWN_RIGHT][i] = 1;
+            mov[SOUTH_EAST][i] = 1;
             pv.push_back(Position{p.x + i, p.y + i});
         }
-
+        
         if(canDown(i) && rmovRange[4][i - 1]) {
-            mov[DOWN][i] = 1;
+            mov[SOUTH][i] = 1;
             pv.push_back(Position{p.x, p.y + i});
         }
-
+        
         if(canLeft(i) && canDown(i) && rmovRange[5][i - 1]) {
-            mov[DOWN_LEFT][i] = 1;
+            mov[SOUTH_WEST][i] = 1;
             pv.push_back(Position{p.x - i, p.y + i});
         }
-
+        
         if(canLeft(i) && rmovRange[6][i - 1]) {
-            mov[LEFT][i] = 1;
+            mov[WEST][i] = 1;
             pv.push_back(Position{p.x - i, p.y});
         }
-
+        
         if(canLeft(i) && canUp(i) && rmovRange[7][i - 1]) {
-            mov[UP_LEFT][i] = 1;
+            mov[NORTH_WEST][i] = 1;
             pv.push_back(Position{p.x - i, p.y - i});
         }
-
+        
     }
-
+    
     return pv;
 }
 
-POS_VEC Game::getRanges() const{
-    auto pv = getPossibleMoves(currPosP1, P1);
-    auto tmp = getPossibleMoves(currPosP2, P2);
+POS_VEC getRanges() {
+    auto pv = getPossibleMoves(currPos[P1], P1);
+    auto tmp = getPossibleMoves(currPos[P2], P2);
     for(auto& v : tmp)
         pv.push_back(v);
-
-//    for(auto& p : pv){
-//        p.x += 1;
-//        p.y += 1;
-//    }
-
+    
+    
     return pv;
+}
 }

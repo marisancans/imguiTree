@@ -148,22 +148,9 @@ CMakeFiles/imguitest.dir/src/imgui/imgui_widgets.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/imguitest.dir/src/imgui/imgui_widgets.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/maris/CLionProjects/imguiTree/src/imgui/imgui_widgets.cpp -o CMakeFiles/imguitest.dir/src/imgui/imgui_widgets.cpp.s
 
-CMakeFiles/imguitest.dir/src/node.cpp.o: CMakeFiles/imguitest.dir/flags.make
-CMakeFiles/imguitest.dir/src/node.cpp.o: ../src/node.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/maris/CLionProjects/imguiTree/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/imguitest.dir/src/node.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/imguitest.dir/src/node.cpp.o -c /home/maris/CLionProjects/imguiTree/src/node.cpp
-
-CMakeFiles/imguitest.dir/src/node.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/imguitest.dir/src/node.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/maris/CLionProjects/imguiTree/src/node.cpp > CMakeFiles/imguitest.dir/src/node.cpp.i
-
-CMakeFiles/imguitest.dir/src/node.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/imguitest.dir/src/node.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/maris/CLionProjects/imguiTree/src/node.cpp -o CMakeFiles/imguitest.dir/src/node.cpp.s
-
 CMakeFiles/imguitest.dir/src/game.cpp.o: CMakeFiles/imguitest.dir/flags.make
 CMakeFiles/imguitest.dir/src/game.cpp.o: ../src/game.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/maris/CLionProjects/imguiTree/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/imguitest.dir/src/game.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/maris/CLionProjects/imguiTree/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/imguitest.dir/src/game.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/imguitest.dir/src/game.cpp.o -c /home/maris/CLionProjects/imguiTree/src/game.cpp
 
 CMakeFiles/imguitest.dir/src/game.cpp.i: cmake_force
@@ -176,7 +163,7 @@ CMakeFiles/imguitest.dir/src/game.cpp.s: cmake_force
 
 CMakeFiles/imguitest.dir/src/gridWindow.cpp.o: CMakeFiles/imguitest.dir/flags.make
 CMakeFiles/imguitest.dir/src/gridWindow.cpp.o: ../src/gridWindow.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/maris/CLionProjects/imguiTree/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/imguitest.dir/src/gridWindow.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/maris/CLionProjects/imguiTree/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/imguitest.dir/src/gridWindow.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/imguitest.dir/src/gridWindow.cpp.o -c /home/maris/CLionProjects/imguiTree/src/gridWindow.cpp
 
 CMakeFiles/imguitest.dir/src/gridWindow.cpp.i: cmake_force
@@ -189,7 +176,7 @@ CMakeFiles/imguitest.dir/src/gridWindow.cpp.s: cmake_force
 
 CMakeFiles/imguitest.dir/src/treeWindow.cpp.o: CMakeFiles/imguitest.dir/flags.make
 CMakeFiles/imguitest.dir/src/treeWindow.cpp.o: ../src/treeWindow.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/maris/CLionProjects/imguiTree/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/imguitest.dir/src/treeWindow.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/maris/CLionProjects/imguiTree/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/imguitest.dir/src/treeWindow.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/imguitest.dir/src/treeWindow.cpp.o -c /home/maris/CLionProjects/imguiTree/src/treeWindow.cpp
 
 CMakeFiles/imguitest.dir/src/treeWindow.cpp.i: cmake_force
@@ -209,7 +196,6 @@ imguitest_OBJECTS = \
 "CMakeFiles/imguitest.dir/src/imgui/imgui_impl_glfw.cpp.o" \
 "CMakeFiles/imguitest.dir/src/imgui/imgui_impl_opengl3.cpp.o" \
 "CMakeFiles/imguitest.dir/src/imgui/imgui_widgets.cpp.o" \
-"CMakeFiles/imguitest.dir/src/node.cpp.o" \
 "CMakeFiles/imguitest.dir/src/game.cpp.o" \
 "CMakeFiles/imguitest.dir/src/gridWindow.cpp.o" \
 "CMakeFiles/imguitest.dir/src/treeWindow.cpp.o"
@@ -224,14 +210,13 @@ imguitest: CMakeFiles/imguitest.dir/src/imgui/imgui_draw.cpp.o
 imguitest: CMakeFiles/imguitest.dir/src/imgui/imgui_impl_glfw.cpp.o
 imguitest: CMakeFiles/imguitest.dir/src/imgui/imgui_impl_opengl3.cpp.o
 imguitest: CMakeFiles/imguitest.dir/src/imgui/imgui_widgets.cpp.o
-imguitest: CMakeFiles/imguitest.dir/src/node.cpp.o
 imguitest: CMakeFiles/imguitest.dir/src/game.cpp.o
 imguitest: CMakeFiles/imguitest.dir/src/gridWindow.cpp.o
 imguitest: CMakeFiles/imguitest.dir/src/treeWindow.cpp.o
 imguitest: CMakeFiles/imguitest.dir/build.make
 imguitest: /usr/lib/x86_64-linux-gnu/libglfw.so.3.2
 imguitest: CMakeFiles/imguitest.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/maris/CLionProjects/imguiTree/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Linking CXX executable imguitest"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/maris/CLionProjects/imguiTree/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Linking CXX executable imguitest"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/imguitest.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

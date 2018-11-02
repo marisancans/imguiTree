@@ -8,63 +8,58 @@
 static inline ImVec2 operator+(const ImVec2& lhs, const ImVec2& rhs) { return ImVec2(lhs.x + rhs.x, lhs.y + rhs.y); }
 static inline ImVec2 operator-(const ImVec2& lhs, const ImVec2& rhs) { return ImVec2(lhs.x - rhs.x, lhs.y - rhs.y); }
 
-void gridWindow(bool* opened, Game& game, GameSettings& gameSettings) {
+void gridWindow(bool* opened, GameSettings& gameSettings) {
     ImGui::SetNextWindowSize(ImVec2(700, 600), ImGuiSetCond_FirstUseEver);
     if (!ImGui::Begin("Example: Custom Node Graph", opened)) {
         ImGui::End();
         return;
     }
-
-    game.makeTurns();
-
+    
+    game::makeTurns(gameSettings);
+    
     static bool graphInited = false;
     static int nodeSelected = -1;
     static Node *nodeClicked = nullptr;
-
+    
     // Draw a list of nodes on the left side
     bool open_context_menu = false;
     int node_hovered_in_list = -1;
     int node_hovered_in_scene = -1;
-
-
+    
+    
     const float NODE_SLOT_RADIUS = 4.0f;
     const ImVec2 NODE_WINDOW_PADDING(8.0f, 8.0f);
 //
     bool won = false;
-    ImGui::Begin("About Dear ImGui", &won, ImGuiWindowFlags_AlwaysAutoResize);
-    ImGui::Text("Dear ImGui, %s", ImGui::GetVersion());
-    ImGui::Separator();
-    ImGui::Text("By Omar Cornut and all dear imgui contributors.");
-    ImGui::Text("Dear ImGui is licensed under the MIT License, see LICENSE for more information.");
+    ImGui::Begin("Todo", &won, ImGuiWindowFlags_AlwaysAutoResize);
+    ImGui::Text("--//-- --//-- --//--");
     ImGui::End();
-
-
-
+    
+    
+    
     ImGui::BeginGroup();
-
-
-
+    
+    
+    
     ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(1, 1));
     ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0, 0));
     ImGui::PushStyleColor(ImGuiCol_ChildWindowBg, IM_COL32(60, 60, 70, 200));
-
+    
     ImGui::BeginChild("scrolling_region", ImVec2(0, 0), true, ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoMove);
     ImGui::PushItemWidth(120.0f);
-
-    ImVec2 offset = ImGui::GetCursorScreenPos() + gameSettings.scrolling;
+    
     ImDrawList* draw_list = ImGui::GetWindowDrawList();
-
-
+    
     ImVec2 win_pos = ImGui::GetCursorScreenPos();
     ImVec2 canvas_sz = ImGui::GetWindowSize();
 
 // ------------------  GRID -----------------------
-
+    
     ImU32 GRID_COLOR = IM_COL32(200, 0, 0,150);
     float spacingX = canvas_sz.x / gameSettings.maxBoardX;
     float spacingY = canvas_sz.y / gameSettings.maxBoardY;
-
-
+    
+    
     // Drawing grid
     for(int x = 0; x < gameSettings.maxBoardX; ++x){
         for(int y = 0; y < gameSettings.maxBoardY; ++y){
@@ -72,47 +67,47 @@ void gridWindow(bool* opened, Game& game, GameSettings& gameSettings) {
             draw_list->AddLine(ImVec2(1, y * spacingY) + win_pos, ImVec2(canvas_sz.x, y * spacingY) + win_pos, GRID_COLOR);
         }
     }
-
-
-
+    
+    
+    
     for(int x = 0; x < gameSettings.maxBoardX; ++x){
         for(int y = 0; y < gameSettings.maxBoardY; ++y) {
 //            draw_list->AddRectFilled(ImVec2())
         }
     }
-
-
+    
+    
     auto lDrawPos = [&](const Position& pos, ImU32 col){
-                                       draw_list->AddRectFilled(ImVec2(pos.x * spacingX, pos.y * spacingY) + win_pos,
-                                       ImVec2((pos.x + 1 )* spacingX, (pos.y + 1) * spacingY) + win_pos,
-                                       col);
-                                      };
-
+        draw_list->AddRectFilled(ImVec2(pos.x * spacingX, pos.y * spacingY) + win_pos,
+                                 ImVec2((pos.x + 1 )* spacingX, (pos.y + 1) * spacingY) + win_pos,
+                                 col);
+    };
+    
     auto lDrawCurr = [&](const Position& pos, ImU32 col){
         draw_list->AddCircleFilled(ImVec2(pos.x * spacingX + spacingX/2, pos.y * spacingY + spacingY/2) + win_pos,
                                    spacingX/2, col);
     };
 
 //    Display current nodes
-    lDrawCurr(game.currPosP1, IM_COL32(200, 0, 0, 150));
-    lDrawCurr(game.currPosP2, IM_COL32(0, 0, 200, 150));
-
-
+    lDrawCurr(game::currPos[P1], IM_COL32(200, 0, 0, 150));
+    lDrawCurr(game::currPos[P2], IM_COL32(0, 0, 200, 150));
+    
+    
     // FOOLING AROUND HERE
-    draw_list->AddLine(ImVec2(game.currPosP1.x * spacingX + spacingX/2, game.currPosP1.y * spacingY + spacingY/2) + win_pos,
-                       ImVec2(game.currPosP2.x * spacingX + spacingX/2, game.currPosP2.y * spacingY + spacingY/2) + win_pos, IM_COL32(0, 150, 0 ,250));
-
-    for(int i = 0; i < game.tracersP1.size(); ++i)
-        lDrawCurr(game.tracersP1[i], IM_COL32(20 * i, 0, 0, 20 * i));
-    for(int i = 0; i < game.tracersP2.size(); ++i)
-        lDrawCurr(game.tracersP2[i], IM_COL32(0, 0, 20 * i, 20 * i));
-
-
-
+    draw_list->AddLine(ImVec2(game::currPos[P1].x * spacingX + spacingX/2, game::currPos[P1].y * spacingY + spacingY/2) + win_pos,
+                       ImVec2(game::currPos[P2].x * spacingX + spacingX/2, game::currPos[P2].y * spacingY + spacingY/2) + win_pos, IM_COL32(0, 150, 0 ,250));
+    
+    for(int i = 0; i < game::tracers[P1].size(); ++i)
+        lDrawCurr(game::tracers[P1][i], IM_COL32(20 * i, 0, 0, 20 * i));
+    for(int i = 0; i < game::tracers[P2].size(); ++i)
+        lDrawCurr(game::tracers[P2][i], IM_COL32(0, 0, 20 * i, 20 * i));
+    
+    
+    
     //    and ranges
-
-    POS_VEC ranges = game.getRanges();
-
+    
+    POS_VEC ranges = game::getRanges();
+    
     for(const auto& p : ranges)
         lDrawPos(p, IM_COL32(0, 100, 0, 50));
 
@@ -121,41 +116,37 @@ void gridWindow(bool* opened, Game& game, GameSettings& gameSettings) {
 
 //
     //    // Display links
-        draw_list->ChannelsSplit(3);
-        draw_list->ChannelsSetCurrent(1);                    // Background
-
-
-        draw_list->ChannelsSetCurrent(2); // Foreground
-        bool old_any_active = ImGui::IsAnyItemActive();
-
-        ImGui::BeginGroup(); // Lock horizontal position
-
-        ImGui::EndGroup();
-
-        // Save the size of what we have emitted and whether any of the widgets are being used
-        bool node_widgets_active = (!old_any_active && ImGui::IsAnyItemActive());
-
-        // Display node box
-        draw_list->ChannelsSetCurrent(1); // Background
-
-        if(ImGui::IsItemClicked(0)) {
+    draw_list->ChannelsSplit(3);
+    draw_list->ChannelsSetCurrent(1);                    // Background
+    
+    
+    draw_list->ChannelsSetCurrent(2); // Foreground
+    bool old_any_active = ImGui::IsAnyItemActive();
+    
+    ImGui::BeginGroup(); // Lock horizontal position
+    
+    ImGui::EndGroup();
+    
+    // Save the size of what we have emitted and whether any of the widgets are being used
+    bool node_widgets_active = (!old_any_active && ImGui::IsAnyItemActive());
+    
+    // Display node box
+    draw_list->ChannelsSetCurrent(1); // Background
+    
+    if(ImGui::IsItemClicked(0)) {
 //            nodeClicked = n;
 //            n->setHighlighted(true);
-        }
-
-        bool node_moving_active = ImGui::IsItemActive();
-
-        draw_list->ChannelsSetCurrent(1);
-
+    }
+    
+    draw_list->ChannelsSetCurrent(1);
     draw_list->ChannelsMerge();
-
-
+    
+    
     // Draw context menu
     ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(8, 8));
     if (ImGui::BeginPopup("context_menu"))
     {
 //        Node* node = nodeSelected != -1 ? &nodes[nodeSelected] : NULL;
-        ImVec2 scene_pos = ImGui::GetMousePosOnOpeningCurrentPopup() - offset;
         if (true)
         {
 //            ImGui::Text("Node '%s'", node->Name);
@@ -172,18 +163,14 @@ void gridWindow(bool* opened, Game& game, GameSettings& gameSettings) {
         ImGui::EndPopup();
     }
     ImGui::PopStyleVar();
-
-    // Scrolling
-    if (ImGui::IsWindowHovered() && !ImGui::IsAnyItemActive() && ImGui::IsMouseDragging(2, 0.0f))
-        gameSettings.scrolling = gameSettings.scrolling + ImGui::GetIO().MouseDelta;
-
+    
     ImGui::PopItemWidth();
     ImGui::EndChild();
     ImGui::PopStyleColor();
     ImGui::PopStyleVar(2);
     ImGui::EndGroup();
-
+    
     ImGui::End();
-
+    
     graphInited = true;
 }
