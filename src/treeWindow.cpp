@@ -21,6 +21,17 @@ void treeWindow(bool* opened, GameSettings& gameSettings){
     ImGui::SliderInt("slider int2",  &gameSettings.levelOffsetX, 0, 255);
     ImGui::SliderInt("slider int",  &gameSettings.levelOffsetY, 0, 255);
     ImGui::SliderInt("Speed",  &gameSettings.speedMS, 1, 5000);
+    
+    
+    for(int r = 0; r < 1; ++r)
+    {
+        for(int i = 0; i < 8; ++i)
+        {
+            ImGui::Checkbox(std::to_string(i).c_str(), &gameSettings.movRange[P1][i]);
+        }
+    }
+    
+    
     if (ImGui::Button("Next generation"))
         game::makeTurns(gameSettings);
     
