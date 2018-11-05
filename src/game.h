@@ -11,7 +11,7 @@ const int MRR = 3; // Max movement range
 struct Position;
 using NODE_VEC = std::vector<Node>;
 using POS_VEC = std::vector<Position>;
-using moveMatrix = int[8][MRR];
+using moveMatrix = bool[8][MRR];
 
 // move Matrix column is MovDir enum and index(n) is how far
 //[UP][n] [NORTH_EAST][n] [DOWN_RIGHT][n] [DOWN][n] [DOWN_LEFT][n] [LEFT][n] [UP_LEFT][n]

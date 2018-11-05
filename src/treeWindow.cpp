@@ -14,6 +14,8 @@ void treeWindow(bool* opened, GameSettings& gameSettings){
         ImGui::End();
         return;
     }
+
+    int static currEditPlayer = 0;
     
     ImGui::BeginGroup();
     
@@ -21,15 +23,24 @@ void treeWindow(bool* opened, GameSettings& gameSettings){
     ImGui::SliderInt("slider int2",  &gameSettings.levelOffsetX, 0, 255);
     ImGui::SliderInt("slider int",  &gameSettings.levelOffsetY, 0, 255);
     ImGui::SliderInt("Speed",  &gameSettings.speedMS, 1, 5000);
-    
-    
-    for(int r = 0; r < 1; ++r)
+
+    ImGui::RadioButton("P1", &currEditPlayer, 0);
+    ImGui::RadioButton("P2", &currEditPlayer, 1);
+
+    for(int r = 0; r < MRR; ++r)
     {
         for(int i = 0; i < 8; ++i)
-        {
-            ImGui::Checkbox(std::to_string(i).c_str(), &gameSettings.movRange[P1][i]);
+            {
+//            Cantor pairing function:
+            int hash = ((i + r) * (i + r + 1)) / 2 + r;
+            ImGui::PushID(hash);
+            ImGui::Checkbox("", &gameSettings.movRange[currEditPlayer][i][r]);
+            ImGui::SameLine();
+            ImGui::PopID();
         }
+        ImGui::NewLine();
     }
+
     
     
     if (ImGui::Button("Next generation"))

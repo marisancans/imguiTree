@@ -110,12 +110,12 @@ int main(int, char**)
     gameSettings.showGrid = false;
     gameSettings.levelOffsetX = 100;
     gameSettings.levelOffsetY = 100;
-    gameSettings.speedMS = 100;
+    gameSettings.speedMS = 500;
     for(int p = 0; p < PLAYER_COUNT; p++)
         for(int i = 0; i < 8; i++)
-            gameSettings.movRange[p][i][0] = 1;
+            gameSettings.movRange[p][i][0] = true;
     for(int i = 0; i < 8; i += 2)
-        gameSettings.movRange[P2][i][1] = 1;
+        gameSettings.movRange[P2][i][1] = true;
     
     gameSettings.startPos[P1] = {0, 0};
     gameSettings.startPos[P2] = {gameSettings.maxBoardX - 1, gameSettings.maxBoardY - 1};

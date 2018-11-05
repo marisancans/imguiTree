@@ -9,7 +9,7 @@
 #include <unordered_set>
 
 namespace game {
-GameSettings gameSettings;
+GameSettings* gameSettings;
 Position currPos[PLAYER_COUNT];
 std::deque<Position> tracers[PLAYER_COUNT];
 PlayerIdx winner;
@@ -102,10 +102,10 @@ void genLayer()
 void init(game::GameMode mode, PlayerIdx turn, GameSettings& gs)
 {
     _currPlayer = turn;
-    gameSettings = gs;
+    gameSettings = &gs;
     newID = 0;
     for(int i = 0; i < PLAYER_COUNT; i++)
-        currPos[i] = gameSettings.startPos[i];
+        currPos[i] = gameSettings->startPos[i];
     swapTurn();
     makeTurns(gs);
 }
@@ -153,13 +153,13 @@ bool checkWinner() {
 POS_VEC getPossibleMoves(const Position &p, PlayerIdx turn) {
     POS_VEC pv;
     moveMatrix mov{};
+
+    auto canRight = [&](int i){ return p.x + i > 0 && p.x + i < gameSettings->maxBoardX; };
+    auto canLeft = [&](int i){ return p.x - i >= 0 && p.x - i < gameSettings->maxBoardX; };
+    auto canUp = [&](int i){ return p.y - i >= 0 && p.y - i < gameSettings->maxBoardY; };
+    auto canDown = [&](int i){ return p.y + i > 0 && p.y + i < gameSettings->maxBoardY; };
     
-    auto canRight = [&](int i){ return p.x + i > 0 && p.x + i < gameSettings.maxBoardX; };
-    auto canLeft = [&](int i){ return p.x - i >= 0 && p.x - i < gameSettings.maxBoardX; };
-    auto canUp = [&](int i){ return p.y - i >= 0 && p.y - i < gameSettings.maxBoardY; };
-    auto canDown = [&](int i){ return p.y + i > 0 && p.y + i < gameSettings.maxBoardY; };
-    
-    const auto& rmovRange = gameSettings.movRange[turn];
+    auto rmovRange = gameSettings->movRange[turn];
     
     // Up
     for(int i = 1; i < MRR + 1; ++i){

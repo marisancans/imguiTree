@@ -4,16 +4,16 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/maris/CLionProjects/imguiTree/src/game.cpp" "/home/maris/CLionProjects/imguiTree/cmake-build-debug/CMakeFiles/imguitest.dir/src/game.cpp.o"
-  "/home/maris/CLionProjects/imguiTree/src/gridWindow.cpp" "/home/maris/CLionProjects/imguiTree/cmake-build-debug/CMakeFiles/imguitest.dir/src/gridWindow.cpp.o"
-  "/home/maris/CLionProjects/imguiTree/src/imgui/imgui.cpp" "/home/maris/CLionProjects/imguiTree/cmake-build-debug/CMakeFiles/imguitest.dir/src/imgui/imgui.cpp.o"
-  "/home/maris/CLionProjects/imguiTree/src/imgui/imgui_demo.cpp" "/home/maris/CLionProjects/imguiTree/cmake-build-debug/CMakeFiles/imguitest.dir/src/imgui/imgui_demo.cpp.o"
-  "/home/maris/CLionProjects/imguiTree/src/imgui/imgui_draw.cpp" "/home/maris/CLionProjects/imguiTree/cmake-build-debug/CMakeFiles/imguitest.dir/src/imgui/imgui_draw.cpp.o"
-  "/home/maris/CLionProjects/imguiTree/src/imgui/imgui_impl_glfw.cpp" "/home/maris/CLionProjects/imguiTree/cmake-build-debug/CMakeFiles/imguitest.dir/src/imgui/imgui_impl_glfw.cpp.o"
-  "/home/maris/CLionProjects/imguiTree/src/imgui/imgui_impl_opengl3.cpp" "/home/maris/CLionProjects/imguiTree/cmake-build-debug/CMakeFiles/imguitest.dir/src/imgui/imgui_impl_opengl3.cpp.o"
-  "/home/maris/CLionProjects/imguiTree/src/imgui/imgui_widgets.cpp" "/home/maris/CLionProjects/imguiTree/cmake-build-debug/CMakeFiles/imguitest.dir/src/imgui/imgui_widgets.cpp.o"
-  "/home/maris/CLionProjects/imguiTree/src/main.cpp" "/home/maris/CLionProjects/imguiTree/cmake-build-debug/CMakeFiles/imguitest.dir/src/main.cpp.o"
-  "/home/maris/CLionProjects/imguiTree/src/treeWindow.cpp" "/home/maris/CLionProjects/imguiTree/cmake-build-debug/CMakeFiles/imguitest.dir/src/treeWindow.cpp.o"
+  "/home/maris/src/imguitest/src/game.cpp" "/home/maris/src/imguitest/cmake-build-debug/CMakeFiles/imguitest.dir/src/game.cpp.o"
+  "/home/maris/src/imguitest/src/gridWindow.cpp" "/home/maris/src/imguitest/cmake-build-debug/CMakeFiles/imguitest.dir/src/gridWindow.cpp.o"
+  "/home/maris/src/imguitest/src/imgui/imgui.cpp" "/home/maris/src/imguitest/cmake-build-debug/CMakeFiles/imguitest.dir/src/imgui/imgui.cpp.o"
+  "/home/maris/src/imguitest/src/imgui/imgui_demo.cpp" "/home/maris/src/imguitest/cmake-build-debug/CMakeFiles/imguitest.dir/src/imgui/imgui_demo.cpp.o"
+  "/home/maris/src/imguitest/src/imgui/imgui_draw.cpp" "/home/maris/src/imguitest/cmake-build-debug/CMakeFiles/imguitest.dir/src/imgui/imgui_draw.cpp.o"
+  "/home/maris/src/imguitest/src/imgui/imgui_impl_glfw.cpp" "/home/maris/src/imguitest/cmake-build-debug/CMakeFiles/imguitest.dir/src/imgui/imgui_impl_glfw.cpp.o"
+  "/home/maris/src/imguitest/src/imgui/imgui_impl_opengl3.cpp" "/home/maris/src/imguitest/cmake-build-debug/CMakeFiles/imguitest.dir/src/imgui/imgui_impl_opengl3.cpp.o"
+  "/home/maris/src/imguitest/src/imgui/imgui_widgets.cpp" "/home/maris/src/imguitest/cmake-build-debug/CMakeFiles/imguitest.dir/src/imgui/imgui_widgets.cpp.o"
+  "/home/maris/src/imguitest/src/main.cpp" "/home/maris/src/imguitest/cmake-build-debug/CMakeFiles/imguitest.dir/src/main.cpp.o"
+  "/home/maris/src/imguitest/src/treeWindow.cpp" "/home/maris/src/imguitest/cmake-build-debug/CMakeFiles/imguitest.dir/src/treeWindow.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

@@ -8,44 +8,44 @@
 		<Option virtualFolders="CMake Files\;CMake Files\..\;CMake Files\..\..\;CMake Files\..\..\..\;CMake Files\..\..\..\..\;CMake Files\..\..\..\..\usr\;CMake Files\..\..\..\..\usr\lib\;CMake Files\..\..\..\..\usr\lib\x86_64-linux-gnu\;CMake Files\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\;CMake Files\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\glfw3\;"/>
 		<Build>
 			<Target title="all">
-				<Option working_dir="/home/maris/CLionProjects/imguiTree/cmake-build-debug"/>
+				<Option working_dir="/home/maris/src/imguitest/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/home/maris/CLionProjects/imguiTree/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/maris/CLionProjects/imguiTree/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/home/maris/CLionProjects/imguiTree/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/home/maris/CLionProjects/imguiTree/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/maris/src/imguitest/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/maris/src/imguitest/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/maris/src/imguitest/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/maris/src/imguitest/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="edit_cache">
-				<Option working_dir="/home/maris/CLionProjects/imguiTree/cmake-build-debug"/>
+				<Option working_dir="/home/maris/src/imguitest/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/home/maris/CLionProjects/imguiTree/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/maris/CLionProjects/imguiTree/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/home/maris/CLionProjects/imguiTree/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/home/maris/CLionProjects/imguiTree/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/maris/src/imguitest/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/maris/src/imguitest/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/maris/src/imguitest/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/maris/src/imguitest/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="rebuild_cache">
-				<Option working_dir="/home/maris/CLionProjects/imguiTree/cmake-build-debug"/>
+				<Option working_dir="/home/maris/src/imguitest/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/home/maris/CLionProjects/imguiTree/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/maris/CLionProjects/imguiTree/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/home/maris/CLionProjects/imguiTree/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/home/maris/CLionProjects/imguiTree/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/maris/src/imguitest/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/maris/src/imguitest/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/maris/src/imguitest/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/maris/src/imguitest/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="imguitest">
-				<Option output="/home/maris/CLionProjects/imguiTree/cmake-build-debug/imguitest" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/home/maris/CLionProjects/imguiTree/cmake-build-debug"/>
+				<Option output="/home/maris/src/imguitest/cmake-build-debug/imguitest" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/maris/src/imguitest/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
 					<Add option="-DGLFW_DLL"/>
-					<Add directory="/home/maris/CLionProjects/imguiTree/src"/>
+					<Add directory="/home/maris/src/imguitest/src"/>
 					<Add directory="/usr/include/c++/7"/>
 					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
 					<Add directory="/usr/include/c++/7/backward"/>
@@ -56,21 +56,21 @@
 					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/home/maris/CLionProjects/imguiTree/cmake-build-debug/Makefile&quot;  VERBOSE=1 imguitest"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/maris/CLionProjects/imguiTree/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/home/maris/CLionProjects/imguiTree/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/home/maris/CLionProjects/imguiTree/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/maris/src/imguitest/cmake-build-debug/Makefile&quot;  VERBOSE=1 imguitest"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/maris/src/imguitest/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/maris/src/imguitest/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/maris/src/imguitest/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="imguitest/fast">
-				<Option output="/home/maris/CLionProjects/imguiTree/cmake-build-debug/imguitest" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/home/maris/CLionProjects/imguiTree/cmake-build-debug"/>
+				<Option output="/home/maris/src/imguitest/cmake-build-debug/imguitest" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/maris/src/imguitest/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
 					<Add option="-DGLFW_DLL"/>
-					<Add directory="/home/maris/CLionProjects/imguiTree/src"/>
+					<Add directory="/home/maris/src/imguitest/src"/>
 					<Add directory="/usr/include/c++/7"/>
 					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
 					<Add directory="/usr/include/c++/7/backward"/>
@@ -81,95 +81,95 @@
 					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/home/maris/CLionProjects/imguiTree/cmake-build-debug/Makefile&quot;  VERBOSE=1 imguitest/fast"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/maris/CLionProjects/imguiTree/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/home/maris/CLionProjects/imguiTree/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/home/maris/CLionProjects/imguiTree/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/maris/src/imguitest/cmake-build-debug/Makefile&quot;  VERBOSE=1 imguitest/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/maris/src/imguitest/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/maris/src/imguitest/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/maris/src/imguitest/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/home/maris/CLionProjects/imguiTree/src/game.cpp">
+		<Unit filename="/home/maris/src/imguitest/src/game.cpp">
 			<Option target="imguitest"/>
 		</Unit>
-		<Unit filename="/home/maris/CLionProjects/imguiTree/src/game.h">
+		<Unit filename="/home/maris/src/imguitest/src/game.h">
 			<Option target="imguitest"/>
 		</Unit>
-		<Unit filename="/home/maris/CLionProjects/imguiTree/src/gridWindow.cpp">
+		<Unit filename="/home/maris/src/imguitest/src/gridWindow.cpp">
 			<Option target="imguitest"/>
 		</Unit>
-		<Unit filename="/home/maris/CLionProjects/imguiTree/src/gridWindow.h">
+		<Unit filename="/home/maris/src/imguitest/src/gridWindow.h">
 			<Option target="imguitest"/>
 		</Unit>
-		<Unit filename="/home/maris/CLionProjects/imguiTree/src/imgui/imconfig.h">
+		<Unit filename="/home/maris/src/imguitest/src/imgui/imconfig.h">
 			<Option target="imguitest"/>
 		</Unit>
-		<Unit filename="/home/maris/CLionProjects/imguiTree/src/imgui/imgui.cpp">
+		<Unit filename="/home/maris/src/imguitest/src/imgui/imgui.cpp">
 			<Option target="imguitest"/>
 		</Unit>
-		<Unit filename="/home/maris/CLionProjects/imguiTree/src/imgui/imgui.h">
+		<Unit filename="/home/maris/src/imguitest/src/imgui/imgui.h">
 			<Option target="imguitest"/>
 		</Unit>
-		<Unit filename="/home/maris/CLionProjects/imguiTree/src/imgui/imgui_demo.cpp">
+		<Unit filename="/home/maris/src/imguitest/src/imgui/imgui_demo.cpp">
 			<Option target="imguitest"/>
 		</Unit>
-		<Unit filename="/home/maris/CLionProjects/imguiTree/src/imgui/imgui_draw.cpp">
+		<Unit filename="/home/maris/src/imguitest/src/imgui/imgui_draw.cpp">
 			<Option target="imguitest"/>
 		</Unit>
-		<Unit filename="/home/maris/CLionProjects/imguiTree/src/imgui/imgui_impl_glfw.cpp">
+		<Unit filename="/home/maris/src/imguitest/src/imgui/imgui_impl_glfw.cpp">
 			<Option target="imguitest"/>
 		</Unit>
-		<Unit filename="/home/maris/CLionProjects/imguiTree/src/imgui/imgui_impl_glfw.h">
+		<Unit filename="/home/maris/src/imguitest/src/imgui/imgui_impl_glfw.h">
 			<Option target="imguitest"/>
 		</Unit>
-		<Unit filename="/home/maris/CLionProjects/imguiTree/src/imgui/imgui_impl_opengl3.cpp">
+		<Unit filename="/home/maris/src/imguitest/src/imgui/imgui_impl_opengl3.cpp">
 			<Option target="imguitest"/>
 		</Unit>
-		<Unit filename="/home/maris/CLionProjects/imguiTree/src/imgui/imgui_impl_opengl3.h">
+		<Unit filename="/home/maris/src/imguitest/src/imgui/imgui_impl_opengl3.h">
 			<Option target="imguitest"/>
 		</Unit>
-		<Unit filename="/home/maris/CLionProjects/imguiTree/src/imgui/imgui_internal.h">
+		<Unit filename="/home/maris/src/imguitest/src/imgui/imgui_internal.h">
 			<Option target="imguitest"/>
 		</Unit>
-		<Unit filename="/home/maris/CLionProjects/imguiTree/src/imgui/imgui_widgets.cpp">
+		<Unit filename="/home/maris/src/imguitest/src/imgui/imgui_widgets.cpp">
 			<Option target="imguitest"/>
 		</Unit>
-		<Unit filename="/home/maris/CLionProjects/imguiTree/src/imgui/imstb_rectpack.h">
+		<Unit filename="/home/maris/src/imguitest/src/imgui/imstb_rectpack.h">
 			<Option target="imguitest"/>
 		</Unit>
-		<Unit filename="/home/maris/CLionProjects/imguiTree/src/imgui/imstb_textedit.h">
+		<Unit filename="/home/maris/src/imguitest/src/imgui/imstb_textedit.h">
 			<Option target="imguitest"/>
 		</Unit>
-		<Unit filename="/home/maris/CLionProjects/imguiTree/src/imgui/imstb_truetype.h">
+		<Unit filename="/home/maris/src/imguitest/src/imgui/imstb_truetype.h">
 			<Option target="imguitest"/>
 		</Unit>
-		<Unit filename="/home/maris/CLionProjects/imguiTree/src/main.cpp">
+		<Unit filename="/home/maris/src/imguitest/src/main.cpp">
 			<Option target="imguitest"/>
 		</Unit>
-		<Unit filename="/home/maris/CLionProjects/imguiTree/src/node.h">
+		<Unit filename="/home/maris/src/imguitest/src/node.h">
 			<Option target="imguitest"/>
 		</Unit>
-		<Unit filename="/home/maris/CLionProjects/imguiTree/src/strategies.h">
+		<Unit filename="/home/maris/src/imguitest/src/strategies.h">
 			<Option target="imguitest"/>
 		</Unit>
-		<Unit filename="/home/maris/CLionProjects/imguiTree/src/treeWindow.cpp">
+		<Unit filename="/home/maris/src/imguitest/src/treeWindow.cpp">
 			<Option target="imguitest"/>
 		</Unit>
-		<Unit filename="/home/maris/CLionProjects/imguiTree/src/treeWindow.h">
+		<Unit filename="/home/maris/src/imguitest/src/treeWindow.h">
 			<Option target="imguitest"/>
 		</Unit>
-		<Unit filename="/home/maris/CLionProjects/imguiTree/CMakeLists.txt">
+		<Unit filename="/home/maris/src/imguitest/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>
-		<Unit filename="/home/maris/CLionProjects/imguiTree/../../../../usr/lib/x86_64-linux-gnu/cmake/glfw3/glfw3Config.cmake">
+		<Unit filename="/home/maris/src/imguitest/../../../../usr/lib/x86_64-linux-gnu/cmake/glfw3/glfw3Config.cmake">
 			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\glfw3\"/>
 		</Unit>
-		<Unit filename="/home/maris/CLionProjects/imguiTree/../../../../usr/lib/x86_64-linux-gnu/cmake/glfw3/glfw3ConfigVersion.cmake">
+		<Unit filename="/home/maris/src/imguitest/../../../../usr/lib/x86_64-linux-gnu/cmake/glfw3/glfw3ConfigVersion.cmake">
 			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\glfw3\"/>
 		</Unit>
-		<Unit filename="/home/maris/CLionProjects/imguiTree/../../../../usr/lib/x86_64-linux-gnu/cmake/glfw3/glfw3Targets-none.cmake">
+		<Unit filename="/home/maris/src/imguitest/../../../../usr/lib/x86_64-linux-gnu/cmake/glfw3/glfw3Targets-none.cmake">
 			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\glfw3\"/>
 		</Unit>
-		<Unit filename="/home/maris/CLionProjects/imguiTree/../../../../usr/lib/x86_64-linux-gnu/cmake/glfw3/glfw3Targets.cmake">
+		<Unit filename="/home/maris/src/imguitest/../../../../usr/lib/x86_64-linux-gnu/cmake/glfw3/glfw3Targets.cmake">
 			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\glfw3\"/>
 		</Unit>
 	</Project>
