@@ -2,6 +2,7 @@
 #include <math.h>
 #include <sstream>
 #include <vector>
+#include "game.h"
 
 
 static inline ImVec2 operator+(const ImVec2& lhs, const ImVec2& rhs) { return ImVec2(lhs.x + rhs.x, lhs.y + rhs.y); }
@@ -76,13 +77,20 @@ void treeWindow(bool* opened, GameSettings& gameSettings){
             draw_list->ChannelsSetCurrent(1);
     
     
-    
+            // Draw children
             for(auto &childID : node.childNodes) {
                 int childXOffset = -int(layers[y+1].size())/2;
                 auto childXPos = childID - layers[y+1][0].ID + childXOffset;
                 auto childPos = ImVec2(childXPos * gameSettings.levelOffsetX, (y+1) *  gameSettings.levelOffsetY) + offset;
-                
-                draw_list->AddLine(parentPos, childPos, IM_COL32(100, 100, 100, 150), 2.f);
+                ImU32 col = IM_COL32(100, 100, 100, 150);
+
+                // If contains child and itself--- Dont do this, its ugly
+                for(const auto& i : game::chosenPath)
+                    if(childID == i.chldID && node.ID == i.parentID)
+                        col = IM_COL32(0, 200, 0, 250);
+
+
+                draw_list->AddLine(parentPos, childPos, col, 2.f);
             }
             
             
@@ -104,7 +112,11 @@ void treeWindow(bool* opened, GameSettings& gameSettings){
             
             std::ostringstream out;
             out << node.pos[P1].x << " | " << node.pos[P1].y << "\n" << node.pos[P2].x << " | " << node.pos[P2].y << "\n" << node.interspace;
-            
+
+            draw_list->AddText(ImVec2(gameSettings.levelOffsetX * x,
+                                      gameSettings.levelOffsetY * y - 10) + offset,
+                               IM_COL32(250, 100, 100, 250), std::to_string(node.ID).c_str());
+
             draw_list->AddText(ImVec2(gameSettings.levelOffsetX * x,
                                       gameSettings.levelOffsetY * y) + offset,
                                IM_COL32(250, 100, 100, 250), out.str().c_str());

@@ -14,10 +14,10 @@ Position currPos[PLAYER_COUNT];
 std::deque<Position> tracers[PLAYER_COUNT];
 PlayerIdx winner;
 
-GameMode _mode;
+
 PlayerIdx _currPlayer;
 std::vector<NODE_VEC> nodes;
-POS_VEC chosenPath;
+std::vector<BackTrack> chosenPath;
 
 int newID;
 
@@ -87,11 +87,16 @@ void genLayer()
     
     
     // @fixme
+    chosenPath.clear();
     auto pIdx = nextPlayer(_currPlayer);
     for(int i = int(nodes.size()); --i >= 1;)
         for(auto& node : nodes[i]) {
             if (decision.ID == node.ID) {
-                chosenPath.push_back(Position({}));
+
+//                if(chosenPath.empty())
+//                    chosenPath.push_back({node.ID, node.parentNodeID});
+
+                chosenPath.push_back({node.ID, node.parentNodeID});
                 decision.ID = node.parentNodeID;
                 currPos[pIdx] = node.pos[pIdx];
                 break;
@@ -99,15 +104,18 @@ void genLayer()
         }
 }
 
-void init(game::GameMode mode, PlayerIdx turn, GameSettings& gs)
+void init(PlayerIdx turn, GameSettings& gs)
 {
     _currPlayer = turn;
     gameSettings = &gs;
     newID = 0;
     for(int i = 0; i < PLAYER_COUNT; i++)
         currPos[i] = gameSettings->startPos[i];
-    swapTurn();
+
     makeTurns(gs);
+}
+void setGameMode(GameMode mode) {
+    gameSettings->gameMode = mode;
 }
 
 void makeTurns(GameSettings& gs) {
@@ -116,9 +124,11 @@ void makeTurns(GameSettings& gs) {
     auto done = std::chrono::high_resolution_clock::now();
     auto ms = std::chrono::duration_cast<std::chrono::milliseconds>(done-started).count();
     if(ms > gs.speedMS) {
-        newID = -1;
+        newID = 0;
         Node n;
-        n.ID = ++newID;
+        n.ID = newID++;
+
+
         for(int i = 0; i < PLAYER_COUNT; i++)
             n.pos[i] = currPos[i];
         n.calcInterspace();
@@ -133,6 +143,10 @@ void makeTurns(GameSettings& gs) {
         
         
         NODE_VEC nv;
+        if(gameSettings->gameMode == PvsPC){
+
+        }
+
         nv.push_back(n);
         nodes.push_back(nv);
         

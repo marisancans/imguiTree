@@ -12,6 +12,7 @@ struct Position;
 using NODE_VEC = std::vector<Node>;
 using POS_VEC = std::vector<Position>;
 using moveMatrix = bool[8][MRR];
+enum GameMode{PvsPC, PCvsPC};
 
 // move Matrix column is MovDir enum and index(n) is how far
 //[UP][n] [NORTH_EAST][n] [DOWN_RIGHT][n] [DOWN][n] [DOWN_LEFT][n] [LEFT][n] [UP_LEFT][n]
@@ -28,6 +29,7 @@ struct GameSettings {
     int levelOffsetX;
     int levelOffsetY;
     int speedMS;
+    GameMode gameMode;
 };
 
 struct Traverse {
@@ -35,6 +37,10 @@ struct Traverse {
     int ID;
 };
 
+struct BackTrack{
+    int chldID;
+    int parentID;
+};
 
 //
 //          NORTH
@@ -56,18 +62,21 @@ enum MovDir // Movement directions
 };
 
 namespace game {
-enum GameMode{PvsPC = 1, PCvsPC =2};
+
 
 void makeTurns(GameSettings& gs);
 bool checkWinner();
 POS_VEC getPossibleMoves(const Position& p, PlayerIdx turn);
 POS_VEC getRanges();
+void setGameMode(GameMode mode);
 
 extern Position currPos[PLAYER_COUNT];
 extern std::deque<Position> tracers[PLAYER_COUNT];
 extern std::vector<NODE_VEC> nodes;
 extern PlayerIdx _currPlayer;
-extern POS_VEC chosenPath;
+extern std::vector<BackTrack> chosenPath;
 
-void init(GameMode mode, PlayerIdx turn, GameSettings& gameSettings);
+
+
+void init(PlayerIdx turn, GameSettings& gameSettings);
 };

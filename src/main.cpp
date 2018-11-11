@@ -92,8 +92,7 @@ int main(int, char**)
     ImGui::StyleColorsDark();
     //ImGui::StyleColorsClassic();
     
-    bool showGridWindow = true;
-    bool showTreeWindow = true;
+
     ImVec4 clear_color = ImVec4(0.0f, 0.0f, 0.0f, 1.00f);
     
     
@@ -121,13 +120,16 @@ int main(int, char**)
     gameSettings.startPos[P2] = {gameSettings.maxBoardX - 1, gameSettings.maxBoardY - 1};
     
     // Init
-    game::init(game::PCvsPC, firstTurn, gameSettings);
-    
-    
-    
+    game::init(firstTurn, gameSettings);
+
+
+    bool showGridWindow = false;
+    bool showTreeWindow = false;
+    bool showGameModeWindow = false;
+
+
     float angle = 0;
-    
-    bool* lala;
+
     // Main loop
     while (!glfwWindowShouldClose(window))
     {
@@ -164,7 +166,34 @@ int main(int, char**)
         
         gridWindow(&showGridWindow, gameSettings);
         treeWindow(&showTreeWindow, gameSettings);
-//        ImGui::ShowDemoWindow(lala);
+
+
+        ImGui::SetNextWindowSize(ImVec2(20, 20), ImGuiSetCond_FirstUseEver);
+        if (!ImGui::Begin("Game mode", &showGameModeWindow)) {
+            ImGui::End();
+        }
+        auto start = [&](){
+            showGridWindow = true;
+            showTreeWindow = true;
+            showGameModeWindow = false;
+        };
+
+
+        ImGui::BeginGroup();
+        if (ImGui::Button("Computer vs Computer")) {
+            game::setGameMode(PCvsPC);
+            start();
+        }
+
+        ImGui::SameLine();
+
+        if (ImGui::Button("Player vs Computer")) {
+            game::setGameMode(PvsPC);
+            start();
+        }
+
+        ImGui::EndGroup();
+        ImGui::End();
         
         // Rendering
         ImGui::Render();

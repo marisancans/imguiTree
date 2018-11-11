@@ -6,22 +6,6 @@
 
 #IncludeRegexTransform: 
 
-/home/maris/src/imguitest/src/game.cpp
-game.h
-/home/maris/src/imguitest/src/game.h
-node.h
-/home/maris/src/imguitest/src/node.h
-iostream
--
-algorithm
--
-chrono
--
-thread
--
-unordered_set
--
-
 /home/maris/src/imguitest/src/game.h
 vector
 -
@@ -71,4 +55,20 @@ strategies.h
 /home/maris/src/imguitest/src/strategies.h
 functional
 -
+
+/home/maris/src/imguitest/src/treeWindow.cpp
+treeWindow.h
+/home/maris/src/imguitest/src/treeWindow.h
+math.h
+-
+sstream
+-
+vector
+-
+game.h
+/home/maris/src/imguitest/src/game.h
+
+/home/maris/src/imguitest/src/treeWindow.h
+game.h
+/home/maris/src/imguitest/src/game.h
 

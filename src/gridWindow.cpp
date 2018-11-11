@@ -8,6 +8,7 @@
 static inline ImVec2 operator+(const ImVec2& lhs, const ImVec2& rhs) { return ImVec2(lhs.x + rhs.x, lhs.y + rhs.y); }
 static inline ImVec2 operator-(const ImVec2& lhs, const ImVec2& rhs) { return ImVec2(lhs.x - rhs.x, lhs.y - rhs.y); }
 
+
 void gridWindow(bool* opened, GameSettings& gameSettings) {
     ImGui::SetNextWindowSize(ImVec2(700, 600), ImGuiSetCond_FirstUseEver);
     if (!ImGui::Begin("Example: Custom Node Graph", opened)) {
@@ -45,7 +46,7 @@ void gridWindow(bool* opened, GameSettings& gameSettings) {
     ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0, 0));
     ImGui::PushStyleColor(ImGuiCol_ChildWindowBg, IM_COL32(60, 60, 70, 200));
     
-    ImGui::BeginChild("scrolling_region", ImVec2(0, 0), true, ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoMove);
+    ImGui::BeginChild("scroll grid", ImVec2(0, 0), true, ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoMove);
     ImGui::PushItemWidth(120.0f);
     
     ImDrawList* draw_list = ImGui::GetWindowDrawList();
@@ -55,7 +56,7 @@ void gridWindow(bool* opened, GameSettings& gameSettings) {
 
 // ------------------  GRID -----------------------
     
-    ImU32 GRID_COLOR = IM_COL32(200, 0, 0,150);
+    ImU32 GRID_COLOR = IM_COL32(100, 100, 100, 50);
     float spacingX = canvas_sz.x / gameSettings.maxBoardX;
     float spacingY = canvas_sz.y / gameSettings.maxBoardY;
     
@@ -94,22 +95,39 @@ void gridWindow(bool* opened, GameSettings& gameSettings) {
     
     
     // FOOLING AROUND HERE
-    draw_list->AddLine(ImVec2(game::currPos[P1].x * spacingX + spacingX/2, game::currPos[P1].y * spacingY + spacingY/2) + win_pos,
-                       ImVec2(game::currPos[P2].x * spacingX + spacingX/2, game::currPos[P2].y * spacingY + spacingY/2) + win_pos, IM_COL32(0, 150, 0 ,250));
-    
+
+    //    and ranges
+
+    POS_VEC ranges = game::getRanges();
+
+    for(const auto& p : ranges)
+        lDrawPos(p, IM_COL32(0, 150, 0, 50));
+
+
     for(int i = 0; i < game::tracers[P1].size(); ++i)
         lDrawCurr(game::tracers[P1][i], IM_COL32(20 * i, 0, 0, 20 * i));
     for(int i = 0; i < game::tracers[P2].size(); ++i)
         lDrawCurr(game::tracers[P2][i], IM_COL32(0, 0, 20 * i, 20 * i));
-    
-    
-    
-    //    and ranges
-    
-    POS_VEC ranges = game::getRanges();
-    
-    for(const auto& p : ranges)
-        lDrawPos(p, IM_COL32(0, 100, 0, 50));
+
+    draw_list->AddLine(ImVec2(game::currPos[P1].x * spacingX + spacingX/2, game::currPos[P1].y * spacingY + spacingY/2) + win_pos,
+                       ImVec2(game::currPos[P2].x * spacingX + spacingX/2, game::currPos[P2].y * spacingY + spacingY/2) + win_pos, IM_COL32(0, 150, 0 ,250));
+
+
+    // Clicking handler
+    ImGuiIO& io = ImGui::GetIO();
+    io.WantCaptureMouse = true;
+
+    if (ImGui::IsMouseDown(0)) {
+        float x = (io.MousePos.x / gameSettings.maxBoardX) * spacingX;
+        float y = io.MousePos.y;
+        draw_list->AddCircleFilled({x, y}, std::min(spacingX / 2, spacingY / 2), IM_COL32(0, 0, 255, 255));
+//        ImVec2(canvas_sz.x, y * spacingY)
+    }
+
+
+
+
+    ImGui::Text("x: '%f | y: '%f' | fps: %f", io.MousePos.x - win_pos.x, io.MousePos.y - win_pos.y, io.Framerate);
 
 
 
