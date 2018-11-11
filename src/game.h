@@ -30,6 +30,8 @@ struct GameSettings {
     int levelOffsetY;
     int speedMS;
     GameMode gameMode;
+    bool hacks{false};
+    bool debug{false};
 };
 
 struct Traverse {
@@ -65,17 +67,19 @@ namespace game {
 
 
 void makeTurns(GameSettings& gs);
-bool checkWinner();
+inline bool checkWinner(const Node& n){ return n.interspace == 0;}
 POS_VEC getPossibleMoves(const Position& p, PlayerIdx turn);
 POS_VEC getRanges();
-void setGameMode(GameMode mode);
+GameSettings setSettings(GameMode mode);
+
 
 extern Position currPos[PLAYER_COUNT];
 extern std::deque<Position> tracers[PLAYER_COUNT];
 extern std::vector<NODE_VEC> nodes;
 extern PlayerIdx _currPlayer;
 extern std::vector<BackTrack> chosenPath;
-
+extern Position lastClicked;
+extern bool won;
 
 
 void init(PlayerIdx turn, GameSettings& gameSettings);

@@ -9,10 +9,12 @@
 #include <unordered_set>
 
 namespace game {
+
 GameSettings* gameSettings;
 Position currPos[PLAYER_COUNT];
 std::deque<Position> tracers[PLAYER_COUNT];
-PlayerIdx winner;
+Position lastClicked{-1, -1};
+bool won;
 
 
 PlayerIdx _currPlayer;
@@ -114,53 +116,113 @@ void init(PlayerIdx turn, GameSettings& gs)
 
     makeTurns(gs);
 }
-void setGameMode(GameMode mode) {
-    gameSettings->gameMode = mode;
-}
+
+GameSettings setSettings(GameMode mode){
+    won = false;
+
+    GameSettings gameSettings;
+    gameSettings.gameMode = mode;
+    gameSettings.maxLayer = 3;
+    gameSettings.maxBoardX = 20;
+    gameSettings.maxBoardY = 20;
+    gameSettings.scrolling = ImVec2(0.0f, 0.0f);
+    gameSettings.showGrid = false;
+    gameSettings.levelOffsetX = 100;
+    gameSettings.levelOffsetY = 100;
+    gameSettings.speedMS = 500;
+    for(int p = 0; p < PLAYER_COUNT; p++)
+        for(int i = 0; i < 8; i++)
+            gameSettings.movRange[p][i][0] = true;
+    for(int i = 0; i < 8; i += 2)
+        gameSettings.movRange[P2][i][1] = true;
+
+    gameSettings.startPos[P1] = {0, 0};
+    gameSettings.startPos[P2] = {gameSettings.maxBoardX - 1, gameSettings.maxBoardY - 1};
+    return gameSettings;
+};
+
 
 void makeTurns(GameSettings& gs) {
+
+
     static auto started = std::chrono::high_resolution_clock::now();
     // Clock
     auto done = std::chrono::high_resolution_clock::now();
     auto ms = std::chrono::duration_cast<std::chrono::milliseconds>(done-started).count();
-    if(ms > gs.speedMS) {
-        newID = 0;
-        Node n;
-        n.ID = newID++;
 
 
-        for(int i = 0; i < PLAYER_COUNT; i++)
-            n.pos[i] = currPos[i];
-        n.calcInterspace();
-        
-        for(int i = 0; i < PLAYER_COUNT; i++) {
+
+    newID = 0;
+    Node n;
+    n.ID = newID++;
+
+
+    for(int i = 0; i < PLAYER_COUNT; i++)
+        n.pos[i] = currPos[i]
+
+                ;
+    n.calcInterspace();
+
+    if(!checkWinner(n)) {
+
+
+
+        for (int i = 0; i < PLAYER_COUNT; i++) {
             tracers[i].emplace_back(currPos[i]);
-            if(tracers[i].size() > 10)
+            if (tracers[i].size() > 10)
                 tracers[i].pop_front();
         }
-        
-        nodes.clear();
-        
-        
+
+
         NODE_VEC nv;
-        if(gameSettings->gameMode == PvsPC){
 
+        if (ms > gs.speedMS && gameSettings->gameMode == PvsPC) {
+            nodes.clear();
+            if (_currPlayer == P1) {
+                nv.push_back(n);
+                nodes.push_back(nv);
+                genLayer();
+                swapTurn();
+            } else {
+                if (lastClicked.x != -1) {
+                    auto laddpos = [&]() {
+                        n.pos[P2].x = lastClicked.x;
+                        n.pos[P2].y = lastClicked.y;
+                        nv.push_back(n);
+                        currPos[P1] = n.pos[P2];
+                        swapTurn();
+                    };
+
+                    if (!gameSettings->hacks) {
+                        auto poss = getPossibleMoves(n.pos[P1], P1);
+
+                        for (int i = 0; i < poss.size(); ++i) {
+                            if (poss[i] == lastClicked) {
+                                laddpos();
+                                break;
+                            }
+                        }
+                    } else {
+                        laddpos();
+                    }
+                }
+                lastClicked.x = -1;
+
+            }
+
+            started = std::chrono::high_resolution_clock::now();
+        } else if (ms > gs.speedMS) {
+            nodes.clear();
+            nv.push_back(n);
+            nodes.push_back(nv);
+            genLayer();
+            swapTurn();
+            started = std::chrono::high_resolution_clock::now();
         }
-
-        nv.push_back(n);
-        nodes.push_back(nv);
-        
-        genLayer();
-        checkWinner();
-        
-        swapTurn();
-        started = std::chrono::high_resolution_clock::now();
     }
-}
+    else
+        won = true;
 
-bool checkWinner() {
-    // @todo
-    return true;
 }
 
 

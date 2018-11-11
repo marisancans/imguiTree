@@ -31,11 +31,11 @@ void gridWindow(bool* opened, GameSettings& gameSettings) {
     const float NODE_SLOT_RADIUS = 4.0f;
     const ImVec2 NODE_WINDOW_PADDING(8.0f, 8.0f);
 //
-    bool won = false;
-    ImGui::Begin("Todo", &won, ImGuiWindowFlags_AlwaysAutoResize);
-    ImGui::Text("--//-- --//-- --//--");
-    ImGui::End();
-    
+
+
+
+
+
     
     
     ImGui::BeginGroup();
@@ -109,25 +109,39 @@ void gridWindow(bool* opened, GameSettings& gameSettings) {
     for(int i = 0; i < game::tracers[P2].size(); ++i)
         lDrawCurr(game::tracers[P2][i], IM_COL32(0, 0, 20 * i, 20 * i));
 
-    draw_list->AddLine(ImVec2(game::currPos[P1].x * spacingX + spacingX/2, game::currPos[P1].y * spacingY + spacingY/2) + win_pos,
-                       ImVec2(game::currPos[P2].x * spacingX + spacingX/2, game::currPos[P2].y * spacingY + spacingY/2) + win_pos, IM_COL32(0, 150, 0 ,250));
+    if(gameSettings.debug)
+        draw_list->AddLine(ImVec2(game::currPos[P1].x * spacingX + spacingX/2, game::currPos[P1].y * spacingY + spacingY/2) + win_pos,
+                           ImVec2(game::currPos[P2].x * spacingX + spacingX/2, game::currPos[P2].y * spacingY + spacingY/2) + win_pos, IM_COL32(0, 150, 0 ,250));
 
 
     // Clicking handler
     ImGuiIO& io = ImGui::GetIO();
+
     io.WantCaptureMouse = true;
 
-    if (ImGui::IsMouseDown(0)) {
-        float x = (io.MousePos.x / gameSettings.maxBoardX) * spacingX;
-        float y = io.MousePos.y;
-        draw_list->AddCircleFilled({x, y}, std::min(spacingX / 2, spacingY / 2), IM_COL32(0, 0, 255, 255));
+//    if (ImGui::IsMouseDown(0)) {
+        auto sp = ImGui::GetIO().MousePos;
+        float xgrid = (sp.x - win_pos.x) / gameSettings.maxBoardX;
+        float xcircle = xgrid * (spacingX/2);
+        float ygrid = (sp.y - win_pos.y) / gameSettings.maxBoardY;
+        float ycircle = ygrid * (spacingY/2);
+        draw_list->AddCircleFilled({xcircle + win_pos.x, ycircle + win_pos.y},
+                                   std::min(spacingX / 2, spacingY / 2), IM_COL32(244, 110, 65, 155));
 //        ImVec2(canvas_sz.x, y * spacingY)
-    }
+        ImGui::Text("x: '%f | y: '%f' | fps: %f",  xgrid, ygrid, io.Framerate);
+//    }
+
+    if(ImGui::IsMouseDown(0) && game::_currPlayer == P2)
+        game::lastClicked = Position({int(xgrid/2), int(ygrid/2)});
+
+    auto width = ImGui::GetWindowWidth();
+    ImGui::SetWindowSize({100, 100});
 
 
 
 
-    ImGui::Text("x: '%f | y: '%f' | fps: %f", io.MousePos.x - win_pos.x, io.MousePos.y - win_pos.y, io.Framerate);
+    if(game::won)
+        ImGui::Text("Player %i won!", game::_currPlayer + 1);
 
 
 

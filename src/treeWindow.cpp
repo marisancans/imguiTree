@@ -19,34 +19,47 @@ void treeWindow(bool* opened, GameSettings& gameSettings){
     int static currEditPlayer = 0;
     
     ImGui::BeginGroup();
+
+    if (ImGui::Button("Computer vs computer")) {
+        gameSettings = game::setSettings(PCvsPC);
+        game::init(P1, gameSettings);
+    }
+
+    ImGui::SameLine();
+    if (ImGui::Button("Player vs computer")) {
+        gameSettings = game::setSettings(PvsPC);
+        game::init(P1, gameSettings);
+    }
+
+    ImGui::SameLine();
+    ImGui::Checkbox("Hacks?", &gameSettings.hacks);
+    ImGui::SameLine();
+    ImGui::Checkbox("Debug?", &gameSettings.debug);
+
     
     // Scrolling
     ImGui::SliderInt("slider int2",  &gameSettings.levelOffsetX, 0, 255);
     ImGui::SliderInt("slider int",  &gameSettings.levelOffsetY, 0, 255);
     ImGui::SliderInt("Speed",  &gameSettings.speedMS, 1, 5000);
 
-    ImGui::RadioButton("P1", &currEditPlayer, 0);
-    ImGui::RadioButton("P2", &currEditPlayer, 1);
+    if(gameSettings.debug) {
+        ImGui::RadioButton("P1", &currEditPlayer, 0);
+        ImGui::RadioButton("P2", &currEditPlayer, 1);
 
-    for(int r = 0; r < MRR; ++r)
-    {
-        for(int i = 0; i < 8; ++i)
-            {
+        for (int r = 0; r < MRR; ++r) {
+            for (int i = 0; i < 8; ++i) {
 //            Cantor pairing function:
-            int hash = ((i + r) * (i + r + 1)) / 2 + r;
-            ImGui::PushID(hash);
-            ImGui::Checkbox("", &gameSettings.movRange[currEditPlayer][i][r]);
-            ImGui::SameLine();
-            ImGui::PopID();
+                int hash = ((i + r) * (i + r + 1)) / 2 + r;
+                ImGui::PushID(hash);
+                ImGui::Checkbox("", &gameSettings.movRange[currEditPlayer][i][r]);
+                ImGui::SameLine();
+                ImGui::PopID();
+            }
+            ImGui::NewLine();
         }
-        ImGui::NewLine();
     }
 
-    
-    
-    if (ImGui::Button("Next generation"))
-        game::makeTurns(gameSettings);
-    
+
     
     ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(1, 1));
     ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0, 0));
@@ -110,16 +123,19 @@ void treeWindow(bool* opened, GameSettings& gameSettings){
             draw_list->ChannelsSetCurrent(2);
             
             
-            std::ostringstream out;
-            out << node.pos[P1].x << " | " << node.pos[P1].y << "\n" << node.pos[P2].x << " | " << node.pos[P2].y << "\n" << node.interspace;
 
-            draw_list->AddText(ImVec2(gameSettings.levelOffsetX * x,
-                                      gameSettings.levelOffsetY * y - 10) + offset,
-                               IM_COL32(250, 100, 100, 250), std::to_string(node.ID).c_str());
+            if(gameSettings.debug) {
+                std::ostringstream out;
+                out << node.pos[P1].x << " | " << node.pos[P1].y << "\n" << node.pos[P2].x << " | " << node.pos[P2].y << "\n" << node.interspace;
 
-            draw_list->AddText(ImVec2(gameSettings.levelOffsetX * x,
-                                      gameSettings.levelOffsetY * y) + offset,
-                               IM_COL32(250, 100, 100, 250), out.str().c_str());
+                draw_list->AddText(ImVec2(gameSettings.levelOffsetX * x,
+                                          gameSettings.levelOffsetY * y - 10) + offset,
+                                   IM_COL32(250, 100, 100, 250), std::to_string(node.ID).c_str());
+
+                draw_list->AddText(ImVec2(gameSettings.levelOffsetX * x,
+                                          gameSettings.levelOffsetY * y) + offset,
+                                   IM_COL32(250, 100, 100, 250), out.str().c_str());
+            }
             
             x++;
         }

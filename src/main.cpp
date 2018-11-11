@@ -101,24 +101,7 @@ int main(int, char**)
     PlayerIdx firstTurn = P1;
     
     
-    GameSettings gameSettings;
-    gameSettings.maxLayer = 3;
-    gameSettings.maxBoardX = 20;
-    gameSettings.maxBoardY = 20;
-    gameSettings.scrolling = ImVec2(0.0f, 0.0f);
-    gameSettings.showGrid = false;
-    gameSettings.levelOffsetX = 100;
-    gameSettings.levelOffsetY = 100;
-    gameSettings.speedMS = 500;
-    for(int p = 0; p < PLAYER_COUNT; p++)
-        for(int i = 0; i < 8; i++)
-            gameSettings.movRange[p][i][0] = true;
-    for(int i = 0; i < 8; i += 2)
-        gameSettings.movRange[P2][i][1] = true;
-    
-    gameSettings.startPos[P1] = {0, 0};
-    gameSettings.startPos[P2] = {gameSettings.maxBoardX - 1, gameSettings.maxBoardY - 1};
-    
+    auto gameSettings = game::setSettings(PCvsPC);
     // Init
     game::init(firstTurn, gameSettings);
 
@@ -163,37 +146,17 @@ int main(int, char**)
         glVertex2f(0, 50);
         glVertex2f(50, 0);
         glEnd();
+
+
+
+
+
         
         gridWindow(&showGridWindow, gameSettings);
         treeWindow(&showTreeWindow, gameSettings);
 
 
-        ImGui::SetNextWindowSize(ImVec2(20, 20), ImGuiSetCond_FirstUseEver);
-        if (!ImGui::Begin("Game mode", &showGameModeWindow)) {
-            ImGui::End();
-        }
-        auto start = [&](){
-            showGridWindow = true;
-            showTreeWindow = true;
-            showGameModeWindow = false;
-        };
 
-
-        ImGui::BeginGroup();
-        if (ImGui::Button("Computer vs Computer")) {
-            game::setGameMode(PCvsPC);
-            start();
-        }
-
-        ImGui::SameLine();
-
-        if (ImGui::Button("Player vs Computer")) {
-            game::setGameMode(PvsPC);
-            start();
-        }
-
-        ImGui::EndGroup();
-        ImGui::End();
         
         // Rendering
         ImGui::Render();

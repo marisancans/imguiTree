@@ -8,6 +8,7 @@ enum PlayerIdx
     P2,
     PLAYER_COUNT,
     FIRST = P1,
+    NONE
 };
 
 static const auto chase = [](auto lhs, auto rhs) { return lhs < rhs; };
