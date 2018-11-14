@@ -26,12 +26,15 @@ struct GameSettings {
     Position startPos[PLAYER_COUNT] = {};
     ImVec2 scrolling;
     bool showGrid;
-    int levelOffsetX;
-    int levelOffsetY;
-    int speedMS;
+    int levelOffsetX{100};
+    int levelOffsetY{100};
+    int speedMS{500};
     GameMode gameMode;
     bool hacks{false};
     bool debug{false};
+    int turnTimes{23};
+    bool trails{true};
+    bool firstP1{true};
 };
 
 struct Traverse {
@@ -80,7 +83,11 @@ extern PlayerIdx _currPlayer;
 extern std::vector<BackTrack> chosenPath;
 extern Position lastClicked;
 extern bool won;
+extern int winnerID;
+extern int tt;
+extern bool humanClicked;
+extern bool firstTurn;
 
 
-void init(PlayerIdx turn, GameSettings& gameSettings);
+void init(GameSettings gameSettings);
 };

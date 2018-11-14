@@ -20,29 +20,37 @@ void treeWindow(bool* opened, GameSettings& gameSettings){
     
     ImGui::BeginGroup();
 
-    if (ImGui::Button("Computer vs computer")) {
-        gameSettings = game::setSettings(PCvsPC);
-        game::init(P1, gameSettings);
-    }
+    if (ImGui::Button("Computer vs computer"))
+        game::init(gameSettings);
+
 
     ImGui::SameLine();
-    if (ImGui::Button("Player vs computer")) {
-        gameSettings = game::setSettings(PvsPC);
-        game::init(P1, gameSettings);
-    }
+    if (ImGui::Button("Player vs computer"))
+        game::init(gameSettings);
+
+
+    ImGui::SameLine();
+    ImGui::Checkbox("P1 starts?", &gameSettings.firstP1);
 
     ImGui::SameLine();
     ImGui::Checkbox("Hacks?", &gameSettings.hacks);
     ImGui::SameLine();
     ImGui::Checkbox("Debug?", &gameSettings.debug);
-
+    ImGui::SameLine();
+    ImGui::Checkbox("Trails?", &gameSettings.trails);
     
+
+//    ImGui::InputText(
+//
+
     // Scrolling
     ImGui::SliderInt("slider int2",  &gameSettings.levelOffsetX, 0, 255);
     ImGui::SliderInt("slider int",  &gameSettings.levelOffsetY, 0, 255);
     ImGui::SliderInt("Speed",  &gameSettings.speedMS, 1, 5000);
 
     if(gameSettings.debug) {
+        ImGui::Text("Edit name:");
+        ImGui::InputInt("##edit", &gameSettings.turnTimes);
         ImGui::RadioButton("P1", &currEditPlayer, 0);
         ImGui::RadioButton("P2", &currEditPlayer, 1);
 

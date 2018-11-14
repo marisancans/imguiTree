@@ -18,20 +18,6 @@ node.h
 deque
 /home/maris/src/imguitest/src/deque
 
-/home/maris/src/imguitest/src/gridWindow.cpp
-math.h
--
-imgui/imgui.h
-/home/maris/src/imguitest/src/imgui/imgui.h
-vector
--
-node.h
-/home/maris/src/imguitest/src/node.h
-game.h
-/home/maris/src/imguitest/src/game.h
-iostream
-/home/maris/src/imguitest/src/iostream
-
 /home/maris/src/imguitest/src/imgui/imconfig.h
 
 /home/maris/src/imguitest/src/imgui/imgui.h
@@ -69,4 +55,20 @@ strategies.h
 /home/maris/src/imguitest/src/strategies.h
 functional
 -
+
+/home/maris/src/imguitest/src/treeWindow.cpp
+treeWindow.h
+/home/maris/src/imguitest/src/treeWindow.h
+math.h
+-
+sstream
+-
+vector
+-
+game.h
+/home/maris/src/imguitest/src/game.h
+
+/home/maris/src/imguitest/src/treeWindow.h
+game.h
+/home/maris/src/imguitest/src/game.h
 

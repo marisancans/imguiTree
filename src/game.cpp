@@ -10,11 +10,14 @@
 
 namespace game {
 
-GameSettings* gameSettings;
+GameSettings gameSettings;
 Position currPos[PLAYER_COUNT];
 std::deque<Position> tracers[PLAYER_COUNT];
 Position lastClicked{-1, -1};
 bool won;
+int winnerID{0};
+
+
 
 
 PlayerIdx _currPlayer;
@@ -22,6 +25,8 @@ std::vector<NODE_VEC> nodes;
 std::vector<BackTrack> chosenPath;
 
 int newID;
+int tt = 0;
+bool humanClicked{false};
 
 inline void swapTurn(){ _currPlayer = nextPlayer(_currPlayer); }
 
@@ -94,10 +99,6 @@ void genLayer()
     for(int i = int(nodes.size()); --i >= 1;)
         for(auto& node : nodes[i]) {
             if (decision.ID == node.ID) {
-
-//                if(chosenPath.empty())
-//                    chosenPath.push_back({node.ID, node.parentNodeID});
-
                 chosenPath.push_back({node.ID, node.parentNodeID});
                 decision.ID = node.parentNodeID;
                 currPos[pIdx] = node.pos[pIdx];
@@ -106,30 +107,29 @@ void genLayer()
         }
 }
 
-void init(PlayerIdx turn, GameSettings& gs)
+void init(GameSettings gs)
 {
-    _currPlayer = turn;
-    gameSettings = &gs;
+    _currPlayer = gs.firstP1 ? P1 : P2;
+    gameSettings = gs;
     newID = 0;
     for(int i = 0; i < PLAYER_COUNT; i++)
-        currPos[i] = gameSettings->startPos[i];
-
+        currPos[i] = gameSettings.startPos[i];
+    won = false;
+    tt = 0;
     makeTurns(gs);
 }
 
 GameSettings setSettings(GameMode mode){
     won = false;
+    tt = 0;
 
     GameSettings gameSettings;
     gameSettings.gameMode = mode;
     gameSettings.maxLayer = 3;
-    gameSettings.maxBoardX = 20;
-    gameSettings.maxBoardY = 20;
+    gameSettings.maxBoardX = 10;
+    gameSettings.maxBoardY = 10;
     gameSettings.scrolling = ImVec2(0.0f, 0.0f);
     gameSettings.showGrid = false;
-    gameSettings.levelOffsetX = 100;
-    gameSettings.levelOffsetY = 100;
-    gameSettings.speedMS = 500;
     for(int p = 0; p < PLAYER_COUNT; p++)
         for(int i = 0; i < 8; i++)
             gameSettings.movRange[p][i][0] = true;
@@ -143,29 +143,74 @@ GameSettings setSettings(GameMode mode){
 
 
 void makeTurns(GameSettings& gs) {
-
-
     static auto started = std::chrono::high_resolution_clock::now();
     // Clock
     auto done = std::chrono::high_resolution_clock::now();
     auto ms = std::chrono::duration_cast<std::chrono::milliseconds>(done-started).count();
 
-
-
     newID = 0;
     Node n;
     n.ID = newID++;
-
+    NODE_VEC nv;
 
     for(int i = 0; i < PLAYER_COUNT; i++)
-        n.pos[i] = currPos[i]
-
-                ;
+        n.pos[i] = currPos[i];
     n.calcInterspace();
 
-    if(!checkWinner(n)) {
+    if(tt >= gs.turnTimes) {
+        winnerID = 2;
+        won = true;
+    }
+
+    if(checkWinner(n)){
+        winnerID = 1;
+        won = true;
+    }
 
 
+    auto lAddMove = [&](){
+        nv.push_back(n);
+        nodes.push_back(nv);
+    };
+
+    auto lBotMove = [&](){
+        lAddMove();
+        genLayer();
+        swapTurn();
+    };
+
+    auto lHumanInRange = [&]()->bool{
+        auto poss = getPossibleMoves(n.pos[P1], P1);
+        bool found = false;
+
+        if (!gameSettings.hacks) {
+            for(const auto& i : poss)
+                if (i == lastClicked) {
+                    lAddMove();
+                    found = true;
+                    break;
+                }
+        } else {
+            found = true;
+            lAddMove();
+        }
+
+        humanClicked = false;
+        return found;
+    };
+
+    auto lHumanMove = [&](){
+        if(humanClicked && lHumanInRange()) {
+            n.pos[P1] = lastClicked;
+            currPos[P1] = n.pos[P1];
+            lAddMove();
+            swapTurn();
+            tt++;
+        }
+    };
+
+
+    if(!won) {
 
         for (int i = 0; i < PLAYER_COUNT; i++) {
             tracers[i].emplace_back(currPos[i]);
@@ -174,54 +219,22 @@ void makeTurns(GameSettings& gs) {
         }
 
 
-        NODE_VEC nv;
-
-        if (ms > gs.speedMS && gameSettings->gameMode == PvsPC) {
+        if (ms > gs.speedMS) {
             nodes.clear();
-            if (_currPlayer == P1) {
-                nv.push_back(n);
-                nodes.push_back(nv);
-                genLayer();
-                swapTurn();
-            } else {
-                if (lastClicked.x != -1) {
-                    auto laddpos = [&]() {
-                        n.pos[P2].x = lastClicked.x;
-                        n.pos[P2].y = lastClicked.y;
-                        nv.push_back(n);
-                        currPos[P1] = n.pos[P2];
-                        swapTurn();
-                    };
 
-                    if (!gameSettings->hacks) {
-                        auto poss = getPossibleMoves(n.pos[P1], P1);
-
-                        for (int i = 0; i < poss.size(); ++i) {
-                            if (poss[i] == lastClicked) {
-                                laddpos();
-                                break;
-                            }
-                        }
-                    } else {
-                        laddpos();
-                    }
-                }
-                lastClicked.x = -1;
-
+            if (gameSettings.gameMode == PCvsPC) {
+                lBotMove();
+                if(_currPlayer == P2)
+                    tt++;
             }
+            if (gameSettings.gameMode == PvsPC)
+                _currPlayer == P2 ? lHumanMove() : lBotMove();
 
-            started = std::chrono::high_resolution_clock::now();
-        } else if (ms > gs.speedMS) {
-            nodes.clear();
-            nv.push_back(n);
-            nodes.push_back(nv);
-            genLayer();
-            swapTurn();
             started = std::chrono::high_resolution_clock::now();
         }
     }
-    else
-        won = true;
+
+
 
 }
 
@@ -230,12 +243,12 @@ POS_VEC getPossibleMoves(const Position &p, PlayerIdx turn) {
     POS_VEC pv;
     moveMatrix mov{};
 
-    auto canRight = [&](int i){ return p.x + i > 0 && p.x + i < gameSettings->maxBoardX; };
-    auto canLeft = [&](int i){ return p.x - i >= 0 && p.x - i < gameSettings->maxBoardX; };
-    auto canUp = [&](int i){ return p.y - i >= 0 && p.y - i < gameSettings->maxBoardY; };
-    auto canDown = [&](int i){ return p.y + i > 0 && p.y + i < gameSettings->maxBoardY; };
+    auto canRight = [&](int i){ return p.x + i > 0 && p.x + i < gameSettings.maxBoardX; };
+    auto canLeft = [&](int i){ return p.x - i >= 0 && p.x - i < gameSettings.maxBoardX; };
+    auto canUp = [&](int i){ return p.y - i >= 0 && p.y - i < gameSettings.maxBoardY; };
+    auto canDown = [&](int i){ return p.y + i > 0 && p.y + i < gameSettings.maxBoardY; };
     
-    auto rmovRange = gameSettings->movRange[turn];
+    auto rmovRange = gameSettings.movRange[turn];
     
     // Up
     for(int i = 1; i < MRR + 1; ++i){

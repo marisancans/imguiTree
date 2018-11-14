@@ -103,11 +103,12 @@ void gridWindow(bool* opened, GameSettings& gameSettings) {
     for(const auto& p : ranges)
         lDrawPos(p, IM_COL32(0, 150, 0, 50));
 
-
-    for(int i = 0; i < game::tracers[P1].size(); ++i)
-        lDrawCurr(game::tracers[P1][i], IM_COL32(20 * i, 0, 0, 20 * i));
-    for(int i = 0; i < game::tracers[P2].size(); ++i)
-        lDrawCurr(game::tracers[P2][i], IM_COL32(0, 0, 20 * i, 20 * i));
+    if(gameSettings.trails) {
+        for (int i = 0; i < game::tracers[P1].size(); ++i)
+            lDrawCurr(game::tracers[P1][i], IM_COL32(20 * i, 0, 0, 20 * i));
+        for (int i = 0; i < game::tracers[P2].size(); ++i)
+            lDrawCurr(game::tracers[P2][i], IM_COL32(0, 0, 20 * i, 20 * i));
+    }
 
     if(gameSettings.debug)
         draw_list->AddLine(ImVec2(game::currPos[P1].x * spacingX + spacingX/2, game::currPos[P1].y * spacingY + spacingY/2) + win_pos,
@@ -128,20 +129,24 @@ void gridWindow(bool* opened, GameSettings& gameSettings) {
         draw_list->AddCircleFilled({xcircle + win_pos.x, ycircle + win_pos.y},
                                    std::min(spacingX / 2, spacingY / 2), IM_COL32(244, 110, 65, 155));
 //        ImVec2(canvas_sz.x, y * spacingY)
-        ImGui::Text("x: '%f | y: '%f' | fps: %f",  xgrid, ygrid, io.Framerate);
+        if(gameSettings.debug)
+            ImGui::Text("x: '%f | y: '%f' | fps: %f",  xgrid, ygrid, io.Framerate);
 //    }
 
-    if(ImGui::IsMouseDown(0) && game::_currPlayer == P2)
-        game::lastClicked = Position({int(xgrid/2), int(ygrid/2)});
+    if(ImGui::IsMouseDown(0)) {
+        game::lastClicked = Position({int(xgrid / 2), int(ygrid / 2)});
+        game::humanClicked = true;
+    }
 
     auto width = ImGui::GetWindowWidth();
     ImGui::SetWindowSize({100, 100});
 
 
+    ImGui::Text("Turn times: %i | %i", game::tt, gameSettings.turnTimes);
 
 
     if(game::won)
-        ImGui::Text("Player %i won!", game::_currPlayer + 1);
+        ImGui::Text("Player %i won!", game::winnerID);
 
 
 

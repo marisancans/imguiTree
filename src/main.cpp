@@ -98,12 +98,12 @@ int main(int, char**)
     
     // GAME SETTINGS <--------------------------------------------------
     
-    PlayerIdx firstTurn = P1;
+
     
     
     auto gameSettings = game::setSettings(PCvsPC);
     // Init
-    game::init(firstTurn, gameSettings);
+    game::init(gameSettings);
 
 
     bool showGridWindow = false;
