@@ -183,7 +183,7 @@ void makeTurns(GameSettings& gs) {
         auto poss = getPossibleMoves(n.pos[P1], P1);
         bool found = false;
 
-        if (!gameSettings.hacks) {
+        if (!gs.hacks) {
             for(const auto& i : poss)
                 if (i == lastClicked) {
                     lAddMove();

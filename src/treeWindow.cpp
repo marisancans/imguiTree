@@ -20,13 +20,17 @@ void treeWindow(bool* opened, GameSettings& gameSettings){
     
     ImGui::BeginGroup();
 
-    if (ImGui::Button("Computer vs computer"))
+    if (ImGui::Button("Computer vs computer")) {
+        gameSettings.gameMode = PCvsPC;
         game::init(gameSettings);
+    }
 
 
     ImGui::SameLine();
-    if (ImGui::Button("Player vs computer"))
+    if (ImGui::Button("Player vs computer")) {
+        gameSettings.gameMode = PvsPC;
         game::init(gameSettings);
+    }
 
 
     ImGui::SameLine();
